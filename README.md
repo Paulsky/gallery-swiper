@@ -49,11 +49,11 @@ This plugin is tested and compatible with the following:
 
 ### Themes
 
-- **GeneratePress**: The secondary thumbnail image is disabled.
+- [**GeneratePress**](https://generatepress.com): The secondary thumbnail image is disabled.
 
 ### Plugins
 
-- **YITH Infinite Scrolling**: Swiper is initialized for AJAX loaded products.
+- [**YITH Infinite Scrolling**](https://yithemes.com/themes/plugins/yith-infinite-scrolling/): Swiper is initialized for AJAX loaded products.
 
 If you encounter any conflicts with other themes or plugins, please report them to us by opening an issue or through our website. We welcome community contributions, so feel free to submit a pull request if you have a fix or improvement.
 
