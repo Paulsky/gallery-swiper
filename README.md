@@ -2,7 +2,7 @@
 
 Enhances the product image gallery in WooCommerce by integrating the Swiper library. This enables a responsive and touch-friendly slider for product thumbnails displayed on **product listing** (e.g., shop page, product categories pages, related products) rather than the single product gallery.
 
-![woo-swiper-demo](https://github.com/Paulsky/woo-swiper/assets/9481318/1d9765af-70e9-4459-a084-af36cea3aff8)
+<img src="https://github.com/Paulsky/woo-swiper/assets/9481318/1d9765af-70e9-4459-a084-af36cea3aff8" width="250" alt="Woo Swiper demo" style="max-width: 250px !important; height: auto !important;" />
 
 For more Wordpress plugins, check out our products at [Wijnberg Developments](https://products.wijnberg.dev).
 
