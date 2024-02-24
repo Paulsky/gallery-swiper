@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Swiper\n"
-"POT-Creation-Date: 2024-02-24 13:59+0100\n"
-"PO-Revision-Date: 2024-02-24 13:59+0100\n"
+"POT-Creation-Date: 2024-02-24 14:57+0100\n"
+"PO-Revision-Date: 2024-02-24 14:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -26,34 +26,39 @@ msgstr ""
 msgid "Customize the swiper settings for your WooCommerce store."
 msgstr "Pas de swiper-instellingen voor uw WooCommerce-winkel aan."
 
-#: admin/class-woo-swiper-admin.php:106
-msgid "WooCommerce Swiper settings"
-msgstr "WooCommerce Swiper instellingen"
-
 #. Plugin Name of the plugin/theme
-#: admin/class-woo-swiper-admin.php:107
+#: admin/class-woo-swiper-admin.php:110 admin/class-woo-swiper-admin.php:111
 msgid "WooCommerce Swiper"
 msgstr "WooCommerce Swiper"
 
-#: admin/class-woo-swiper-admin.php:120
+#: admin/class-woo-swiper-admin.php:123
 msgid "Swiper settings"
 msgstr "Swiper instellingen"
 
-#: admin/class-woo-swiper-admin.php:128
+#: admin/class-woo-swiper-admin.php:131
 msgid "Enable scrollbar"
 msgstr "Scrollbalk inschakelen"
 
-#: admin/class-woo-swiper-admin.php:140
+#: admin/class-woo-swiper-admin.php:143
 msgid "Enable pagination"
 msgstr "Paginering inschakelen"
 
-#: admin/class-woo-swiper-admin.php:152
+#: admin/class-woo-swiper-admin.php:155
 msgid "Enable navigation"
 msgstr "Navigatie inschakelen"
 
-#: admin/class-woo-swiper-admin.php:164
+#: admin/class-woo-swiper-admin.php:167
 msgid "Disable swiper from"
 msgstr "Swiper uitschakelen vanaf"
+
+#: admin/class-woo-swiper-admin.php:180
+msgid ""
+"When set, the swiper will be disabled from the specified breakpoint upwards, "
+"and the second product image will be displayed on mouse hover."
+msgstr ""
+"Wanneer ingesteld, wordt de swiper vanaf het gespecificeerde breekpunt "
+"uitgeschakeld en wordt de tweede productafbeelding weergegeven door muis "
+"hover."
 
 #: includes/class-woo-swiper-activator.php:36
 msgid ""
@@ -78,3 +83,6 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Wijnberg Developments"
 msgstr "Wijnberg Developments"
+
+#~ msgid "WooCommerce Swiper settings"
+#~ msgstr "WooCommerce Swiper instellingen"

@@ -35,7 +35,7 @@ These instructions will guide you through the installation and basic setup of th
 Once activated, WooCommerce Swiper requires no mandatory configuration to start working. By default, it will automatically apply the Swiper slider to your WooCommerce product galleries.
 
 To customize the Swiper slider settings:
-1. Go to the WooCommerce Swiper settings page in the WordPress admin area.
+1. Go to the WooCommerce Swiper settings page located under the 'WooCommerce' menu in the WordPress admin area.
 2. Adjust the settings according to your preferences, such as enabling or disabling the scrollbar, pagination, and navigation arrows.
 3. Save your changes.
 

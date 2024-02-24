@@ -154,7 +154,7 @@ class Woo_Swiper {
 
 		$plugin_admin = new Woo_Swiper_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' , 100);
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'init_settings' );
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 	}

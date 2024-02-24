@@ -66,7 +66,7 @@ class Woo_Swiper_Admin {
 
 		$options = get_option( 'woo_swiper_settings', $defaults );
 
-		$value = isset($options[$args['label_for']]) ? $options[$args['label_for']] : (isset($defaults[$args['label_for']]) ? $defaults[$args['label_for']] : '0');
+		$value = isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] : ( isset( $defaults[ $args['label_for'] ] ) ? $defaults[ $args['label_for'] ] : '0' );
 		?>
         <input type='checkbox'
                name='woo_swiper_settings[<?php echo esc_attr( $args['label_for'] ); ?>]' <?php checked( $value, 1 ); ?>
@@ -83,6 +83,9 @@ class Woo_Swiper_Admin {
 			<?php endforeach; ?>
         </select>
 		<?php
+		if ( isset( $args['help'] ) ) {
+			echo '<p class="description">' . esc_html( $args['help'] ) . '</p>';
+		}
 	}
 
 	public function options_page() {
@@ -102,13 +105,13 @@ class Woo_Swiper_Admin {
 	}
 
 	public function add_admin_menu() {
-		add_menu_page(
-			__( 'WooCommerce Swiper settings', 'woo-swiper' ),
+		add_submenu_page(
+			'woocommerce',
+			__( 'WooCommerce Swiper', 'woo-swiper' ),
 			__( 'WooCommerce Swiper', 'woo-swiper' ),
 			'manage_options',
 			'woocommerce_swiper',
-			[ $this, 'options_page' ],
-			'dashicons-images-alt'
+			[ $this, 'options_page' ]
 		);
 	}
 
@@ -125,7 +128,7 @@ class Woo_Swiper_Admin {
 		// Scrollbar
 		add_settings_field(
 			'woo_swiper_scrollbar',
-			__( 'Enable scrollbar', 'woo - swiper' ),
+			__( 'Enable scrollbar', 'woo-swiper' ),
 			[ $this, 'checkbox_field_render' ],
 			'woo_swiper',
 			'woo_swiper_section',
@@ -137,7 +140,7 @@ class Woo_Swiper_Admin {
 		// Pagination
 		add_settings_field(
 			'woo_swiper_pagination',
-			__( 'Enable pagination', 'woo - swiper' ),
+			__( 'Enable pagination', 'woo-swiper' ),
 			[ $this, 'checkbox_field_render' ],
 			'woo_swiper',
 			'woo_swiper_section',
@@ -149,7 +152,7 @@ class Woo_Swiper_Admin {
 		// Navigation
 		add_settings_field(
 			'woo_swiper_navigation',
-			__( 'Enable navigation', 'woo - swiper' ),
+			__( 'Enable navigation', 'woo-swiper' ),
 			[ $this, 'checkbox_field_render' ],
 			'woo_swiper',
 			'woo_swiper_section',
@@ -161,7 +164,7 @@ class Woo_Swiper_Admin {
 		// Breakpoint
 		add_settings_field(
 			'woo_swiper_breakpoint',
-			__( 'Disable swiper from', 'woo - swiper' ),
+			__( 'Disable swiper from', 'woo-swiper' ),
 			[ $this, 'select_field_render' ],
 			'woo_swiper',
 			'woo_swiper_section',
@@ -173,7 +176,8 @@ class Woo_Swiper_Admin {
 					'768'  => 'Disabled from 768px and up',
 					'992'  => 'Disabled from 992px and up',
 					'1200' => 'Disabled from 1200px and up',
-				]
+				],
+				'help'      => __( 'When set, the swiper will be disabled from the specified breakpoint upwards, and the second product image will be displayed on mouse hover.', 'woo-swiper' )
 			]
 		);
 	}

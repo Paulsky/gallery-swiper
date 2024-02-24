@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Swiper\n"
-"POT-Creation-Date: 2024-02-24 14:00+0100\n"
-"PO-Revision-Date: 2024-02-24 14:00+0100\n"
+"POT-Creation-Date: 2024-02-24 14:57+0100\n"
+"PO-Revision-Date: 2024-02-24 14:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -15,8 +15,8 @@ msgstr ""
 "X-Poedit-WPHeader: woo-swiper.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
@@ -26,34 +26,38 @@ msgstr ""
 msgid "Customize the swiper settings for your WooCommerce store."
 msgstr "Customize the swiper settings for your WooCommerce store."
 
-#: admin/class-woo-swiper-admin.php:106
-msgid "WooCommerce Swiper settings"
-msgstr "WooCommerce Swiper settings"
-
 #. Plugin Name of the plugin/theme
-#: admin/class-woo-swiper-admin.php:107
+#: admin/class-woo-swiper-admin.php:110 admin/class-woo-swiper-admin.php:111
 msgid "WooCommerce Swiper"
 msgstr "WooCommerce Swiper"
 
-#: admin/class-woo-swiper-admin.php:120
+#: admin/class-woo-swiper-admin.php:123
 msgid "Swiper settings"
 msgstr "Swiper settings"
 
-#: admin/class-woo-swiper-admin.php:128
+#: admin/class-woo-swiper-admin.php:131
 msgid "Enable scrollbar"
 msgstr "Enable scrollbar"
 
-#: admin/class-woo-swiper-admin.php:140
+#: admin/class-woo-swiper-admin.php:143
 msgid "Enable pagination"
 msgstr "Enable pagination"
 
-#: admin/class-woo-swiper-admin.php:152
+#: admin/class-woo-swiper-admin.php:155
 msgid "Enable navigation"
 msgstr "Enable navigation"
 
-#: admin/class-woo-swiper-admin.php:164
+#: admin/class-woo-swiper-admin.php:167
 msgid "Disable swiper from"
 msgstr "Disable swiper from"
+
+#: admin/class-woo-swiper-admin.php:180
+msgid ""
+"When set, the swiper will be disabled from the specified breakpoint upwards, "
+"and the second product image will be displayed on mouse hover."
+msgstr ""
+"When set, the swiper will be disabled from the specified breakpoint upwards, "
+"and the second product image will be displayed on mouse hover."
 
 #: includes/class-woo-swiper-activator.php:36
 msgid ""
@@ -78,3 +82,6 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Wijnberg Developments"
 msgstr "Wijnberg Developments"
+
+#~ msgid "WooCommerce Swiper settings"
+#~ msgstr "WooCommerce Swiper settings"
