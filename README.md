@@ -1,18 +1,18 @@
-# Swiper for Woocommerce
+# Swiper for WooCommerce
 
-Enhances the product image gallery in Woocommerce by integrating the Swiper library. This enables a responsive and touch-friendly slider for product thumbnails displayed on **product listing** (e.g., shop page, product categories pages, related products) rather than the single product gallery.
+Enhances the product image gallery in WooCommerce by integrating the Swiper library. This enables a responsive and touch-friendly slider for product thumbnails displayed on **product listing** (e.g., shop page, product categories pages, related products) rather than the single product gallery.
 
 For more Wordpress plugins, check out our products at [Wijnberg Developments](https://products.wijnberg.dev).
 
 ## Built with
 
 - [Swiper](https://github.com/nolimits4web/swiper)
-- [Woocommerce](https://github.com/woocommerce/woocommerce)
+- [WooCommerce](https://github.com/woocommerce/woocommerce)
 - [WordPress](https://github.com/WordPress/WordPress)
 
 ## Requirements
 
-- Woocommerce plugin installed and activated
+- WooCommerce plugin installed and activated
 
 ## Installation
 
@@ -28,14 +28,14 @@ The plugin is now ready for use.
 
 ## Getting started
 
-These instructions will guide you through the installation and basic setup of the Woocommerce Swiper plugin, ensuring a smooth integration with your Woocommerce product images.
+These instructions will guide you through the installation and basic setup of the WooCommerce Swiper plugin, ensuring a smooth integration with your WooCommerce product images.
 
 ### Configuration
 
-Once activated, Woocommerce Swiper requires no mandatory configuration to start working. By default, it will automatically apply the Swiper slider to your Woocommerce product galleries.
+Once activated, WooCommerce Swiper requires no mandatory configuration to start working. By default, it will automatically apply the Swiper slider to your WooCommerce product galleries.
 
 To customize the Swiper slider settings:
-1. Go to the Woocommerce Swiper settings page located under the 'Woocommerce' menu in the WordPress admin area.
+1. Go to the WooCommerce Swiper settings page located under the 'WooCommerce' menu in the WordPress admin area.
 2. Adjust the settings according to your preferences, such as enabling or disabling the scrollbar, pagination, and navigation arrows.
 3. Save your changes.
 

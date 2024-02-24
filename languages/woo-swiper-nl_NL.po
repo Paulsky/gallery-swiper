@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Swiper\n"
-"POT-Creation-Date: 2024-02-24 14:57+0100\n"
-"PO-Revision-Date: 2024-02-24 14:57+0100\n"
+"POT-Creation-Date: 2024-02-24 15:20+0100\n"
+"PO-Revision-Date: 2024-02-24 15:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -62,10 +62,10 @@ msgstr ""
 
 #: includes/class-woo-swiper-activator.php:36
 msgid ""
-"This plugin requires Woocommerce. Please install and activate WooCommerce "
+"This plugin requires WooCommerce. Please install and activate WooCommerce "
 "before activating this plugin."
 msgstr ""
-"Deze plug-in vereist Woocommerce. Installeer en activeer WooCommerce voordat "
+"Deze plug-in vereist WooCommerce. Installeer en activeer WooCommerce voordat "
 "u deze plug-in activeert."
 
 #. Plugin URI of the plugin/theme

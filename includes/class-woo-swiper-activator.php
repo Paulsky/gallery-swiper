@@ -33,7 +33,7 @@ class Woo_Swiper_Activator {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 			
-			wp_die( __( 'This plugin requires Woocommerce. Please install and activate WooCommerce before activating this plugin.', 'woo-swiper' ) );
+			wp_die( __( 'This plugin requires WooCommerce. Please install and activate WooCommerce before activating this plugin.', 'woo-swiper' ) );
 		}
 	}
 
