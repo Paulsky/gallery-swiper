@@ -1,0 +1,14 @@
+{
+	"name": "woo-swiper",
+	"version": "1.0.0",
+	"description": "Enhances WooCommerce product image display with Swiper, providing a responsive and touch-friendly slider.",
+	"author": "Wijnberg Developments",
+	"scripts": {
+		"format": "wp-scripts format",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"deploy": "npm run format && npm run plugin-zip"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^27.3.0"
+	}
+}
