@@ -18,7 +18,7 @@ For more Wordpress plugins, check out our products at [Wijnberg Developments](ht
 
 To install the plugin, follow these steps:
 
-1. Download the `.zip` file from the repository.
+1. Download the `.zip` file from the [releases page](https://github.com/Paulsky/woo-swiper/releases).
 2. In your WordPress admin dashboard, go to `Plugins` > `Add New`.
 3. Click `Upload Plugin` at the top of the page.
 4. Click `Choose File`, select the `.zip` file you downloaded, then click `Install Now`.
