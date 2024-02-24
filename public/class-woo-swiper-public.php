@@ -107,7 +107,7 @@ class Woo_Swiper_Public {
 			echo '<div class="swiper-slide"> ' . woocommerce_get_product_thumbnail() . '</div > ';
 
 			foreach ( $attachment_ids as $attachment_id ) {
-				echo '<div class="swiper-slide">' . wp_get_attachment_image( $attachment_id, 'woocommerce_thumbnail', false, [ 'class' => 'secondary-image attachment-shop-catalog' ] ) . '</div>';
+				echo '<div class="swiper-slide">' . wp_get_attachment_image( $attachment_id, 'woocommerce_thumbnail' ) . '</div>';
 			}
 
 			echo '</div>';
