@@ -116,6 +116,7 @@ class Woo_Swiper_Public {
 			echo '<div class="swiper-button-prev"></div>';
 			echo '<div class="swiper-button-next"></div>';
 			echo '<div class="swiper-scrollbar"></div>';
+			echo '</div>';
 		} else {
 			//This is the default for woocommerce_before_shop_loop_item_title!
 			echo woocommerce_get_product_thumbnail();
