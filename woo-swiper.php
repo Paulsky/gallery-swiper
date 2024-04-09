@@ -19,7 +19,7 @@
  * Version:           1.0.0
  * Author:            Wijnberg Developments
  * License:           MIT
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License URI:       https://opensource.org/licenses/MIT
  * Text Domain:       woo-swiper
  * Domain Path:       /languages
  * Requires at least:   6.0
