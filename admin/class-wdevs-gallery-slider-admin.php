@@ -73,21 +73,21 @@ class Wdevs_Gallery_Slider_Admin {
 				'type'    => 'checkbox',
 				'desc'    => __( 'Enable scrollbar for the slider', 'wdevs-gallery-slider' ),
 				'id'      => 'wdevs_gallery_slider_scrollbar',
-				'default' => '1'
+				'default' => 'yes'
 			),
 			array(
 				'name'    => __( 'Enable pagination', 'wdevs-gallery-slider' ),
 				'type'    => 'checkbox',
 				'desc'    => __( 'Enable pagination for the slider', 'wdevs-gallery-slider' ),
 				'id'      => 'wdevs_gallery_slider_pagination',
-				'default' => '0'
+				'default' => 'no'
 			),
 			array(
 				'name'    => __( 'Enable navigation', 'wdevs-gallery-slider' ),
 				'type'    => 'checkbox',
 				'desc'    => __( 'Enable navigation for the slider', 'wdevs-gallery-slider' ),
 				'id'      => 'wdevs_gallery_slider_navigation',
-				'default' => '0'
+				'default' => 'no'
 			),
 			array(
 				'name'    => __( 'Disable slider from', 'wdevs-gallery-slider' ),

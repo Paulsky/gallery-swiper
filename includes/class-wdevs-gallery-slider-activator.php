@@ -32,7 +32,7 @@ class Wdevs_Gallery_Slider_Activator {
 	public static function activate() {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
-			
+
 			wp_die( esc_html__( 'This plugin requires WooCommerce. Please install and activate WooCommerce before activating this plugin.', 'wdevs-gallery-slider' ) );
 		}
 
@@ -65,7 +65,14 @@ class Wdevs_Gallery_Slider_Activator {
 		// Update each setting individually
 		foreach ( $settings_mapping as $old_key => $new_key ) {
 			if ( isset( $old_settings[ $old_key ] ) ) {
-				update_option( $new_key, $old_settings[ $old_key ] );
+				if ( $old_key !== 'woo_swiper_breakpoint' ) {
+					// Convert checkbox values to WooCommerce format, which is 'yes'/'no'
+					$new_value = $old_settings[ $old_key ] == '1' ? 'yes' : 'no';
+				} else {
+					// For non-checkbox settings, just use the old value
+					$new_value = $old_settings[ $old_key ];
+				}
+				update_option( $new_key, $new_value );
 			}
 		}
 

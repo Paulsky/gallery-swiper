@@ -93,9 +93,9 @@ class Wdevs_Gallery_Slider_Public {
 
 		$localized_settings = [
 			'swiper' => [
-				'scrollbar'  => ! empty( get_option('wdevs_gallery_slider_scrollbar') ),
-				'pagination' => ! empty( get_option('wdevs_gallery_slider_pagination') ),
-				'navigation' => ! empty( get_option('wdevs_gallery_slider_navigation') ),
+				'scrollbar'  => get_option( 'wdevs_gallery_slider_scrollbar', 'yes' ) === 'yes',
+				'pagination' => get_option( 'wdevs_gallery_slider_pagination', 'no' ) === 'yes',
+				'navigation' => get_option( 'wdevs_gallery_slider_navigation', 'no' ) === 'yes',
 				'breakpoint' => $this->parse_breakpoint( get_option( 'wdevs_gallery_slider_breakpoint', '' ) ),
 			]
 		];
