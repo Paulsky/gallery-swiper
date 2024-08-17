@@ -9,8 +9,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Woo_Swiper
- * @subpackage Woo_Swiper/includes
+ * @package    Wdevs_Gallery_Slider
+ * @subpackage Wdevs_Gallery_Slider/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Woo_Swiper
- * @subpackage Woo_Swiper/includes
+ * @package    Wdevs_Gallery_Slider
+ * @subpackage Wdevs_Gallery_Slider/includes
  * @author     Wijnberg Developments
  */
-class Woo_Swiper {
+class Wdevs_Gallery_Slider {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Woo_Swiper {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Woo_Swiper_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Wdevs_Gallery_Slider_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -72,13 +72,12 @@ class Woo_Swiper {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'woo-swiper';
+		$this->plugin_name = 'wdevs-gallery-slider';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -86,10 +85,10 @@ class Woo_Swiper {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Woo_Swiper_Loader. Orchestrates the hooks of the plugin.
-	 * - Woo_Swiper_i18n. Defines internationalization functionality.
-	 * - Woo_Swiper_Admin. Defines all hooks for the admin area.
-	 * - Woo_Swiper_Public. Defines all hooks for the public side of the site.
+	 * - Wdevs_Gallery_Slider_Loader. Orchestrates the hooks of the plugin.
+	 * - Wdevs_Gallery_Slider_i18n. Defines internationalization functionality.
+	 * - Wdevs_Gallery_Slider_Admin. Defines all hooks for the admin area.
+	 * - Wdevs_Gallery_Slider_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -103,33 +102,33 @@ class Woo_Swiper {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woo-swiper-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-slider-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woo-swiper-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-slider-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-woo-swiper-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wdevs-gallery-slider-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-woo-swiper-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wdevs-gallery-slider-public.php';
 
-		$this->loader = new Woo_Swiper_Loader();
+		$this->loader = new Wdevs_Gallery_Slider_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Woo_Swiper_i18n class in order to set the domain and to register the hook
+	 * Uses the Wdevs_Gallery_Slider_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -137,7 +136,7 @@ class Woo_Swiper {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Woo_Swiper_i18n();
+		$plugin_i18n = new Wdevs_Gallery_Slider_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -152,10 +151,12 @@ class Woo_Swiper {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Woo_Swiper_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Wdevs_Gallery_Slider_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' , 100);
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'init_settings' );
+		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_admin, 'add_settings_tab', 50 );
+		$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_gallery_slider', $plugin_admin, 'settings_tab' );
+		$this->loader->add_action( 'woocommerce_update_options_wdevs_gallery_slider', $plugin_admin, 'update_settings' );
+
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 	}
 
@@ -168,7 +169,7 @@ class Woo_Swiper {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Woo_Swiper_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Wdevs_Gallery_Slider_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'woocommerce_init', $plugin_public, 'on_woocommerce_init' );
 
@@ -198,7 +199,7 @@ class Woo_Swiper {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Woo_Swiper_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Wdevs_Gallery_Slider_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

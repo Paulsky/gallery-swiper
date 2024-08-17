@@ -1,10 +1,10 @@
-# Swiper for WooCommerce
+# Product Gallery Slider for WooCommerce
 
-Enhances the product image gallery in WooCommerce by integrating the Swiper library. This enables a responsive and touch-friendly slider for product thumbnails displayed on **product listing** (e.g., shop page, product categories pages, related products) rather than the single product gallery.
+Enhances the product image gallery in WooCommerce by integrating the Swiper library. This enables a responsive and touch-friendly slider for product thumbnails displayed on **product listing sections** (e.g., shop page, product categories pages, related products) rather than the single product gallery.
 
-<img src="https://github.com/Paulsky/woo-swiper/assets/9481318/1d9765af-70e9-4459-a084-af36cea3aff8" width="250" alt="Woo Swiper demo" style="max-width: 250px !important; height: auto !important;" />
+<img src="https://github.com/Paulsky/woo-swiper/assets/9481318/1d9765af-70e9-4459-a084-af36cea3aff8" width="250" alt="Product Gallery Slider demo" style="max-width: 250px !important; height: auto !important;" />
 
-For more Wordpress plugins, check out our products at [Wijnberg Developments](https://products.wijnberg.dev).
+For more WordPress plugins, check out our products at [Wijnberg Developments](https://products.wijnberg.dev).
 
 ## Built with
 
@@ -20,7 +20,7 @@ For more Wordpress plugins, check out our products at [Wijnberg Developments](ht
 
 To install the plugin, follow these steps:
 
-1. Download the `.zip` file from the [releases page](https://github.com/Paulsky/woo-swiper/releases).
+1. Download the `.zip` file from the [releases page](https://github.com/Paulsky/gallery-slider/releases).
 2. In your WordPress admin dashboard, go to `Plugins` > `Add New`.
 3. Click `Upload Plugin` at the top of the page.
 4. Click `Choose File`, select the `.zip` file you downloaded, then click `Install Now`.
@@ -30,20 +30,20 @@ The plugin is now ready for use.
 
 ## Getting started
 
-These instructions will guide you through the installation and basic setup of the WooCommerce Swiper plugin, ensuring a smooth integration with your WooCommerce product images.
+These instructions will guide you through the installation and basic setup of the Gallery Slider plugin, ensuring a smooth integration with your WooCommerce product listing sections.
 
 ### Configuration
 
-Once activated, WooCommerce Swiper requires no mandatory configuration to start working. By default, it will automatically apply the Swiper slider to your WooCommerce product galleries.
+Once activated, Product Gallery Slider for WooCommerce requires no mandatory configuration to start working. By default, it will automatically apply the Swiper slider to your WooCommerce product galleries on listing pages.
 
 To customize the Swiper slider settings:
-1. Go to the WooCommerce Swiper settings page located under the 'WooCommerce' menu in the WordPress admin area.
+1. Go to the Gallery Slider settings page located under the 'WooCommerce' menu in the WordPress admin area.
 2. Adjust the settings according to your preferences, such as enabling or disabling the scrollbar, pagination, and navigation arrows.
 3. Save your changes.
 
 ### Usage
 
-After installation and configuration, navigate to any product page on your website. You should see the product images displayed within a Swiper slider, allowing for a touch-friendly and responsive browsing experience.
+After installation and configuration, navigate to any product listing page on your website. You should see the product images displayed within a Swiper slider, allowing for a touch-friendly and responsive browsing experience.
 
 ## Compatibility
 
@@ -71,7 +71,6 @@ If you would like to add support for a new language or improve existing translat
 
 Your contributions are welcome! If you'd like to contribute to the project, feel free to fork the repository, make your changes, and submit a pull request.
 
-
 ## Development and deployment
 
 To prepare your development work for submission, ensure you have `npm` installed and run `npm run deploy`. This command packages your changes into a `.zip` file, ready for deployment.
@@ -90,4 +89,8 @@ If you discover any security related issues, please email us instead of using th
 
 ## License
 
-The MIT License (MIT). Please see [LICENSE](LICENSE.txt) for more information.
+This plugin is licensed under the GNU General Public License v2 or later.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, version 2, as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.

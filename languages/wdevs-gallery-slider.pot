@@ -1,0 +1,114 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Product Gallery Slider for WooCommerce\n"
+"POT-Creation-Date: 2024-08-17 16:37+0200\n"
+"PO-Revision-Date: 2024-08-17 16:29+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wdevs-gallery-slider.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SearchPathExcluded-2: public/vendor\n"
+
+#: admin/class-wdevs-gallery-slider-admin.php:59
+msgid "Gallery Slider"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:66
+msgid "Gallery Slider settings"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:68
+msgid "Customize the Gallery slider settings."
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:72
+msgid "Enable scrollbar"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:74
+msgid "Enable scrollbar for the slider"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:79
+msgid "Enable pagination"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:81
+msgid "Enable pagination for the slider"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:86
+msgid "Enable navigation"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:88
+msgid "Enable navigation for the slider"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:93
+msgid "Disable slider from"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:95
+msgid ""
+"When set, the slider will be disabled from the specified breakpoint upwards, "
+"and the second product image will be displayed on mouse hover."
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:98
+msgid "Always enabled"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:99
+msgid "Disabled from 480px and up"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:100
+msgid "Disabled from 768px and up"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:101
+msgid "Disabled from 992px and up"
+msgstr ""
+
+#: admin/class-wdevs-gallery-slider-admin.php:102
+msgid "Disabled from 1200px and up"
+msgstr ""
+
+#: includes/class-wdevs-gallery-slider-activator.php:36
+msgid ""
+"This plugin requires WooCommerce. Please install and activate WooCommerce "
+"before activating this plugin."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Product Gallery Slider for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wijnberg.dev"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Enhances WooCommerce product images display, providing a responsive and "
+"touch-friendly slider."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Wijnberg Developments"
+msgstr ""

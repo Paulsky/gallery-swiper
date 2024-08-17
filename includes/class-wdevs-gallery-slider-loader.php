@@ -6,8 +6,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Woo_Swiper
- * @subpackage Woo_Swiper/includes
+ * @package    Wdevs_Gallery_Slider
+ * @subpackage Wdevs_Gallery_Slider/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Woo_Swiper
- * @subpackage Woo_Swiper/includes
+ * @package    Wdevs_Gallery_Slider
+ * @subpackage Wdevs_Gallery_Slider/includes
  * @author     Wijnberg Developments
  */
-class Woo_Swiper_Loader {
+class Wdevs_Gallery_Slider_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

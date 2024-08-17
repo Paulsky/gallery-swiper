@@ -1,4 +1,4 @@
-function woo_swiper_init_swiper() {
+function wdevs_gallery_slider_init_swiper() {
 	const swiperElements = document.querySelectorAll( '.swiper' );
 
 	swiperElements.forEach( function ( swiperElement ) {
@@ -8,23 +8,23 @@ function woo_swiper_init_swiper() {
 				scrollbar: {
 					el: '.swiper-scrollbar',
 					hide: false,
-					enabled: window.wooSwiperSettings.swiper.scrollbar,
+					enabled: window.wgsSettings.swiper.scrollbar,
 				},
 				pagination: {
 					el: '.swiper-pagination',
 					clickable: true,
-					enabled: window.wooSwiperSettings.swiper.pagination,
+					enabled: window.wgsSettings.swiper.pagination,
 				},
 				navigation: {
 					nextEl: '.swiper-button-next',
 					prevEl: '.swiper-button-prev',
-					enabled: window.wooSwiperSettings.swiper.navigation,
+					enabled: window.wgsSettings.swiper.navigation,
 				},
 			};
 
-			if ( window.wooSwiperSettings.swiper.breakpoint ) {
+			if ( window.wgsSettings.swiper.breakpoint ) {
 				swiperOptions.breakpoints = {
-					[ window.wooSwiperSettings.swiper.breakpoint ]: {
+					[ window.wgsSettings.swiper.breakpoint ]: {
 						enabled: false,
 					},
 				};
@@ -32,7 +32,7 @@ function woo_swiper_init_swiper() {
 
 			const swiper = new Swiper( swiperElement, swiperOptions );
 
-			if ( window.wooSwiperSettings.swiper.breakpoint ) {
+			if ( window.wgsSettings.swiper.breakpoint ) {
 				swiperElement.addEventListener( 'mouseenter', function () {
 					if (
 						swiper.activeIndex === 0 &&
@@ -67,10 +67,10 @@ function woo_swiper_init_swiper() {
 	'use strict';
 
 	if (
-		typeof window.wooSwiperSettings === 'undefined' ||
-		typeof window.wooSwiperSettings.swiper === 'undefined'
+		typeof window.wgsSettings === 'undefined' ||
+		typeof window.wgsSettings.swiper === 'undefined'
 	) {
-		window.wooSwiperSettings = {
+		window.wgsSettings = {
 			swiper: {
 				scrollbar: true,
 				pagination: false,
@@ -81,6 +81,6 @@ function woo_swiper_init_swiper() {
 	}
 
 	document.addEventListener( 'DOMContentLoaded', function () {
-		woo_swiper_init_swiper();
+		wdevs_gallery_slider_init_swiper();
 	} );
 } )( window, document );

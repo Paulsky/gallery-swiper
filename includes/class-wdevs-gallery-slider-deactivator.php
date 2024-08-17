@@ -6,8 +6,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Woo_Swiper
- * @subpackage Woo_Swiper/includes
+ * @package    Wdevs_Gallery_Slider
+ * @subpackage Wdevs_Gallery_Slider/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Woo_Swiper
- * @subpackage Woo_Swiper/includes
+ * @package    Wdevs_Gallery_Slider
+ * @subpackage Wdevs_Gallery_Slider/includes
  * @author     Wijnberg Developments
  */
-class Woo_Swiper_Deactivator {
+class Wdevs_Gallery_Slider_Deactivator {
 
 	/**
 	 * Short Description. (use period)
