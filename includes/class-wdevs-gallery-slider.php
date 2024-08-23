@@ -67,8 +67,8 @@ class Wdevs_Gallery_Slider {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'WOO_SWIPER_VERSION' ) ) {
-			$this->version = WOO_SWIPER_VERSION;
+		if ( defined( 'WDEVS_GALLERY_SLIDER_VERSION' ) ) {
+			$this->version = WDEVS_GALLERY_SLIDER_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -76,8 +76,9 @@ class Wdevs_Gallery_Slider {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_admin_hooks();
+		//$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_woocommerce_hooks();
 	}
 
 	/**
@@ -120,6 +121,13 @@ class Wdevs_Gallery_Slider {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wdevs-gallery-slider-public.php';
+
+		/**
+		 * The class responsible for defining the WooCommerce functionality
+		 * of the plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-slider-woocommerce.php';
+
 
 		$this->loader = new Wdevs_Gallery_Slider_Loader();
 
@@ -173,6 +181,23 @@ class Wdevs_Gallery_Slider {
 
 		$this->loader->add_action( 'woocommerce_init', $plugin_public, 'on_woocommerce_init' );
 
+	}
+
+	/**
+	 * Register all of the hooks related to the Woocommerce functionality
+	 * of the plugin.
+	 *
+	 * @since    1.2.0
+	 * @access   private
+	 */
+	private function define_woocommerce_hooks() {
+		$plugin_woocommerce = new Wdevs_Gallery_Slider_Woocommerce( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_filter( 'before_woocommerce_init', $plugin_woocommerce, 'declare_compatibility' );
+		if ( is_admin() ) {
+			$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_woocommerce, 'add_settings_tab', 50 );
+			$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_tax_switch', $plugin_woocommerce, 'settings_tab' );
+			$this->loader->add_action( 'woocommerce_update_options_wdevs_tax_switch', $plugin_woocommerce, 'update_settings' );
+		}
 	}
 
 	/**
