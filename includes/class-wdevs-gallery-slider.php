@@ -90,6 +90,7 @@ class Wdevs_Gallery_Slider {
 	 * - Wdevs_Gallery_Slider_i18n. Defines internationalization functionality.
 	 * - Wdevs_Gallery_Slider_Admin. Defines all hooks for the admin area.
 	 * - Wdevs_Gallery_Slider_Public. Defines all hooks for the public side of the site.
+	 * - Wdevs_Gallery_Slider_WooCommerce. Defines all hooks for the WooCommerce functionality.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -160,10 +161,6 @@ class Wdevs_Gallery_Slider {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Wdevs_Gallery_Slider_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_admin, 'add_settings_tab', 50 );
-		$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_gallery_slider', $plugin_admin, 'settings_tab' );
-		$this->loader->add_action( 'woocommerce_update_options_wdevs_gallery_slider', $plugin_admin, 'update_settings' );
 
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 	}
