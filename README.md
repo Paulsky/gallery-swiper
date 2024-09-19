@@ -59,6 +59,8 @@ This plugin is tested and compatible with the following:
 
 If you encounter any conflicts with other themes or plugins, please report them to us by opening an issue or through our website. We welcome community contributions, so feel free to submit a pull request if you have a fix or improvement.
 
+Some WooCommerce Blocks are not fully compatible with this plugin as they do not use standard WooCommerce filters for generating thumbnails. This is a known limitation of WooCommerce Blocks and not specific to this plugin. You can fix this by using WooCommerce shortcodes instead of the WooCommerce Blocks.
+
 ## Language support
 
 Currently supported languages:

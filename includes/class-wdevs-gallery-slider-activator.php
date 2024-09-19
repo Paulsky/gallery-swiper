@@ -33,7 +33,7 @@ class Wdevs_Gallery_Slider_Activator {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 
-			wp_die( esc_html__( 'This plugin requires WooCommerce. Please install and activate WooCommerce before activating this plugin.', 'wdevs-gallery-slider' ) );
+			wp_die( esc_html__( 'This plugin requires WooCommerce. Please install and activate WooCommerce before activating this plugin.', 'product-gallery-slider-for-woocommerce' ) );
 		}
 
 		self::migrate_settings();

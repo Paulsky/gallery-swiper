@@ -35,7 +35,7 @@ class Wdevs_Gallery_Slider_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'wdevs-gallery-slider',
+			'product-gallery-slider-for-woocommerce',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

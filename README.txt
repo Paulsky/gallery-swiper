@@ -42,6 +42,8 @@ After installation and activation, Product Gallery Slider for WooCommerce will a
 
 Product Gallery Slider for WooCommerce has been tested with GeneratePress theme, where the secondary thumbnail image is disabled. It's also compatible with YITH Infinite Scrolling plugin, with Swiper being initialized for AJAX loaded products.
 
+Some WooCommerce Blocks are not fully compatible with this plugin as they do not use standard WooCommerce filters for generating thumbnails. This is a known limitation of WooCommerce Blocks and not specific to this plugin. You can fix this by using WooCommerce shortcodes instead of the WooCommerce Blocks.
+
 If you encounter any conflicts with other themes or plugins, please report them to us.
 
 == Changelog ==

@@ -75,7 +75,7 @@ class Wdevs_Gallery_Slider_Woocommerce {
 	 * @since    1.2.0
 	 */
 	public function add_settings_tab( $settings_tabs ) {
-		$settings_tabs['wdevs_gallery_slider'] = __( 'Gallery Slider', 'wdevs-gallery-slider' );
+		$settings_tabs['wdevs_gallery_slider'] = __( 'Gallery Slider', 'product-gallery-slider-for-woocommerce' );
 		return $settings_tabs;
 	}
 
@@ -88,43 +88,43 @@ class Wdevs_Gallery_Slider_Woocommerce {
 	public function get_settings() {
 		$settings = array(
 			array(
-				'name' => __( 'Gallery Slider settings', 'wdevs-gallery-slider' ),
+				'name' => __( 'Gallery Slider settings', 'product-gallery-slider-for-woocommerce' ),
 				'type' => 'title',
-				'desc' => __( 'Customize the Gallery slider settings.', 'wdevs-gallery-slider' ),
+				'desc' => __( 'Customize the Gallery slider settings.', 'product-gallery-slider-for-woocommerce' ),
 				'id'   => 'wdevs_gallery_slider_section_title'
 			),
 			array(
-				'name'    => __( 'Enable scrollbar', 'wdevs-gallery-slider' ),
+				'name'    => __( 'Enable scrollbar', 'product-gallery-slider-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'desc'    => __( 'Enable scrollbar for the slider', 'wdevs-gallery-slider' ),
+				'desc'    => __( 'Enable scrollbar for the slider', 'product-gallery-slider-for-woocommerce' ),
 				'id'      => 'wdevs_gallery_slider_scrollbar',
 				'default' => 'yes'
 			),
 			array(
-				'name'    => __( 'Enable pagination', 'wdevs-gallery-slider' ),
+				'name'    => __( 'Enable pagination', 'product-gallery-slider-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'desc'    => __( 'Enable pagination for the slider', 'wdevs-gallery-slider' ),
+				'desc'    => __( 'Enable pagination for the slider', 'product-gallery-slider-for-woocommerce' ),
 				'id'      => 'wdevs_gallery_slider_pagination',
 				'default' => 'no'
 			),
 			array(
-				'name'    => __( 'Enable navigation', 'wdevs-gallery-slider' ),
+				'name'    => __( 'Enable navigation', 'product-gallery-slider-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'desc'    => __( 'Enable navigation for the slider', 'wdevs-gallery-slider' ),
+				'desc'    => __( 'Enable navigation for the slider', 'product-gallery-slider-for-woocommerce' ),
 				'id'      => 'wdevs_gallery_slider_navigation',
 				'default' => 'no'
 			),
 			array(
-				'name'    => __( 'Disable slider from', 'wdevs-gallery-slider' ),
+				'name'    => __( 'Disable slider from', 'product-gallery-slider-for-woocommerce' ),
 				'type'    => 'select',
-				'desc'    => __( 'When set, the slider will be disabled from the specified breakpoint upwards, and the second product image will be displayed on mouse hover.', 'wdevs-gallery-slider' ),
+				'desc'    => __( 'When set, the slider will be disabled from the specified breakpoint upwards, and the second product image will be displayed on mouse hover.', 'product-gallery-slider-for-woocommerce' ),
 				'id'      => 'wdevs_gallery_slider_breakpoint',
 				'options' => array(
-					''     => __( 'Always enabled', 'wdevs-gallery-slider' ),
-					'480'  => __( 'Disabled from 480px and up', 'wdevs-gallery-slider' ),
-					'768'  => __( 'Disabled from 768px and up', 'wdevs-gallery-slider' ),
-					'992'  => __( 'Disabled from 992px and up', 'wdevs-gallery-slider' ),
-					'1200' => __( 'Disabled from 1200px and up', 'wdevs-gallery-slider' )
+					''     => __( 'Always enabled', 'product-gallery-slider-for-woocommerce' ),
+					'480'  => __( 'Disabled from 480px and up', 'product-gallery-slider-for-woocommerce' ),
+					'768'  => __( 'Disabled from 768px and up', 'product-gallery-slider-for-woocommerce' ),
+					'992'  => __( 'Disabled from 992px and up', 'product-gallery-slider-for-woocommerce' ),
+					'1200' => __( 'Disabled from 1200px and up', 'product-gallery-slider-for-woocommerce' )
 				),
 				'default' => ''
 			),

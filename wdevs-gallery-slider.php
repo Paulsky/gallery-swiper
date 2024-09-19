@@ -20,7 +20,7 @@
  * Author:               Wijnberg Developments
  * License:              GPL-2.0+
  * License URI:          http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:          wdevs-gallery-slider
+ * Text Domain:          product-gallery-slider-for-woocommerce
  * Domain Path:          /languages
  * Requires at least:    6.0
  * Tested up to:         6.6
@@ -46,7 +46,7 @@ define( 'WDEVS_GALLERY_SLIDER_VERSION', '1.2.0' );
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wdevs-gallery-slider-activator.php
  */
-function activate_wdevs_gallery_slider() {
+function wdevs_gallery_slider_activate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wdevs-gallery-slider-activator.php';
 	Wdevs_Gallery_Slider_Activator::activate();
 }
@@ -55,7 +55,7 @@ function activate_wdevs_gallery_slider() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-wdevs-gallery-slider-deactivator.php
  */
-function deactivate_wdevs_gallery_slider() {
+function wdevs_gallery_slider_deactivate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wdevs-gallery-slider-deactivator.php';
 	Wdevs_Gallery_Slider_Deactivator::deactivate();
 }
@@ -64,8 +64,8 @@ if ( ! function_exists( 'is_plugin_active' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 
-register_activation_hook( __FILE__, 'activate_wdevs_gallery_slider' );
-register_deactivation_hook( __FILE__, 'deactivate_wdevs_gallery_slider' );
+register_activation_hook( __FILE__, 'wdevs_gallery_slider_activate' );
+register_deactivation_hook( __FILE__, 'wdevs_gallery_slider_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -82,11 +82,11 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wdevs-gallery-slider.php';
  *
  * @since    1.0.0
  */
-function run_wdevs_gallery_slider() {
+function wdevs_gallery_slider_run() {
 
 	$plugin = new Wdevs_Gallery_Slider();
 	$plugin->run();
 
 }
 
-run_wdevs_gallery_slider();
+wdevs_gallery_slider_run();

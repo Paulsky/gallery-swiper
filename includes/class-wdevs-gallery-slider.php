@@ -192,8 +192,8 @@ class Wdevs_Gallery_Slider {
 		$this->loader->add_filter( 'before_woocommerce_init', $plugin_woocommerce, 'declare_compatibility' );
 		if ( is_admin() ) {
 			$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_woocommerce, 'add_settings_tab', 50 );
-			$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_tax_switch', $plugin_woocommerce, 'settings_tab' );
-			$this->loader->add_action( 'woocommerce_update_options_wdevs_tax_switch', $plugin_woocommerce, 'update_settings' );
+			$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_gallery_slider', $plugin_woocommerce, 'settings_tab' );
+			$this->loader->add_action( 'woocommerce_update_options_wdevs_gallery_slider', $plugin_woocommerce, 'update_settings' );
 		}
 	}
 
