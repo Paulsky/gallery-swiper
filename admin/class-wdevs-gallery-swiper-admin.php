@@ -6,8 +6,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/admin
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/admin
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/admin
  * @author     Wijnberg Developments
  */
-class Wdevs_Gallery_Slider_Admin {
+class Wdevs_Gallery_Swiper_Admin {
 
 	/**
 	 * The ID of this plugin.

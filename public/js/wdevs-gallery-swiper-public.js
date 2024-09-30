@@ -1,4 +1,4 @@
-function wdevs_gallery_slider_init_swiper() {
+function wdevs_gallery_swiper_init_swiper() {
 	const swiperElements = document.querySelectorAll( '.swiper' );
 
 	swiperElements.forEach( function ( swiperElement ) {
@@ -81,6 +81,6 @@ function wdevs_gallery_slider_init_swiper() {
 	}
 
 	document.addEventListener( 'DOMContentLoaded', function () {
-		wdevs_gallery_slider_init_swiper();
+		wdevs_gallery_swiper_init_swiper();
 	} );
 } )( window, document );

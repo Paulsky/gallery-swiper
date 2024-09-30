@@ -6,8 +6,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  * @author     Wijnberg Developments
  */
-class Wdevs_Gallery_Slider_Activator {
+class Wdevs_Gallery_Swiper_Activator {
 
 	/**
 	 * Short Description. (use period)
@@ -33,16 +33,16 @@ class Wdevs_Gallery_Slider_Activator {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 
-			wp_die( esc_html__( 'This plugin requires WooCommerce. Please install and activate WooCommerce before activating this plugin.', 'product-gallery-slider-for-woocommerce' ) );
+			wp_die( esc_html__( 'This plugin requires WooCommerce. Please install and activate WooCommerce before activating this plugin.', 'product-gallery-swiper-for-woocommerce' ) );
 		}
 
 		self::migrate_settings();
 	}
 
 	/**
-	 * Migrates settings from 'Woo Swiper' to 'Wdevs Gallery Slider'.
+	 * Migrates settings from 'Woo Swiper' to 'Wdevs Gallery Swiper'.
 	 *
-	 * This plugin was renamed from 'Woo Swiper' to 'Wdevs Gallery Slider' in version 1.1.
+	 * This plugin was renamed from 'Woo Swiper' to 'Wdevs Gallery Swiper' in version 1.1.
 	 * This method ensures that existing settings are transferred to the new format.
 	 *
 	 * @since    1.1.0
@@ -56,10 +56,14 @@ class Wdevs_Gallery_Slider_Activator {
 
 		// Mapping of old setting keys to new ones
 		$settings_mapping = [
-			'woo_swiper_scrollbar'  => 'wdevs_gallery_slider_scrollbar',
-			'woo_swiper_pagination' => 'wdevs_gallery_slider_pagination',
-			'woo_swiper_navigation' => 'wdevs_gallery_slider_navigation',
-			'woo_swiper_breakpoint' => 'wdevs_gallery_slider_breakpoint'
+			'woo_swiper_scrollbar'            => 'wdevs_gallery_swiper_scrollbar',
+			'woo_swiper_pagination'           => 'wdevs_gallery_swiper_pagination',
+			'woo_swiper_navigation'           => 'wdevs_gallery_swiper_navigation',
+			'woo_swiper_breakpoint'           => 'wdevs_gallery_swiper_breakpoint',
+			'wdevs_gallery_slider_scrollbar'  => 'wdevs_gallery_swiper_scrollbar',
+			'wdevs_gallery_slider_pagination' => 'wdevs_gallery_swiper_pagination',
+			'wdevs_gallery_slider_navigation' => 'wdevs_gallery_swiper_navigation',
+			'wdevs_gallery_slider_breakpoint' => 'wdevs_gallery_swiper_breakpoint',
 		];
 
 		// Update each setting individually

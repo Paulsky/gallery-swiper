@@ -13,7 +13,7 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: wdevs-gallery-slider.php\n"
+"X-Poedit-WPHeader: wdevs-gallery-swiper.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
@@ -23,80 +23,80 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 "X-Poedit-SearchPathExcluded-2: public/vendor\n"
 
-#: admin/class-wdevs-gallery-slider-admin.php:59
-msgid "Gallery Slider"
+#: admin/class-wdevs-gallery-swiper-admin.php:59
+msgid "Gallery Swiper"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:66
+#: admin/class-wdevs-gallery-swiper-admin.php:66
 msgid "Gallery Slider settings"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:68
+#: admin/class-wdevs-gallery-swiper-admin.php:68
 msgid "Customize the Gallery slider settings."
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:72
+#: admin/class-wdevs-gallery-swiper-admin.php:72
 msgid "Enable scrollbar"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:74
+#: admin/class-wdevs-gallery-swiper-admin.php:74
 msgid "Enable scrollbar for the slider"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:79
+#: admin/class-wdevs-gallery-swiper-admin.php:79
 msgid "Enable pagination"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:81
+#: admin/class-wdevs-gallery-swiper-admin.php:81
 msgid "Enable pagination for the slider"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:86
+#: admin/class-wdevs-gallery-swiper-admin.php:86
 msgid "Enable navigation"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:88
+#: admin/class-wdevs-gallery-swiper-admin.php:88
 msgid "Enable navigation for the slider"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:93
+#: admin/class-wdevs-gallery-swiper-admin.php:93
 msgid "Disable slider from"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:95
+#: admin/class-wdevs-gallery-swiper-admin.php:95
 msgid ""
 "When set, the slider will be disabled from the specified breakpoint upwards, "
 "and the second product image will be displayed on mouse hover."
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:98
+#: admin/class-wdevs-gallery-swiper-admin.php:98
 msgid "Always enabled"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:99
+#: admin/class-wdevs-gallery-swiper-admin.php:99
 msgid "Disabled from 480px and up"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:100
+#: admin/class-wdevs-gallery-swiper-admin.php:100
 msgid "Disabled from 768px and up"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:101
+#: admin/class-wdevs-gallery-swiper-admin.php:101
 msgid "Disabled from 992px and up"
 msgstr ""
 
-#: admin/class-wdevs-gallery-slider-admin.php:102
+#: admin/class-wdevs-gallery-swiper-admin.php:102
 msgid "Disabled from 1200px and up"
 msgstr ""
 
-#: includes/class-wdevs-gallery-slider-activator.php:36
+#: includes/class-wdevs-gallery-swiper-activator.php:36
 msgid ""
 "This plugin requires WooCommerce. Please install and activate WooCommerce "
 "before activating this plugin."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Product Gallery Slider for WooCommerce"
+msgid "Product Gallery Swiper for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

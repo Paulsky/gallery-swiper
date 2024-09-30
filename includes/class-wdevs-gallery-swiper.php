@@ -9,8 +9,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  * @author     Wijnberg Developments
  */
-class Wdevs_Gallery_Slider {
+class Wdevs_Gallery_Swiper {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Wdevs_Gallery_Slider {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Wdevs_Gallery_Slider_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Wdevs_Gallery_Swiper_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -72,7 +72,7 @@ class Wdevs_Gallery_Slider {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'wdevs-gallery-slider';
+		$this->plugin_name = 'wdevs-gallery-swiper';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -86,11 +86,11 @@ class Wdevs_Gallery_Slider {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Wdevs_Gallery_Slider_Loader. Orchestrates the hooks of the plugin.
-	 * - Wdevs_Gallery_Slider_i18n. Defines internationalization functionality.
-	 * - Wdevs_Gallery_Slider_Admin. Defines all hooks for the admin area.
-	 * - Wdevs_Gallery_Slider_Public. Defines all hooks for the public side of the site.
-	 * - Wdevs_Gallery_Slider_WooCommerce. Defines all hooks for the WooCommerce functionality.
+	 * - Wdevs_Gallery_Swiper_Loader. Orchestrates the hooks of the plugin.
+	 * - Wdevs_Gallery_Swiper_i18n. Defines internationalization functionality.
+	 * - Wdevs_Gallery_Swiper_Admin. Defines all hooks for the admin area.
+	 * - Wdevs_Gallery_Swiper_Public. Defines all hooks for the public side of the site.
+	 * - Wdevs_Gallery_Swiper_WooCommerce. Defines all hooks for the WooCommerce functionality.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -104,40 +104,40 @@ class Wdevs_Gallery_Slider {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-slider-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-swiper-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-slider-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-swiper-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wdevs-gallery-slider-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wdevs-gallery-swiper-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wdevs-gallery-slider-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wdevs-gallery-swiper-public.php';
 
 		/**
 		 * The class responsible for defining the WooCommerce functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-slider-woocommerce.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-swiper-woocommerce.php';
 
 
-		$this->loader = new Wdevs_Gallery_Slider_Loader();
+		$this->loader = new Wdevs_Gallery_Swiper_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Wdevs_Gallery_Slider_i18n class in order to set the domain and to register the hook
+	 * Uses the Wdevs_Gallery_Swiper_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -145,7 +145,7 @@ class Wdevs_Gallery_Slider {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Wdevs_Gallery_Slider_i18n();
+		$plugin_i18n = new Wdevs_Gallery_Swiper_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -160,7 +160,7 @@ class Wdevs_Gallery_Slider {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Wdevs_Gallery_Slider_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Wdevs_Gallery_Swiper_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 	}
@@ -174,7 +174,7 @@ class Wdevs_Gallery_Slider {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Wdevs_Gallery_Slider_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Wdevs_Gallery_Swiper_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'woocommerce_init', $plugin_public, 'on_woocommerce_init' );
 
@@ -188,12 +188,12 @@ class Wdevs_Gallery_Slider {
 	 * @access   private
 	 */
 	private function define_woocommerce_hooks() {
-		$plugin_woocommerce = new Wdevs_Gallery_Slider_Woocommerce( $this->get_plugin_name(), $this->get_version() );
+		$plugin_woocommerce = new Wdevs_Gallery_Swiper_Woocommerce( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_filter( 'before_woocommerce_init', $plugin_woocommerce, 'declare_compatibility' );
 		if ( is_admin() ) {
 			$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_woocommerce, 'add_settings_tab', 50 );
-			$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_gallery_slider', $plugin_woocommerce, 'settings_tab' );
-			$this->loader->add_action( 'woocommerce_update_options_wdevs_gallery_slider', $plugin_woocommerce, 'update_settings' );
+			$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_gallery_swiper', $plugin_woocommerce, 'settings_tab' );
+			$this->loader->add_action( 'woocommerce_update_options_wdevs_gallery_swiper', $plugin_woocommerce, 'update_settings' );
 		}
 	}
 
@@ -221,7 +221,7 @@ class Wdevs_Gallery_Slider {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Wdevs_Gallery_Slider_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Wdevs_Gallery_Swiper_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

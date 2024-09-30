@@ -9,8 +9,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  * @author     Wijnberg Developments
  */
-class Wdevs_Gallery_Slider_i18n {
+class Wdevs_Gallery_Swiper_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Wdevs_Gallery_Slider_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'product-gallery-slider-for-woocommerce',
+			'product-gallery-swiper-for-woocommerce',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

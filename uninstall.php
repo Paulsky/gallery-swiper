@@ -22,7 +22,7 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Wdevs_Gallery_Slider
+ * @package    Wdevs_Gallery_Swiper
  */
 
 // If uninstall not called from WordPress, then exit.

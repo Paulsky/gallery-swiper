@@ -3,15 +3,15 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * This file contains the Wdevs_Gallery_Slider_Public class which handles all public-facing
+ * This file contains the Wdevs_Gallery_Swiper_Public class which handles all public-facing
  * aspects of the plugin, including enqueueing scripts and styles, modifying WooCommerce
  * product displays, and ensuring compatibility with themes and other plugins.
  *
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/public
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/public
  */
 
 /**
@@ -21,11 +21,11 @@
  * and JavaScript. It also handles the modification of WooCommerce product displays and
  * ensures compatibility with various themes and plugins.
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/public
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/public
  * @author     Wijnberg Developments
  */
-class Wdevs_Gallery_Slider_Public {
+class Wdevs_Gallery_Swiper_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -89,14 +89,14 @@ class Wdevs_Gallery_Slider_Public {
 		wp_register_script( 'swiper-js', plugin_dir_url( __FILE__ ) . 'vendor/swiper/swiper-bundle.min.js', [], self::SWIPER_VERSION, true );
 		wp_enqueue_script( 'swiper-js' );
 
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-slider-public.js', [ 'swiper-js' ], $this->version, true );
+		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-swiper-public.js', [ 'swiper-js' ], $this->version, true );
 
 		$localized_settings = [
 			'swiper' => [
-				'scrollbar'  => get_option( 'wdevs_gallery_slider_scrollbar', 'yes' ) === 'yes',
-				'pagination' => get_option( 'wdevs_gallery_slider_pagination', 'no' ) === 'yes',
-				'navigation' => get_option( 'wdevs_gallery_slider_navigation', 'no' ) === 'yes',
-				'breakpoint' => $this->parse_breakpoint( get_option( 'wdevs_gallery_slider_breakpoint', '' ) ),
+				'scrollbar'  => get_option( 'wdevs_gallery_swiper_scrollbar', 'yes' ) === 'yes',
+				'pagination' => get_option( 'wdevs_gallery_swiper_pagination', 'no' ) === 'yes',
+				'navigation' => get_option( 'wdevs_gallery_swiper_navigation', 'no' ) === 'yes',
+				'breakpoint' => $this->parse_breakpoint( get_option( 'wdevs_gallery_swiper_breakpoint', '' ) ),
 			]
 		];
 
@@ -161,12 +161,12 @@ class Wdevs_Gallery_Slider_Public {
 		add_action( 'wp_enqueue_scripts', function () {
 			// YITH Infinite Scrolling compatibility
 			if ( is_plugin_active( 'yith-infinite-scrolling/init.php' ) ) {
-				wp_register_script( 'wdevs-gallery-slider-yith-infinite-scrolling', plugin_dir_url( __FILE__ ) . 'js/yith-infinite-scrolling.js', [
+				wp_register_script( 'wdevs-gallery-swiper-yith-infinite-scrolling', plugin_dir_url( __FILE__ ) . 'js/yith-infinite-scrolling.js', [
 					'jquery',
 					'yith-infinitescroll',
 					$this->plugin_name
 				], $this->version, true );
-				wp_enqueue_script( 'wdevs-gallery-slider-yith-infinite-scrolling' );
+				wp_enqueue_script( 'wdevs-gallery-swiper-yith-infinite-scrolling' );
 			}
 		} );
 	}

@@ -1,8 +1,8 @@
-# Product Gallery Slider for WooCommerce
+# Product Gallery Swiper for WooCommerce
 
 Enhances the product image gallery in WooCommerce by integrating the Swiper library. This enables a responsive and touch-friendly slider for product thumbnails displayed on **product listing sections** (e.g., shop page, product categories pages, related products) rather than the single product gallery.
 
-<img src="https://github.com/Paulsky/woo-swiper/assets/9481318/1d9765af-70e9-4459-a084-af36cea3aff8" width="250" alt="Product Gallery Slider demo" style="max-width: 250px !important; height: auto !important;" />
+<img src="https://github.com/Paulsky/woo-swiper/assets/9481318/1d9765af-70e9-4459-a084-af36cea3aff8" width="250" alt="Product Gallery Swiper demo" style="max-width: 250px !important; height: auto !important;" />
 
 For more WordPress plugins, check out our products at [Wijnberg Developments](https://products.wijnberg.dev).
 
@@ -20,7 +20,7 @@ For more WordPress plugins, check out our products at [Wijnberg Developments](ht
 
 To install the plugin, follow these steps:
 
-1. Download the `.zip` file from the [releases page](https://github.com/Paulsky/gallery-slider/releases).
+1. Download the `.zip` file from the [releases page](https://github.com/Paulsky/gallery-swiper/releases).
 2. In your WordPress admin dashboard, go to `Plugins` > `Add New`.
 3. Click `Upload Plugin` at the top of the page.
 4. Click `Choose File`, select the `.zip` file you downloaded, then click `Install Now`.
@@ -30,14 +30,14 @@ The plugin is now ready for use.
 
 ## Getting started
 
-These instructions will guide you through the installation and basic setup of the Gallery Slider plugin, ensuring a smooth integration with your WooCommerce product listing sections.
+These instructions will guide you through the installation and basic setup of the Gallery Swiper plugin, ensuring a smooth integration with your WooCommerce product listing sections.
 
 ### Configuration
 
-Once activated, Product Gallery Slider for WooCommerce requires no mandatory configuration to start working. By default, it will automatically apply the Swiper slider to your WooCommerce product galleries on listing pages.
+Once activated, Product Gallery Swiper for WooCommerce requires no mandatory configuration to start working. By default, it will automatically apply the Swiper slider to your WooCommerce product galleries on listing pages.
 
 To customize the Swiper slider settings:
-1. Go to the Gallery Slider settings page located under the 'WooCommerce' menu in the WordPress admin area.
+1. Go to the Gallery Swiper settings page located under the 'WooCommerce' menu in the WordPress admin area.
 2. Adjust the settings according to your preferences, such as enabling or disabling the scrollbar, pagination, and navigation arrows.
 3. Save your changes.
 

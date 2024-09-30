@@ -6,8 +6,8 @@
  * @link       https://wijnberg.dev
  * @since      1.0.0
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  * @author     Wijnberg Developments
  */
-class Wdevs_Gallery_Slider_Deactivator {
+class Wdevs_Gallery_Swiper_Deactivator {
 
 	/**
 	 * Short Description. (use period)

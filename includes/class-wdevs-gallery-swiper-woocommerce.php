@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and hooks for WooCommerce functionality.
  * This class is responsible for registering and rendering the WooCommerce settings.
  *
- * @package    Wdevs_Gallery_Slider
- * @subpackage Wdevs_Gallery_Slider/includes
+ * @package    Wdevs_Gallery_Swiper
+ * @subpackage Wdevs_Gallery_Swiper/includes
  * @author     Wijnberg Developments <contact@wijnberg.dev>
  */
-class Wdevs_Gallery_Slider_Woocommerce {
+class Wdevs_Gallery_Swiper_Woocommerce {
 
 	/**
 	 * The ID of this plugin.
@@ -62,7 +62,7 @@ class Wdevs_Gallery_Slider_Woocommerce {
 	 */
 	public function declare_compatibility(){
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'wdevs-gallery-slider/wdevs-gallery-slider.php', true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'wdevs-gallery-swiper/wdevs-gallery-swiper.php', true );
 		}
 	}
 
@@ -75,7 +75,7 @@ class Wdevs_Gallery_Slider_Woocommerce {
 	 * @since    1.2.0
 	 */
 	public function add_settings_tab( $settings_tabs ) {
-		$settings_tabs['wdevs_gallery_slider'] = __( 'Gallery Slider', 'product-gallery-slider-for-woocommerce' );
+		$settings_tabs['wdevs_gallery_swiper'] = __( 'Gallery Swiper', 'product-gallery-swiper-for-woocommerce' );
 		return $settings_tabs;
 	}
 
@@ -88,53 +88,53 @@ class Wdevs_Gallery_Slider_Woocommerce {
 	public function get_settings() {
 		$settings = array(
 			array(
-				'name' => __( 'Gallery Slider settings', 'product-gallery-slider-for-woocommerce' ),
+				'name' => __( 'Gallery Swiper settings', 'product-gallery-swiper-for-woocommerce' ),
 				'type' => 'title',
-				'desc' => __( 'Customize the Gallery slider settings.', 'product-gallery-slider-for-woocommerce' ),
-				'id'   => 'wdevs_gallery_slider_section_title'
+				'desc' => __( 'Customize the Gallery slider settings.', 'product-gallery-swiper-for-woocommerce' ),
+				'id'   => 'wdevs_gallery_swiper_section_title'
 			),
 			array(
-				'name'    => __( 'Enable scrollbar', 'product-gallery-slider-for-woocommerce' ),
+				'name'    => __( 'Enable scrollbar', 'product-gallery-swiper-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'desc'    => __( 'Enable scrollbar for the slider', 'product-gallery-slider-for-woocommerce' ),
-				'id'      => 'wdevs_gallery_slider_scrollbar',
+				'desc'    => __( 'Enable scrollbar for the slider', 'product-gallery-swiper-for-woocommerce' ),
+				'id'      => 'wdevs_gallery_swiper_scrollbar',
 				'default' => 'yes'
 			),
 			array(
-				'name'    => __( 'Enable pagination', 'product-gallery-slider-for-woocommerce' ),
+				'name'    => __( 'Enable pagination', 'product-gallery-swiper-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'desc'    => __( 'Enable pagination for the slider', 'product-gallery-slider-for-woocommerce' ),
-				'id'      => 'wdevs_gallery_slider_pagination',
+				'desc'    => __( 'Enable pagination for the slider', 'product-gallery-swiper-for-woocommerce' ),
+				'id'      => 'wdevs_gallery_swiper_pagination',
 				'default' => 'no'
 			),
 			array(
-				'name'    => __( 'Enable navigation', 'product-gallery-slider-for-woocommerce' ),
+				'name'    => __( 'Enable navigation', 'product-gallery-swiper-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'desc'    => __( 'Enable navigation for the slider', 'product-gallery-slider-for-woocommerce' ),
-				'id'      => 'wdevs_gallery_slider_navigation',
+				'desc'    => __( 'Enable navigation for the slider', 'product-gallery-swiper-for-woocommerce' ),
+				'id'      => 'wdevs_gallery_swiper_navigation',
 				'default' => 'no'
 			),
 			array(
-				'name'    => __( 'Disable slider from', 'product-gallery-slider-for-woocommerce' ),
+				'name'    => __( 'Disable slider from', 'product-gallery-swiper-for-woocommerce' ),
 				'type'    => 'select',
-				'desc'    => __( 'When set, the slider will be disabled from the specified breakpoint upwards, and the second product image will be displayed on mouse hover.', 'product-gallery-slider-for-woocommerce' ),
-				'id'      => 'wdevs_gallery_slider_breakpoint',
+				'desc'    => __( 'When set, the slider will be disabled from the specified breakpoint upwards, and the second product image will be displayed on mouse hover.', 'product-gallery-swiper-for-woocommerce' ),
+				'id'      => 'wdevs_gallery_swiper_breakpoint',
 				'options' => array(
-					''     => __( 'Always enabled', 'product-gallery-slider-for-woocommerce' ),
-					'480'  => __( 'Disabled from 480px and up', 'product-gallery-slider-for-woocommerce' ),
-					'768'  => __( 'Disabled from 768px and up', 'product-gallery-slider-for-woocommerce' ),
-					'992'  => __( 'Disabled from 992px and up', 'product-gallery-slider-for-woocommerce' ),
-					'1200' => __( 'Disabled from 1200px and up', 'product-gallery-slider-for-woocommerce' )
+					''     => __( 'Always enabled', 'product-gallery-swiper-for-woocommerce' ),
+					'480'  => __( 'Disabled from 480px and up', 'product-gallery-swiper-for-woocommerce' ),
+					'768'  => __( 'Disabled from 768px and up', 'product-gallery-swiper-for-woocommerce' ),
+					'992'  => __( 'Disabled from 992px and up', 'product-gallery-swiper-for-woocommerce' ),
+					'1200' => __( 'Disabled from 1200px and up', 'product-gallery-swiper-for-woocommerce' )
 				),
 				'default' => ''
 			),
 			array(
 				'type' => 'sectionend',
-				'id'   => 'wdevs_gallery_slider_section_end'
+				'id'   => 'wdevs_gallery_swiper_section_end'
 			)
 		);
 
-		return apply_filters( 'wdevs_gallery_slider_settings', $settings );
+		return apply_filters( 'wdevs_gallery_swiper_settings', $settings );
 	}
 
 	/**
