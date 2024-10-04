@@ -75,6 +75,8 @@ class Wdevs_Gallery_Swiper_Public {
 	public function enqueue_styles() {
 		wp_register_style( 'swiper-css', plugin_dir_url( __FILE__ ) . 'vendor/swiper/swiper-bundle.min.css', [], self::SWIPER_VERSION );
 		wp_enqueue_style( 'swiper-css' );
+
+		wp_enqueue_style( $this->plugin_name . '-public', plugin_dir_url( __FILE__ ) . 'css/wdevs-gallery-swiper-public.css', array(), $this->version );
 	}
 
 	/**
