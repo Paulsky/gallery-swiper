@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to the Wdevs Tax Switch plugin will be documented in this file.
 
+## [1.4.0] - 04-01-2025
+### Updated
+- Possible breaking change: only render the Swiper HTML if the slider can be displayed
+- Possible breaking change: Render the default theme featured image HTML in the first slide
+- Updated Swiper from 11.1.9 to 11.2.0
+
+### Added
+- Compatibility for Blocksy theme
+- Color setting for Swiper buttons and pagination
+
 ## [1.3.0] - 24-09-2024
 ### Updated
 

@@ -1,3 +1,12 @@
+.woocommerce ul.products li.product .swiper {
+    max-width: 100%;
+    /*fix for to large images: https://github.com/nolimits4web/swiper/issues/3599 */
+    display: grid;
+}
+.woocommerce ul.products li.product .swiper-wrapper {
+    /*fix for to large images: https://github.com/nolimits4web/swiper/issues/3599 */
+    min-width: 0;
+}
 .woocommerce ul.products li.product a.woocommerce-loop-product__link {
     max-width: 100%;
 }

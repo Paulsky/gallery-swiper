@@ -175,7 +175,6 @@ class Wdevs_Gallery_Swiper {
 	private function define_public_hooks() {
 
 		$plugin_public = new Wdevs_Gallery_Swiper_Public( $this->get_plugin_name(), $this->get_version() );
-
 		$this->loader->add_action( 'woocommerce_init', $plugin_public, 'on_woocommerce_init' );
 
 	}

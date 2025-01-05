@@ -129,6 +129,13 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 				'default' => ''
 			),
 			array(
+				'name'    => __( 'Theme color', 'product-gallery-swiper-for-woocommerce' ),
+				'type'    => 'color',
+				'desc'    => __( 'Choose the Swiper theme color', 'product-gallery-swiper-for-woocommerce' ),
+				'id'      => 'wdevs_gallery_swiper_theme_color',
+				'default' => '#007aff'
+			),
+			array(
 				'type' => 'sectionend',
 				'id'   => 'wdevs_gallery_swiper_section_end'
 			)

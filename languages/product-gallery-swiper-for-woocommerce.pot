@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Product Gallery Slider for WooCommerce\n"
-"POT-Creation-Date: 2024-08-17 17:34+0200\n"
+"POT-Creation-Date: 2025-01-04 12:09+0100\n"
 "PO-Revision-Date: 2024-08-17 16:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wdevs-gallery-swiper.php\n"
@@ -23,76 +23,84 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 "X-Poedit-SearchPathExcluded-2: public/vendor\n"
 
-#: admin/class-wdevs-gallery-swiper-admin.php:59
+#: includes/class-wdevs-gallery-swiper-activator.php:36
+msgid ""
+"This plugin requires WooCommerce. Please install and activate WooCommerce "
+"before activating this plugin."
+msgstr ""
+
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:78
 msgid "Gallery Swiper"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:66
-msgid "Gallery Slider settings"
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:91
+msgid "Gallery Swiper settings"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:68
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:93
 msgid "Customize the Gallery slider settings."
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:72
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:97
 msgid "Enable scrollbar"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:74
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:99
 msgid "Enable scrollbar for the slider"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:79
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:104
 msgid "Enable pagination"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:81
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:106
 msgid "Enable pagination for the slider"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:86
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:111
 msgid "Enable navigation"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:88
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:113
 msgid "Enable navigation for the slider"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:93
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:118
 msgid "Disable slider from"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:95
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:120
 msgid ""
 "When set, the slider will be disabled from the specified breakpoint upwards, "
 "and the second product image will be displayed on mouse hover."
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:98
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:123
 msgid "Always enabled"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:99
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:124
 msgid "Disabled from 480px and up"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:100
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:125
 msgid "Disabled from 768px and up"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:101
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:126
 msgid "Disabled from 992px and up"
 msgstr ""
 
-#: admin/class-wdevs-gallery-swiper-admin.php:102
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:127
 msgid "Disabled from 1200px and up"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-activator.php:36
-msgid ""
-"This plugin requires WooCommerce. Please install and activate WooCommerce "
-"before activating this plugin."
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:132
+msgid "Theme color"
+msgstr ""
+
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:134
+msgid "Choose the Swiper theme color"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
@@ -106,7 +114,7 @@ msgstr ""
 #. Description of the plugin/theme
 msgid ""
 "Enhances WooCommerce product images display on product listing sections, "
-"providing a responsive and touch-friendly slider."
+"providing a responsive and touch-friendly swiper."
 msgstr ""
 
 #. Author of the plugin/theme

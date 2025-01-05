@@ -52,6 +52,7 @@ This plugin is tested and compatible with the following:
 ### Themes
 
 - [**GeneratePress**](https://generatepress.com): The secondary thumbnail image is disabled.
+- Blocksy
 
 ### Plugins
 

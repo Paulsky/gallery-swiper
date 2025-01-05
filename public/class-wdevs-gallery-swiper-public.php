@@ -50,7 +50,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @since    1.1.0
 	 */
-	private const SWIPER_VERSION = '11.1.9';
+	private const SWIPER_VERSION = '11.2.0';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -77,6 +77,15 @@ class Wdevs_Gallery_Swiper_Public {
 		wp_enqueue_style( 'swiper-css' );
 
 		wp_enqueue_style( $this->plugin_name . '-public', plugin_dir_url( __FILE__ ) . 'css/wdevs-gallery-swiper-public.css', array(), $this->version );
+
+		$theme_color = get_option( 'wdevs_gallery_swiper_theme_color', '' );
+		if ( ! empty( $theme_color ) ) {
+			$inline_css = sprintf(
+				'.woocommerce ul.products li.product .swiper { --swiper-theme-color: %s; }',
+				esc_attr($theme_color)
+			);
+			wp_add_inline_style( $this->plugin_name . '-public', $inline_css );
+		}
 	}
 
 	/**
@@ -108,38 +117,6 @@ class Wdevs_Gallery_Swiper_Public {
 	}
 
 	/**
-	 * Modify the product thumbnail structure to implement the gallery slider.
-	 *
-	 * This function replaces the standard WooCommerce product thumbnail with a Swiper slider
-	 * containing all product gallery images.
-	 *
-	 * @since    1.0.0
-	 */
-	public function mutate_product_thumbnail_structure() {
-		if ( 'product' === get_post_type() && ( $product = wc_get_product() ) && ( $attachment_ids = $product->get_gallery_image_ids() ) && has_post_thumbnail() ) {
-			echo '<div class="swiper">';
-			echo '<div class="swiper-wrapper">';
-
-			echo '<div class="swiper-slide"> ' . woocommerce_get_product_thumbnail() . '</div > ';
-
-			foreach ( $attachment_ids as $attachment_id ) {
-				echo '<div class="swiper-slide">' . wp_get_attachment_image( $attachment_id, 'woocommerce_thumbnail' ) . '</div>';
-			}
-
-			echo '</div>';
-
-			echo '<div class="swiper-pagination"></div>';
-			echo '<div class="swiper-button-prev"></div>';
-			echo '<div class="swiper-button-next"></div>';
-			echo '<div class="swiper-scrollbar"></div>';
-			echo '</div>';
-		} else {
-			// This is the default for woocommerce_before_shop_loop_item_title
-			echo woocommerce_get_product_thumbnail();
-		}
-	}
-
-	/**
 	 * Add compatibility fixes for various themes.
 	 *
 	 * Currently, this function removes the secondary product image functionality
@@ -148,8 +125,38 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.0.0
 	 */
 	public function add_themes_compatibility() {
+		// Default WooCommerce
+		//remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+
 		// GeneratePress Theme compatibility
 		remove_action( 'woocommerce_before_shop_loop_item_title', 'generatepress_wc_secondary_product_image' );
+
+		// Blocksy Theme compatibility: disable product (card) image
+		if ( function_exists( 'blocksy_template_loop_product_thumbnail' ) ) {
+			add_filter( "theme_mod_woo_card_layout", function ( $value ) {
+				if ( $this->should_display_gallery() ) {
+					if ( is_array( $value ) ) {
+						foreach ( $value as &$layout ) {
+							if ( $layout['id'] === 'product_image' ) {
+
+								$layout['enabled'] = false;
+							}
+						}
+					}
+				}
+
+				return $value;
+			} );
+
+			add_action( 'woocommerce_before_shop_loop_item_title', function () {
+				if ( $this->should_display_gallery() ) {
+					blocksy_template_loop_product_thumbnail( [
+						'id'      => 'product_image',
+						'enabled' => true
+					] );
+				}
+			}, 5 );
+		}
 	}
 
 	/**
@@ -182,14 +189,16 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.0.0
 	 */
 	public function on_woocommerce_init() {
-		remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
-		add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'mutate_product_thumbnail_structure' ], 10 );
+
+		add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'start_gallery_rendering' ], PHP_INT_MIN );
+		add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], PHP_INT_MAX );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 
 		$this->add_themes_compatibility();
 		$this->add_plugins_compatibility();
+
 	}
 
 	/**
@@ -206,5 +215,146 @@ class Wdevs_Gallery_Swiper_Public {
 		$value = intval( $breakpoint );
 
 		return $value > 0 ? $value : null;
+	}
+
+	/**
+	 * Begins the HTML structure for the Swiper gallery container.
+	 *
+	 * Creates the opening HTML elements for the Swiper gallery, including
+	 * the main container, wrapper, and first slide which will contain
+	 * the product's featured image. Only runs if the gallery should be
+	 * displayed for the current product.
+	 *
+	 * @since    1.4.0
+	 */
+	public function start_gallery_rendering() {
+		if ( $this->should_display_gallery() ) {
+			echo '<div class="swiper">';
+			echo '<div class="swiper-wrapper">';
+			echo '<div class="swiper-slide">';
+		}
+	}
+
+	/**
+	 * Completes the Swiper gallery structure and adds gallery images.
+	 *
+	 * Closes the initial slide div, then adds additional slides for each gallery
+	 * image from the product's gallery. Finally adds the Swiper navigation elements and closes all container elements.
+	 * This method works in conjunction with start_gallery_rendering() to create
+	 * the complete gallery structure.
+	 *
+	 * @since    1.4.0
+	 */
+	public function finish_gallery_rendering() {
+		if ( $this->should_display_gallery() ) {
+			echo '</div>';
+
+			$product = wc_get_product();
+			foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
+				echo '<div class="swiper-slide">' . $this->get_product_image( $product, $attachment_id ) . '</div>';
+			}
+
+			echo '</div>';
+			echo '<div class="swiper-pagination"></div>';
+			echo '<div class="swiper-button-prev"></div>';
+			echo '<div class="swiper-button-next"></div>';
+			echo '<div class="swiper-scrollbar"></div>';
+			echo '</div>';
+		}
+	}
+
+	/**
+	 * Determines if the gallery should be displayed.
+	 *
+	 * Checks if the current post is a product, has a product object,
+	 * contains gallery images, and has a featured thumbnail.
+	 *
+	 * @return bool True if gallery should be displayed, false otherwise.
+	 * @since    1.4.0
+	 */
+	private function should_display_gallery(): bool {
+		return 'product' === get_post_type() &&
+		       ( $product = wc_get_product() ) &&
+		       ( $product->get_gallery_image_ids() ) &&
+		       has_post_thumbnail();
+	}
+
+	/**
+	 * Get the product image HTML for the gallery.
+	 *
+	 * Retrieves the product image HTML based on the attachment ID and theme compatibility.
+	 *
+	 * @param WC_Product $product The product object.
+	 * @param int $attachment_id The attachment ID of the image.
+	 * @return string The HTML for the product image.
+	 *
+	 * @since    1.4.0
+	 */
+	private function get_product_image( $product, $attachment_id ) {
+		if ( ! isset( $product ) ) {
+			return '';
+		}
+
+		if ( function_exists( 'blocksy_media' ) ) {
+
+			return $this->get_blocksy_image( $product, $attachment_id );
+		}
+
+		return wp_get_attachment_image( $attachment_id, 'woocommerce_thumbnail' );
+	}
+
+	/**
+	 * Get the product image HTML using Blocksy theme compatibility.
+	 *
+	 * Generates the product image HTML using Blocksy theme's media function
+	 * with proper attributes and filters.
+	 *
+	 * @param WC_Product $product The product object.
+	 * @param int $attachment_id The attachment ID of the image.
+	 * @return mixed The HTML for the product image with Blocksy compatibility.
+	 *
+	 * @since    1.4.0
+	 */
+	private function get_blocksy_image( $product, $attachment_id ): mixed {
+		$html_atts = [
+			'href'       => apply_filters(
+				'woocommerce_loop_product_link',
+				get_permalink( $product->get_id() ),
+				$product
+			),
+			'aria-label' => strip_tags( $product->get_name() ),
+		];
+
+		$image = blocksy_media( [
+			'no_image_type'               => 'woo',
+			'attachment_id'               => $attachment_id,
+			'post_id'                     => $product->get_id(),
+			'size'                        => 'woocommerce_archive_thumbnail',
+			'include_original_image_size' => is_customize_preview(),
+			'ratio'                       => apply_filters(
+				'blocksy:woocommerce:product-card:thumbnail:ratio',
+				blocksy_get_woocommerce_ratio( [
+					'key'      => 'archive_thumbnail',
+					'cropping' => blocksy_akg(
+						'blocksy_woocommerce_archive_thumbnail_cropping',
+						[],
+						'predefined'
+					)
+				] ),
+				$product->get_id()
+			),
+			'tag_name'                    => 'a',
+			'html_atts'                   => $html_atts,
+		] );
+
+		return apply_filters(
+			'woocommerce_product_get_image',
+			$image,
+			$product,
+			'woocommerce_archive_thumbnail',
+			[],
+			'',
+			$image
+		);
 	}
 }
