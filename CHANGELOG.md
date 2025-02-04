@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to the Wdevs Tax Switch plugin will be documented in this file.
 
+## [1.4.1] - 04-02-2025
+### Updated
+- Tested WooCommerce 9.6.0
+
 ## [1.4.0] - 04-01-2025
 ### Updated
 - Possible breaking change: only render the Swiper HTML if the slider can be displayed
