@@ -1,6 +1,5 @@
 ( function ( $, window, document ) {
-	'use strict';
-	$( document ).on( 'yith-infs-scroll-finished', function () {
+	$( document ).on( 'yith_infs_added_elem', function () {
 		setTimeout( function () {
 			wdevs_gallery_swiper_init_swiper();
 		}, 100 );

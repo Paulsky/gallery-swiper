@@ -177,6 +177,16 @@ class Wdevs_Gallery_Swiper_Public {
 				], $this->version, true );
 				wp_enqueue_script( 'wdevs-gallery-swiper-yith-infinite-scrolling' );
 			}
+
+			// Woo Product Filter by WBW compatibility
+			if ( is_plugin_active( 'woo-product-filter/woo-product-filter.php' ) ) {
+				wp_register_script( 'wdevs-gallery-swiper-woo-product-filter-by-wbw', plugin_dir_url( __FILE__ ) . 'js/woo-product-filter-by-wbw.js', [
+					'jquery',
+					'commonWpf',
+					$this->plugin_name
+				], $this->version, true );
+				wp_enqueue_script( 'wdevs-gallery-swiper-woo-product-filter-by-wbw' );
+			}
 		} );
 	}
 

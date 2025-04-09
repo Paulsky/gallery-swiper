@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to the Wdevs Tax Switch plugin will be documented in this file.
 
+## [1.5.0] - 09-04-2025
+### Updated
+- Small improvement for YITH Infinite Scrolling
+- Tested WordPress 6.7.2
+- Tested WooCommerce 9.7.1
+
+### Added
+- Compatibility for Product Filter by WBW
+
 ## [1.4.1] - 04-02-2025
 ### Updated
 - Tested WooCommerce 9.6.0
