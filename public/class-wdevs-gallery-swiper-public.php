@@ -264,6 +264,21 @@ class Wdevs_Gallery_Swiper_Public {
 				echo '<div class="swiper-slide">' . $this->get_product_image( $product, $attachment_id ) . '</div>';
 			}
 
+			if ($product->is_type('variable')){
+				$consider_variation_images = ( get_option( 'wdevs_gallery_swiper_variation_images', 'no' ) === 'yes' );
+				if ( $consider_variation_images ) {
+					$variation_images = [];
+					$variations       = $product->get_available_variations();
+
+					foreach ( $variations as $variation ) {
+						if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
+							echo '<div class="swiper-slide">' . $this->get_product_image( $product, $variation['image_id'] ) . '</div>';
+							$variation_images[] = $variation['image_id'];
+						}
+					}
+				}
+			}
+
 			echo '</div>';
 			echo '<div class="swiper-pagination"></div>';
 			echo '<div class="swiper-button-prev"></div>';
@@ -283,10 +298,32 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.4.0
 	 */
 	private function should_display_gallery(): bool {
-		return 'product' === get_post_type() &&
-		       ( $product = wc_get_product() ) &&
-		       ( $product->get_gallery_image_ids() ) &&
-		       has_post_thumbnail();
+		if ('product' !== get_post_type()) {
+			return false;
+		}
+
+		$has_featured_image = has_post_thumbnail();
+
+		if(!$has_featured_image){
+			return false;
+		}
+
+		$product = wc_get_product();
+		if (!$product) {
+			return false;
+		}
+
+		$gallery_images = $product->get_gallery_image_ids();
+		if(count($gallery_images) > 0){
+			return true;
+		}
+
+		$consider_variation_images = (get_option('wdevs_gallery_swiper_variation_images', 'no') === 'yes');
+		if($consider_variation_images){
+			return $this->product_has_variation_images($product);
+		}
+
+		return false;
 	}
 
 	/**
@@ -366,5 +403,28 @@ class Wdevs_Gallery_Swiper_Public {
 			'',
 			$image
 		);
+	}
+
+	/**
+	 * Checks if the product has a variation with an image
+	 *
+	 * @param $product
+	 *
+	 * @return bool
+	 *
+	 * @since    1.5.2
+	 */
+	private function product_has_variation_images($product): bool {
+		if (!$product->is_type('variable')) {
+			return false;
+		}
+
+		foreach ($product->get_available_variations() as $variation) {
+			if (!empty($variation['image_id'])) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

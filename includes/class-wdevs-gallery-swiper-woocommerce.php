@@ -115,6 +115,13 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 				'default' => 'no'
 			),
 			array(
+				'name'    => __( 'Enable variation images', 'product-gallery-swiper-for-woocommerce' ),
+				'type'    => 'checkbox',
+				'desc'    => __( 'Display variation images in the slider', 'product-gallery-swiper-for-woocommerce' ),
+				'id'      => 'wdevs_gallery_swiper_variation_images',
+				'default' => 'no'
+			),
+			array(
 				'name'    => __( 'Disable slider from', 'product-gallery-swiper-for-woocommerce' ),
 				'type'    => 'select',
 				'desc'    => __( 'When set, the slider will be disabled from the specified breakpoint upwards, and the second product image will be displayed on mouse hover.', 'product-gallery-swiper-for-woocommerce' ),

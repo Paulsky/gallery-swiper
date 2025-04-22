@@ -2,22 +2,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Product Gallery Slider for WooCommerce\n"
-"POT-Creation-Date: 2025-01-04 12:10+0100\n"
-"PO-Revision-Date: 2025-01-04 13:56+0100\n"
+"POT-Creation-Date: 2025-04-22 13:56+0200\n"
+"PO-Revision-Date: 2025-04-22 13:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wdevs-gallery-swiper.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
@@ -68,10 +67,18 @@ msgid "Enable navigation for the slider"
 msgstr "Schakel navigatie in voor de slider"
 
 #: includes/class-wdevs-gallery-swiper-woocommerce.php:118
+msgid "Enable variation images"
+msgstr "Schakel variatie-afbeeldingen in"
+
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:120
+msgid "Display variation images in the slider"
+msgstr "Variatie-afbeeldingen weergeven in de slider"
+
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:125
 msgid "Disable slider from"
 msgstr "Schakel slider uit vanaf"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:120
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:127
 msgid ""
 "When set, the slider will be disabled from the specified breakpoint upwards, "
 "and the second product image will be displayed on mouse hover."
@@ -80,31 +87,31 @@ msgstr ""
 "breekpunt en hoger, en wordt de tweede productafbeelding weergegeven bij het "
 "hoveren met de muis."
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:123
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:130
 msgid "Always enabled"
 msgstr "Altijd ingeschakeld"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:124
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:131
 msgid "Disabled from 480px and up"
 msgstr "Uitgeschakeld vanaf 480px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:125
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:132
 msgid "Disabled from 768px and up"
 msgstr "Uitgeschakeld vanaf 768px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:126
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:133
 msgid "Disabled from 992px and up"
 msgstr "Uitgeschakeld vanaf 992px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:127
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:134
 msgid "Disabled from 1200px and up"
 msgstr "Uitgeschakeld vanaf 1200px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:132
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:139
 msgid "Theme color"
 msgstr "Themakleur"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:134
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:141
 msgid "Choose the Swiper theme color"
 msgstr "Kies de Swiper themakleur"
 
