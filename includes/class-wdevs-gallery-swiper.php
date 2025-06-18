@@ -76,7 +76,7 @@ class Wdevs_Gallery_Swiper {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		//$this->define_admin_hooks();
+		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_woocommerce_hooks();
 	}
@@ -161,7 +161,7 @@ class Wdevs_Gallery_Swiper {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Wdevs_Gallery_Swiper_Admin( $this->get_plugin_name(), $this->get_version() );
-
+		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/' . $this->plugin_name . '.php' ), $plugin_admin, 'add_action_links' );
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 	}
 
@@ -192,7 +192,7 @@ class Wdevs_Gallery_Swiper {
 		if ( is_admin() ) {
 			$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_woocommerce, 'add_settings_tab', 50 );
 			$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_gallery_swiper', $plugin_woocommerce, 'settings_tab' );
-			$this->loader->add_action( 'woocommerce_update_options_wdevs_gallery_swiper', $plugin_woocommerce, 'update_settings' );
+			$this->loader->add_action('woocommerce_after_settings_wdevs_gallery_swiper', $plugin_woocommerce, 'render_footer_info');
 		}
 	}
 

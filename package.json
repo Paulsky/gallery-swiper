@@ -1,6 +1,6 @@
 {
 	"name": "wdevs-gallery-swiper",
-	"version": "1.5.2",
+	"version": "1.5.3",
 	"description": "Enhances WooCommerce product images display on product listing sections, providing a responsive and touch-friendly slider.",
 	"author": "Wijnberg Developments",
 	"scripts": {

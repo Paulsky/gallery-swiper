@@ -52,7 +52,19 @@ class Wdevs_Gallery_Swiper_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+	}
 
+	/**
+	 * @since 1.5.3
+	 */
+	public function add_action_links( $actions ) {
+		$links = array(
+			'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=wdevs_gallery_swiper' ) . '">' . __( 'Settings' ) . '</a>', //Yes, just use WordPress text domain
+		);
+
+		$actions = array_merge( $actions, $links );
+
+		return $actions;
 	}
 
 }

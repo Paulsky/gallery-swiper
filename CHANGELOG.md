@@ -1,5 +1,10 @@
 # Changelog
-All notable changes to the Wdevs Tax Switch plugin will be documented in this file.
+All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
+
+## [1.5.3] - 2025-06-18
+### Updated
+- Tested WooCommerce 9.9.4
+- Added settings link
 
 ## [1.5.2] - 22-04-2025
 ### Added

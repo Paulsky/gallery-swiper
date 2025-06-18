@@ -40,6 +40,15 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 	 */
 	private $version;
 
+	/**
+	 * The current settings section.
+	 *
+	 * @since    1.5.3
+	 * @access   private
+	 * @var      string $current_section The current settings section.
+	 */
+	private $current_section;
+
 
 	/**
 	 * Initialize the class and set its properties.
@@ -53,6 +62,12 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+
+		$this->current_section = isset( $_GET['section'] ) ? sanitize_text_field( $_GET['section'] ) : '';
+
+		if ( is_admin() && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' && isset( $_GET['tab'] ) && $_GET['tab'] === 'wdevs_gallery_swiper' ) {
+			$this->handle_sections();
+		}
 	}
 
 	/**
@@ -60,7 +75,7 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 	 *
 	 * @since 1.2.0
 	 */
-	public function declare_compatibility(){
+	public function declare_compatibility() {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'wdevs-gallery-swiper/wdevs-gallery-swiper.php', true );
 		}
@@ -76,6 +91,7 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 	 */
 	public function add_settings_tab( $settings_tabs ) {
 		$settings_tabs['wdevs_gallery_swiper'] = __( 'Gallery Swiper', 'product-gallery-swiper-for-woocommerce' );
+
 		return $settings_tabs;
 	}
 
@@ -167,6 +183,93 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 	 */
 	public function update_settings() {
 		woocommerce_update_options( $this->get_settings() );
+	}
+
+	/**
+	 * Output footer info
+	 *
+	 * @since    1.5.3
+	 */
+	public function render_footer_info() {
+		$text = sprintf(
+		/* translators: %s: Link to author site. */
+			__( 'Product Gallery Swiper for WooCommerce is developed by %s. Your trusted WordPress & WooCommerce plugin partner from the Netherlands.', 'product-gallery-swiper-for-woocommerce' ),
+			'<a href="https://products.wijnberg.dev" target="_blank" rel="noopener">Wijnberg Developments</a>'
+		);
+
+		echo '<span style="padding: 0 30px; background: #f0f0f1; display: block;">' . wp_kses_post( $text ) . '</span>';
+	}
+
+	/**
+	 * Handle sections for the settings tab.
+	 *
+	 * @since    1.5.3
+	 */
+	private function handle_sections() {
+		add_action( 'woocommerce_sections_wdevs_gallery_swiper', array( $this, 'output_sections' ) );
+
+		if ( ! empty( $this->current_section ) ) {
+			add_action( 'woocommerce_update_options_wdevs_gallery_swiper_' . $this->current_section, array(
+				$this,
+				'update_settings'
+			) );
+		} else {
+			add_action( 'woocommerce_update_options_wdevs_gallery_swiper', array( $this, 'update_settings' ) );
+		}
+	}
+
+	/**
+	 * Output sections navigation.
+	 *
+	 * @since    1.5.3
+	 */
+	public function output_sections() {
+		$sections = $this->get_sections();
+
+		$documentationURL = 'https://products.wijnberg.dev/product/wordpress/plugins/product-gallery-swiper-for-woocommerce/';
+
+		echo '<ul class="subsubsub">';
+
+		foreach ( $sections as $id => $label ) {
+			$url       = admin_url( 'admin.php?page=wc-settings&tab=wdevs_gallery_swiper&section=' . sanitize_title( $id ) );
+			$class     = ( $this->current_section === $id ? 'current' : '' );
+			$separator = '|';
+			$text      = esc_html( $label );
+			echo "<li><a href='$url' class='$class'>$text</a> $separator </li>";
+		}
+
+		?>
+
+        <li>
+            <a href="<?php echo esc_attr( $documentationURL ); ?>" target="_blank">
+				<?php esc_html_e( 'Documentation', 'product-gallery-swiper-for-woocommerce' ); ?>
+                <svg style="width: 0.8rem; height: 0.8rem; stroke: currentColor; fill: none;"
+                     xmlns="http://www.w3.org/2000/svg"
+                     stroke-width="10" stroke-dashoffset="0"
+                     stroke-dasharray="0" stroke-linecap="round"
+                     stroke-linejoin="round" viewBox="0 0 100 100">
+                    <polyline fill="none" points="40 20 20 20 20 90 80 90 80 60"/>
+                    <polyline fill="none" points="60 10 90 10 90 40"/>
+                    <line fill="none" x1="89" y1="11" x2="50" y2="50"/>
+                </svg>
+            </a>
+        </li>
+
+		<?php
+
+		echo '</ul><br class="clear" />';
+	}
+
+	/**
+	 * Get available sections for the settings tab.
+	 *
+	 * @return array Array of sections.
+	 * @since    1.5.3
+	 */
+	private function get_sections() {
+		return array(
+			'' => __( 'Settings', 'product-gallery-swiper-for-woocommerce' ),
+		);
 	}
 
 }

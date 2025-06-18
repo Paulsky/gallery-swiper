@@ -3,7 +3,7 @@ Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 Requires PHP: 7.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -62,6 +62,10 @@ Some WooCommerce Blocks are not fully compatible with this plugin as they do not
 If you encounter any conflicts with other themes or plugins, please report them to us. We are trying to use all standard WooCommerce filters and hooks, and we want to use the active theme settings and change as little as possible. This approach ensures maximum compatibility with themes and other plugins. However, some themes and plugins might not follow standard WordPress/WooCommerce practices, which can result in compatibility issues out of the box.
 
 == Changelog ==
+= 1.5.3 =
+* Tested WooCommerce 9.9.4
+* Added settings link
+
 = 1.5.2 =
 * Added option to display variation images
 

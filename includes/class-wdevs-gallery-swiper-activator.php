@@ -23,9 +23,6 @@
 class Wdevs_Gallery_Swiper_Activator {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
 	 *
 	 * @since    1.0.0
 	 */
