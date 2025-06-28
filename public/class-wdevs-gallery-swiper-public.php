@@ -157,6 +157,16 @@ class Wdevs_Gallery_Swiper_Public {
 				}
 			}, 5 );
 		}
+
+		// XStore theme compatibility: init swiper after AJAX filter
+		if(function_exists('etheme_theme_setup')){
+			wp_register_script( 'wdevs-gallery-swiper-xstore-theme', plugin_dir_url( __FILE__ ) . 'js/xstore-theme.js', [
+				'jquery',
+				'ajaxFilters',
+				$this->plugin_name
+			], $this->version, true );
+			wp_enqueue_script( 'wdevs-gallery-swiper-xstore-theme' );
+		}
 	}
 
 	/**
