@@ -40,6 +40,7 @@ Themes:
 
 * GeneratePress (secondary thumbnail image disabled)
 * Blocksy
+* XStore
 
 Plugins:
 

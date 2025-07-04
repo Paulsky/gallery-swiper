@@ -75,7 +75,6 @@ class Wdevs_Gallery_Swiper {
 		$this->plugin_name = 'wdevs-gallery-swiper';
 
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_woocommerce_hooks();
@@ -107,12 +106,6 @@ class Wdevs_Gallery_Swiper {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-swiper-loader.php';
 
 		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wdevs-gallery-swiper-i18n.php';
-
-		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wdevs-gallery-swiper-admin.php';
@@ -131,23 +124,6 @@ class Wdevs_Gallery_Swiper {
 
 
 		$this->loader = new Wdevs_Gallery_Swiper_Loader();
-
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Wdevs_Gallery_Swiper_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function set_locale() {
-
-		$plugin_i18n = new Wdevs_Gallery_Swiper_i18n();
-
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
 
