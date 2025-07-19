@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.5.5]
+### Removed
+- Load_plugin_textdomain() because it has been discouraged since WordPress version 4.6.
+### Updated
+- Tested WooCommerce 10.0.2
+
 ## [1.5.4] - 27-06-2025
 ### Added
 - Compatibility for XStore theme 
