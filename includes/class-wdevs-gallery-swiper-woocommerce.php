@@ -65,7 +65,10 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 
 		$this->current_section = isset( $_GET['section'] ) ? sanitize_text_field( $_GET['section'] ) : '';
 
-		if ( is_admin() && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' && isset( $_GET['tab'] ) && $_GET['tab'] === 'wdevs_gallery_swiper' ) {
+		$page = isset( $_GET['page'] ) ? sanitize_text_field( $_GET['page'] ) : '';
+		$tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : '';
+		
+		if ( is_admin() && $page === 'wc-settings' && $tab === 'wdevs_gallery_swiper' ) {
 			$this->handle_sections();
 		}
 	}
@@ -140,7 +143,7 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 			array(
 				'name'    => __( 'Disable slider from', 'product-gallery-swiper-for-woocommerce' ),
 				'type'    => 'select',
-				'desc'    => __( 'When set, the slider will be disabled from the specified breakpoint upwards, and the second product image will be displayed on mouse hover.', 'product-gallery-swiper-for-woocommerce' ),
+				'desc'    => __( 'When set, the slider will be disabled from the specified breakpoint upwards.', 'product-gallery-swiper-for-woocommerce' ),
 				'id'      => 'wdevs_gallery_swiper_breakpoint',
 				'options' => array(
 					''     => __( 'Always enabled', 'product-gallery-swiper-for-woocommerce' ),
@@ -150,6 +153,14 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 					'1200' => __( 'Disabled from 1200px and up', 'product-gallery-swiper-for-woocommerce' )
 				),
 				'default' => ''
+			),
+			array(
+				'name'    => __( 'Enable hover on disabled slider', 'product-gallery-swiper-for-woocommerce' ),
+				'type'    => 'checkbox',
+				'desc'    => __( 'When the slider is disabled (above breakpoint), show the second image on mouse hover.', 'product-gallery-swiper-for-woocommerce' ),
+				'id'      => 'wdevs_gallery_swiper_hover_enabled',
+				'default' => 'yes',
+				'class'   => 'wdevs-gallery-swiper-hover-field'
 			),
 			array(
 				'name'    => __( 'Theme color', 'product-gallery-swiper-for-woocommerce' ),

@@ -1,7 +1,13 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
-## [1.5.6]  - 23-07-2025
+## [1.5.7] - 23-07-2025
+### Added
+- Option to enable/disable hover functionality when slider is disabled above breakpoint
+### Updated
+- Breakpoint functionality to work properly with mobile-first approach
+
+## [1.5.6] - 23-07-2025
 ### Added
 - Compatibility for GeneratePress Premium
 

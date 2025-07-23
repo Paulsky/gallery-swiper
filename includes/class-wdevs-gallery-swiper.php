@@ -138,7 +138,7 @@ class Wdevs_Gallery_Swiper {
 
 		$plugin_admin = new Wdevs_Gallery_Swiper_Admin( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/' . $this->plugin_name . '.php' ), $plugin_admin, 'add_action_links' );
-		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 	}
 
 	/**

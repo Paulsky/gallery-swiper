@@ -55,6 +55,27 @@ class Wdevs_Gallery_Swiper_Admin {
 	}
 
 	/**
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.5.7
+	 */
+	public function enqueue_scripts() {
+		// Only load on WooCommerce settings page with our tab
+		$page = isset( $_GET['page'] ) ? sanitize_text_field( $_GET['page'] ) : '';
+		$tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : '';
+		
+		if ( $page === 'wc-settings' && $tab === 'wdevs_gallery_swiper' ) {
+			wp_enqueue_script( 
+				$this->plugin_name . '-admin', 
+				plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-swiper-admin.js', 
+				array( 'jquery' ), 
+				$this->version, 
+				true 
+			);
+		}
+	}
+
+	/**
 	 * @since 1.5.3
 	 */
 	public function add_action_links( $actions ) {

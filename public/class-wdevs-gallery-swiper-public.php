@@ -108,6 +108,7 @@ class Wdevs_Gallery_Swiper_Public {
 				'pagination' => get_option( 'wdevs_gallery_swiper_pagination', 'no' ) === 'yes',
 				'navigation' => get_option( 'wdevs_gallery_swiper_navigation', 'no' ) === 'yes',
 				'breakpoint' => $this->parse_breakpoint( get_option( 'wdevs_gallery_swiper_breakpoint', '' ) ),
+				'hoverEnabled' => get_option( 'wdevs_gallery_swiper_hover_enabled', 'yes' ) === 'yes',
 			]
 		];
 
@@ -201,8 +202,10 @@ class Wdevs_Gallery_Swiper_Public {
 
 		// GeneratePress Premium compatibility. Adjust gallery rendering timing for image wrapper conflict
 		if ( function_exists( 'generatepress_wc_image_wrapper_close' ) ) {
+			remove_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'start_gallery_rendering' ], PHP_INT_MIN );
+			add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'start_gallery_rendering' ], 9 );
 			remove_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], PHP_INT_MAX );
-			add_action( 'woocommerce_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], 9 );
+			add_action( 'woocommerce_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], 7 );
 		}
 	}
 

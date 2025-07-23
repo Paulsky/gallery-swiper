@@ -53,11 +53,13 @@ This plugin is tested and compatible with the following:
 
 - [**GeneratePress**](https://generatepress.com): The secondary thumbnail image is disabled.
 - Blocksy
+- XStore
 
 ### Plugins
 
 - [**YITH Infinite Scrolling**](https://yithemes.com/themes/plugins/yith-infinite-scrolling/): Swiper is initialized for AJAX loaded products.
 - [**Product Filter by WBW**](https://wordpress.org/plugins/woo-product-filter/): Swiper is initialized for AJAX loaded products.
+- GeneratePress Premium: Adjust gallery rendering timing for image wrapper conflict
 
 If you encounter any conflicts with other themes or plugins, please report them to us by opening an issue or through our website. We welcome community contributions, so feel free to submit a pull request if you have a fix or improvement.
 

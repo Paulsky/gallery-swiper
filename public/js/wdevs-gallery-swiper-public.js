@@ -26,33 +26,43 @@ function wdevs_gallery_swiper_init_swiper() {
 				swiperOptions.breakpoints = {
 					[ window.wgsSettings.swiper.breakpoint ]: {
 						enabled: false,
+						scrollbar: { enabled: false },
+						pagination: { enabled: false },
+						navigation: { enabled: false },
 					},
 				};
 			}
 
 			const swiper = new Swiper( swiperElement, swiperOptions );
 
-			if ( window.wgsSettings.swiper.breakpoint ) {
+			if (
+				window.wgsSettings.swiper.breakpoint &&
+				window.wgsSettings.swiper.hoverEnabled &&
+				swiper.slides.length > 1
+			) {
 				swiperElement.addEventListener( 'mouseenter', function () {
 					if (
-						swiper.activeIndex === 0 &&
-						swiper.slides.length > 1
+						window.innerWidth >=
+							window.wgsSettings.swiper.breakpoint &&
+						swiper.activeIndex === 0
 					) {
 						const defaultStatus = swiper.enabled;
 
 						swiper.enabled = true;
 						swiper.slideTo( 1, 0 );
-
 						swiper.enabled = defaultStatus;
 					}
 				} );
 				swiperElement.addEventListener( 'mouseleave', function () {
-					if ( swiper.activeIndex !== 0 ) {
+					if (
+						window.innerWidth >=
+							window.wgsSettings.swiper.breakpoint &&
+						swiper.activeIndex !== 0
+					) {
 						const defaultStatus = swiper.enabled;
 
 						swiper.enabled = true;
 						swiper.slideTo( 0, 0 );
-
 						swiper.enabled = defaultStatus;
 					}
 				} );
@@ -76,6 +86,7 @@ function wdevs_gallery_swiper_init_swiper() {
 				pagination: false,
 				navigation: false,
 				breakpoint: null,
+				hoverEnabled: true,
 			},
 		};
 	}
