@@ -1,7 +1,11 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
-## [1.5.5]
+## [1.5.6]  - 23-07-2025
+### Added
+- Compatibility for GeneratePress Premium
+
+## [1.5.5] - 19-07-2025
 ### Removed
 - Load_plugin_textdomain() because it has been discouraged since WordPress version 4.6.
 ### Updated

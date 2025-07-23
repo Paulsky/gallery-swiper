@@ -198,6 +198,12 @@ class Wdevs_Gallery_Swiper_Public {
 				wp_enqueue_script( 'wdevs-gallery-swiper-woo-product-filter-by-wbw' );
 			}
 		} );
+
+		// GeneratePress Premium compatibility. Adjust gallery rendering timing for image wrapper conflict
+		if ( function_exists( 'generatepress_wc_image_wrapper_close' ) ) {
+			remove_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], PHP_INT_MAX );
+			add_action( 'woocommerce_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], 9 );
+		}
 	}
 
 	/**
