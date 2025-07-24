@@ -118,10 +118,48 @@ class Wdevs_Gallery_Swiper_Public {
 	}
 
 	/**
+	 * Initialize the plugin's public-facing functionality.
+	 *
+	 * This function is called when WooCommerce is initialized. It sets up all necessary
+	 * actions and filters for the plugin to function properly.
+	 *
+	 * @since    1.0.0
+	 */
+	public function on_woocommerce_init() {
+		$this->setup_default_woocommerce_integration();
+
+		// Hooks for external developers to call our methods
+		add_action( 'wdevs_gallery_swiper_start_gallery_rendering', [ $this, 'start_gallery_rendering' ] );
+		add_action( 'wdevs_gallery_swiper_finish_gallery_rendering', [ $this, 'finish_gallery_rendering' ] );
+		add_action( 'wdevs_gallery_swiper_render_gallery', [ $this, 'render_full_gallery' ], 10, 1 );
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+
+		$this->add_themes_compatibility();
+		$this->add_plugins_compatibility();
+	}
+
+	/**
+	 * Setup default WooCommerce integration.
+	 *
+	 * This method sets up the default gallery rendering hooks for WooCommerce product loops.
+	 * External developers can disable this via the 'wdevs_gallery_swiper_enable_default_integration' filter.
+	 *
+	 * @since 1.5.8
+	 */
+	public function setup_default_woocommerce_integration() {
+		if ( apply_filters( 'wdevs_gallery_swiper_enable_default_integration', true ) ) {
+			add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'start_gallery_rendering' ], PHP_INT_MIN );
+			add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], PHP_INT_MAX );
+		}
+	}
+
+	/**
 	 * Add compatibility fixes for various themes.
 	 *
-	 * Currently, this function removes the secondary product image functionality
-	 * from the GeneratePress theme to avoid conflicts.
+	 * Handles compatibility with various themes including GeneratePress, Blocksy, and XStore.
+	 * Removes conflicting elements and adjusts rendering behavior as needed.
 	 *
 	 * @since    1.0.0
 	 */
@@ -200,51 +238,18 @@ class Wdevs_Gallery_Swiper_Public {
 			}
 		} );
 
-		// GeneratePress Premium compatibility. Adjust gallery rendering timing for image wrapper conflict
-		if ( function_exists( 'generatepress_wc_image_wrapper_close' ) ) {
-			remove_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'start_gallery_rendering' ], PHP_INT_MIN );
-			add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'start_gallery_rendering' ], 9 );
-			remove_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], PHP_INT_MAX );
-			add_action( 'woocommerce_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], 7 );
+		// GeneratePress Premium WooCommerce compatibility. Adjust gallery rendering timing for image wrapper conflict
+		if ( function_exists( 'generatepress_is_module_active' ) ) {
+			if ( generatepress_is_module_active( 'generate_package_woocommerce', 'GENERATE_WOOCOMMERCE' ) ) {
+				$this->disable_default_thumbnail();
+				
+				// Use filter to disable default integration instead of remove_action
+				add_filter( 'wdevs_gallery_swiper_enable_default_integration', '__return_false' );
+				add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'render_gallery_with_default_thumbnail' ], 10 );
+			}
 		}
 	}
 
-	/**
-	 * Initialize the plugin's public-facing functionality.
-	 *
-	 * This function is called when WooCommerce is initialized. It sets up all necessary
-	 * actions and filters for the plugin to function properly.
-	 *
-	 * @since    1.0.0
-	 */
-	public function on_woocommerce_init() {
-
-		add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'start_gallery_rendering' ], PHP_INT_MIN );
-		add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'finish_gallery_rendering' ], PHP_INT_MAX );
-
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-
-		$this->add_themes_compatibility();
-		$this->add_plugins_compatibility();
-
-	}
-
-	/**
-	 * Parse the breakpoint value from the settings.
-	 *
-	 * This function converts the breakpoint setting to an integer and validates it.
-	 *
-	 * @param string $breakpoint The breakpoint value from the settings.
-	 *
-	 * @return   int|null                 The parsed breakpoint value or null if invalid.
-	 * @since    1.1.0
-	 */
-	private function parse_breakpoint( $breakpoint ) {
-		$value = intval( $breakpoint );
-
-		return $value > 0 ? $value : null;
-	}
 
 	/**
 	 * Begins the HTML structure for the Swiper gallery container.
@@ -258,7 +263,9 @@ class Wdevs_Gallery_Swiper_Public {
 	 */
 	public function start_gallery_rendering() {
 		if ( $this->should_display_gallery() ) {
-			echo '<div class="swiper">';
+			$extra_classes = apply_filters( 'wdevs_gallery_swiper_container_extra_classes', '' );
+			$container_classes = trim( 'swiper ' . $extra_classes );
+			echo '<div class="' . esc_attr( $container_classes ) . '">';
 			echo '<div class="swiper-wrapper">';
 			echo '<div class="swiper-slide">';
 		}
@@ -280,7 +287,7 @@ class Wdevs_Gallery_Swiper_Public {
 
 			$product = wc_get_product();
 			foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
-				echo '<div class="swiper-slide">' . $this->get_product_image( $product, $attachment_id ) . '</div>';
+				echo $this->wrap_in_slide( $this->get_product_image( $product, $attachment_id ) );
 			}
 
 			if ($product->is_type('variable')){
@@ -291,7 +298,7 @@ class Wdevs_Gallery_Swiper_Public {
 
 					foreach ( $variations as $variation ) {
 						if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
-							echo '<div class="swiper-slide">' . $this->get_product_image( $product, $variation['image_id'] ) . '</div>';
+							echo $this->wrap_in_slide( $this->get_product_image( $product, $variation['image_id'] ) );
 							$variation_images[] = $variation['image_id'];
 						}
 					}
@@ -308,6 +315,38 @@ class Wdevs_Gallery_Swiper_Public {
 	}
 
 	/**
+	 * Render the complete gallery with optional default thumbnail inclusion.
+	 *
+	 * Renders the full Swiper gallery structure, optionally including the default
+	 * product thumbnail as the first slide. Used for theme compatibility adjustments.
+	 *
+	 * @param bool $include_default Whether to include the default thumbnail as first slide.
+	 *
+	 * @since 1.5.8
+	 */
+	public function render_full_gallery( $include_default = false ) {
+		$this->start_gallery_rendering();
+		if ( $include_default ) {
+			$this->render_default_thumbnail_slide();
+		}
+		$this->finish_gallery_rendering();
+	}
+
+	/**
+	 * Render the default product thumbnail as a Swiper slide.
+	 *
+	 * Creates a Swiper slide containing the default WooCommerce product thumbnail.
+	 * Only renders if the gallery should be displayed for the current product.
+	 *
+	 * @since 1.5.8
+	 */
+	public function render_default_thumbnail_slide() {
+		if ( $this->should_display_gallery() ) {
+			echo $this->wrap_in_slide( woocommerce_get_product_thumbnail() );
+		}
+	}
+
+	/**
 	 * Determines if the gallery should be displayed.
 	 *
 	 * Checks if the current post is a product, has a product object,
@@ -316,7 +355,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @return bool True if gallery should be displayed, false otherwise.
 	 * @since    1.4.0
 	 */
-	private function should_display_gallery(): bool {
+	public function should_display_gallery(): bool {
 		if ('product' !== get_post_type()) {
 			return false;
 		}
@@ -339,10 +378,10 @@ class Wdevs_Gallery_Swiper_Public {
 
 		$consider_variation_images = (get_option('wdevs_gallery_swiper_variation_images', 'no') === 'yes');
 		if($consider_variation_images){
-			return $this->product_has_variation_images($product);
+			return apply_filters( 'wdevs_gallery_swiper_should_display_gallery', $this->product_has_variation_images($product) );
 		}
 
-		return false;
+		return apply_filters( 'wdevs_gallery_swiper_should_display_gallery', false );
 	}
 
 	/**
@@ -356,7 +395,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @since    1.4.0
 	 */
-	private function get_product_image( $product, $attachment_id ) {
+	public function get_product_image( $product, $attachment_id ) {
 		if ( ! isset( $product ) ) {
 			return '';
 		}
@@ -425,13 +464,13 @@ class Wdevs_Gallery_Swiper_Public {
 	}
 
 	/**
-	 * Checks if the product has a variation with an image
+	 * Checks if the product has a variation with an image.
 	 *
-	 * @param $product
+	 * @param WC_Product $product The product object to check.
 	 *
-	 * @return bool
+	 * @return bool True if product has variations with images, false otherwise.
 	 *
-	 * @since    1.5.2
+	 * @since 1.5.2
 	 */
 	private function product_has_variation_images($product): bool {
 		if (!$product->is_type('variable')) {
@@ -445,5 +484,64 @@ class Wdevs_Gallery_Swiper_Public {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Disable the default WooCommerce product thumbnail.
+	 *
+	 * Removes the default WooCommerce product thumbnail from the shop loop
+	 * to prevent conflicts with the gallery swiper.
+	 *
+	 * @since 1.5.8
+	 */
+	public function disable_default_thumbnail() {
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+	}
+
+	/**
+	 * Parse the breakpoint value from the settings.
+	 *
+	 * This function converts the breakpoint setting to an integer and validates it.
+	 *
+	 * @param string $breakpoint The breakpoint value from the settings.
+	 *
+	 * @return int|null The parsed breakpoint value or null if invalid.
+	 *
+	 * @since 1.1.0
+	 */
+	private function parse_breakpoint( $breakpoint ) {
+		$value = intval( $breakpoint );
+
+		return $value > 0 ? $value : null;
+	}
+
+	/**
+	 * Wrap content in a Swiper slide div.
+	 *
+	 * Creates a div element with the swiper-slide class and wraps the provided content.
+	 *
+	 * @param string $content The content to wrap in the slide.
+	 *
+	 * @return string The HTML for the Swiper slide with content.
+	 *
+	 * @since 1.5.8
+	 */
+	public function wrap_in_slide( $content ) {
+		$extra_classes = apply_filters( 'wdevs_gallery_swiper_slide_extra_classes', '' );
+		$slide_classes = trim( 'swiper-slide ' . $extra_classes );
+		return '<div class="' . esc_attr( $slide_classes ) . '">' . $content . '</div>';
+	}
+
+	/**
+	 * Render gallery with default thumbnail as first slide.
+	 *
+	 * This method is used as a callback for theme/plugin compatibility adjustments
+	 * where the default gallery rendering needs to be replaced with a version
+	 * that includes the default thumbnail as the first slide.
+	 *
+	 * @since 1.5.8
+	 */
+	public function render_gallery_with_default_thumbnail() {
+		$this->render_full_gallery( true );
 	}
 }

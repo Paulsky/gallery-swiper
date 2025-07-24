@@ -73,6 +73,61 @@ Currently supported languages:
 
 If you would like to add support for a new language or improve existing translations, please let us know by opening an issue or contacting us through our website. You are also welcome to submit a pull request of course!
 
+## Plugin integration approach
+
+The **Product Gallery Swiper for WooCommerce** plugin follows a conservative integration strategy, attempting to work with existing theme output rather than replacing it entirely.
+
+### Default integration method
+
+By default, the plugin:
+
+1. **Wraps existing output**: Uses the `woocommerce_before_shop_loop_item_title` hook with `start_gallery_rendering()` at `PHP_INT_MIN` priority and `finish_gallery_rendering()` at `PHP_INT_MAX` priority
+2. **Preserves theme functionality**: The original product thumbnail becomes the first slide, maintaining theme-specific styling and functionality
+3. **Minimal interference**: This approach captures whatever the theme outputs between the Swiper container elements
+
+### Developer API for external integration
+
+External developers can control the plugin behavior through WordPress actions and filters:
+
+#### Disabling default integration
+```php
+// Disable default integration to implement custom rendering
+add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
+```
+
+#### Custom rendering with actions
+```php
+// After disabling default integration, implement your own rendering
+add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
+
+// Remove default WooCommerce thumbnail if needed
+remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+
+add_action('woocommerce_before_shop_loop_item_title', function() {
+    do_action('wdevs_gallery_swiper_start_gallery_rendering');
+    // Add custom elements here if needed
+    do_action('wdevs_gallery_swiper_finish_gallery_rendering');
+}, 10);
+
+// Or render complete gallery with optional parameter
+do_action('wdevs_gallery_swiper_render_gallery', true); // includes default thumbnail
+```
+
+### Internal compatibility handling
+
+When the default approach causes conflicts, the plugin provides several fallback mechanisms:
+
+#### Complete rendering override
+Example for themes that have conflicting wrappers:
+```php
+// Remove default WooCommerce thumbnail if needed
+remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+// Use filter to disable default integration instead of remove_action
+add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
+// Choose one location to render fully
+add_action('woocommerce_before_shop_loop_item_title', [$this, 'render_gallery_with_default_thumbnail'], 10);
+```
+
 ## Contributing
 
 Your contributions are welcome! If you'd like to contribute to the project, feel free to fork the repository, make your changes, and submit a pull request.

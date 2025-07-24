@@ -3,7 +3,7 @@ Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.5.7
+Stable tag: 1.5.8
 Requires PHP: 7.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -64,6 +64,12 @@ Some WooCommerce Blocks are not fully compatible with this plugin as they do not
 If you encounter any conflicts with other themes or plugins, please report them to us. We are trying to use all standard WooCommerce filters and hooks, and we want to use the active theme settings and change as little as possible. This approach ensures maximum compatibility with themes and other plugins. However, some themes and plugins might not follow standard WordPress/WooCommerce practices, which can result in compatibility issues out of the box.
 
 == Changelog ==
+= 1.5.8 =
+* Added new rendering filters/actions for third party compatibility adjustments
+* Added helper functions for cleaner code organization and better maintainability
+* Updated code structure with better method organization and documentation
+* Updated theme compatibility handling with more modular approach
+
 = 1.5.7 =
 * Added option to enable/disable hover functionality when slider is disabled above breakpoint
 * Updated breakpoint functionality to work properly with mobile-first approach
