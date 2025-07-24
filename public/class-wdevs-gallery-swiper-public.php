@@ -126,8 +126,6 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.0.0
 	 */
 	public function on_woocommerce_init() {
-		$this->setup_default_woocommerce_integration();
-
 		// Hooks for external developers to call our methods
 		add_action( 'wdevs_gallery_swiper_start_gallery_rendering', [ $this, 'start_gallery_rendering' ] );
 		add_action( 'wdevs_gallery_swiper_finish_gallery_rendering', [ $this, 'finish_gallery_rendering' ] );
@@ -138,6 +136,8 @@ class Wdevs_Gallery_Swiper_Public {
 
 		$this->add_themes_compatibility();
 		$this->add_plugins_compatibility();
+
+		$this->setup_default_woocommerce_integration();
 	}
 
 	/**
@@ -242,7 +242,7 @@ class Wdevs_Gallery_Swiper_Public {
 		if ( function_exists( 'generatepress_is_module_active' ) ) {
 			if ( generatepress_is_module_active( 'generate_package_woocommerce', 'GENERATE_WOOCOMMERCE' ) ) {
 				$this->disable_default_thumbnail();
-				
+
 				// Use filter to disable default integration instead of remove_action
 				add_filter( 'wdevs_gallery_swiper_enable_default_integration', '__return_false' );
 				add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'render_gallery_with_default_thumbnail' ], 10 );
