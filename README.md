@@ -89,44 +89,72 @@ By default, the plugin:
 
 External developers can control the plugin behavior through WordPress actions and filters:
 
-#### Disabling default integration
+#### Available filters
 ```php
 // Disable default integration to implement custom rendering
 add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
+
+// Override gallery display decision (force show/hide)
+add_filter('wdevs_gallery_swiper_should_display_gallery', '__return_true'); // or '__return_false'
+
+// Add custom CSS classes to gallery container
+add_filter('wdevs_gallery_swiper_container_extra_classes', function($classes) {
+    return $classes . ' my-custom-class';
+});
+
+// Add custom CSS classes to individual slides
+add_filter('wdevs_gallery_swiper_slide_extra_classes', function($classes) {
+    return $classes . ' my-slide-class';
+});
 ```
 
-#### Custom rendering with actions
+#### Available actions for custom rendering
 ```php
-// After disabling default integration, implement your own rendering
+// Granular control - start/finish gallery rendering
+do_action('wdevs_gallery_swiper_start_gallery_rendering');
+do_action('wdevs_gallery_swiper_finish_gallery_rendering');
+
+// Complete gallery rendering with optional default thumbnail inclusion
+do_action('wdevs_gallery_swiper_render_gallery', true); // includes default thumbnail as first slide
+do_action('wdevs_gallery_swiper_render_gallery', false); // gallery images only
+```
+
+#### Complete custom implementation example
+```php
+// Disable default integration and implement your own
 add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
 
-// Remove default WooCommerce thumbnail if needed
+// Remove default WooCommerce thumbnail to prevent conflicts
 remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
 
+// Add your custom rendering at desired hook
 add_action('woocommerce_before_shop_loop_item_title', function() {
     do_action('wdevs_gallery_swiper_start_gallery_rendering');
-    // Add custom elements here if needed
+    // Add any custom HTML/elements between gallery start and finish
     do_action('wdevs_gallery_swiper_finish_gallery_rendering');
 }, 10);
-
-// Or render complete gallery with optional parameter
-do_action('wdevs_gallery_swiper_render_gallery', true); // includes default thumbnail
 ```
 
 ### Internal compatibility handling
 
-When the default approach causes conflicts, the plugin provides several fallback mechanisms:
+The plugin includes built-in compatibility for various themes and plugins. When the default approach causes conflicts, it uses a complete rendering override pattern:
 
-#### Complete rendering override
-Example for themes that have conflicting wrappers:
+#### Complete rendering override pattern
 ```php
-// Remove default WooCommerce thumbnail if needed
-remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
-// Use filter to disable default integration instead of remove_action
+// Step 1: Disable default WooCommerce thumbnail to prevent conflicts
+$this->disable_default_thumbnail();
+
+// Step 2: Disable default plugin integration hooks 
 add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
-// Choose one location to render fully
+
+// Step 3: Force gallery display (override normal display logic)
+add_filter('wdevs_gallery_swiper_should_display_gallery', '__return_true');
+
+// Step 4: Add custom rendering with default thumbnail as first slide
 add_action('woocommerce_before_shop_loop_item_title', [$this, 'render_gallery_with_default_thumbnail'], 10);
 ```
+
+This pattern is used for themes like GeneratePress Premium that have conflicting wrapper structures. It provides a "nuclear option" that completely replaces the default behavior with a custom rendering approach.
 
 ## Contributing
 

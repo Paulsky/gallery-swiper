@@ -242,9 +242,8 @@ class Wdevs_Gallery_Swiper_Public {
 		if ( function_exists( 'generatepress_is_module_active' ) ) {
 			if ( generatepress_is_module_active( 'generate_package_woocommerce', 'GENERATE_WOOCOMMERCE' ) ) {
 				$this->disable_default_thumbnail();
-
-				// Use filter to disable default integration instead of remove_action
 				add_filter( 'wdevs_gallery_swiper_enable_default_integration', '__return_false' );
+				add_filter('wdevs_gallery_swiper_should_display_gallery', '__return_true');
 				add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'render_gallery_with_default_thumbnail' ], 10 );
 			}
 		}
