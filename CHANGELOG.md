@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.5.9] - 2025-07-25
+### Added
+--WooCommerce ProductImage block integration
+
 ## [1.5.8] - 2025-07-24
 ### Added
 - New rendering filters/actions for third party compatibility adjustments

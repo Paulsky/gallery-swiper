@@ -59,11 +59,11 @@ This plugin is tested and compatible with the following:
 
 - [**YITH Infinite Scrolling**](https://yithemes.com/themes/plugins/yith-infinite-scrolling/): Swiper is initialized for AJAX loaded products.
 - [**Product Filter by WBW**](https://wordpress.org/plugins/woo-product-filter/): Swiper is initialized for AJAX loaded products.
-- GeneratePress Premium: Adjust gallery rendering timing for image wrapper conflict
+- [**GeneratePress Premium**](https://generatepress.com/): Adjust gallery rendering timing for image wrapper conflict
 
 If you encounter any conflicts with other themes or plugins, please report them to us by opening an issue or through our website. We welcome community contributions, so feel free to submit a pull request if you have a fix or improvement.
 
-Some WooCommerce Blocks are not fully compatible with this plugin as they do not use standard WooCommerce filters for generating thumbnails. This is a known limitation of WooCommerce Blocks and not specific to this plugin. You can fix this by using WooCommerce shortcodes instead of the WooCommerce Blocks.
+**WooCommerce Blocks Support**: The plugin includes support for WooCommerce ProductImage Block. Some other WooCommerce Blocks are not fully compatible with this plugin as they do not use standard WooCommerce filters for generating thumbnails. This is a known limitation of WooCommerce Blocks and not specific to this plugin. You can fix this by using WooCommerce shortcodes instead of the WooCommerce Blocks.
 
 ## Language support
 
@@ -79,24 +79,38 @@ The **Product Gallery Swiper for WooCommerce** plugin follows a conservative int
 
 ### Default integration method
 
-By default, the plugin:
+By default, the plugin automatically handles both classic WooCommerce templates and WooCommerce Blocks:
 
+**Classic Templates:**
 1. **Wraps existing output**: Uses the `woocommerce_before_shop_loop_item_title` hook with `start_gallery_rendering()` at `PHP_INT_MIN` priority and `finish_gallery_rendering()` at `PHP_INT_MAX` priority
 2. **Preserves theme functionality**: The original product thumbnail becomes the first slide, maintaining theme-specific styling and functionality
 3. **Minimal interference**: This approach captures whatever the theme outputs between the Swiper container elements
 
+**WooCommerce Blocks:**
+1. **Block integration**: Uses the `render_block_woocommerce/product-image` filter with `start_gallery_block_rendering()` and `finish_gallery_block_rendering()`
+2. **Context aware**: Automatically detects product context and renders gallery images using the block system
+3. **Maintains block functionality**: Preserves all block-specific features while adding gallery capabilities
+
 ### Developer API for external integration
 
-External developers can control the plugin behavior through WordPress actions and filters:
+External developers can control the plugin behavior through WordPress actions and filters. The plugin supports both **classic WooCommerce templates** and **WooCommerce Blocks**.
 
 #### Available filters
+
+**Integration control:**
 ```php
-// Disable default integration to implement custom rendering
+// Disable classic template integration to implement custom rendering
 add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
+
+// Disable WooCommerce block integration to implement custom rendering
+add_filter('wdevs_gallery_swiper_enable_default_block_integration', '__return_false');
 
 // Override gallery display decision (force show/hide)
 add_filter('wdevs_gallery_swiper_should_display_gallery', '__return_true'); // or '__return_false'
+```
 
+**CSS customization:**
+```php
 // Add custom CSS classes to gallery container
 add_filter('wdevs_gallery_swiper_container_extra_classes', function($classes) {
     return $classes . ' my-custom-class';
@@ -109,6 +123,8 @@ add_filter('wdevs_gallery_swiper_slide_extra_classes', function($classes) {
 ```
 
 #### Available actions for custom rendering
+
+**Classic template rendering:**
 ```php
 // Granular control - start/finish gallery rendering
 do_action('wdevs_gallery_swiper_start_gallery_rendering');
@@ -119,7 +135,16 @@ do_action('wdevs_gallery_swiper_render_gallery', true); // includes default thum
 do_action('wdevs_gallery_swiper_render_gallery', false); // gallery images only
 ```
 
-#### Complete custom implementation example
+**WooCommerce Blocks rendering:**
+```php
+// Block-specific gallery rendering (requires block context)
+do_action('wdevs_gallery_swiper_start_gallery_block_rendering', $block_content, $block, $instance);
+do_action('wdevs_gallery_swiper_finish_gallery_block_rendering', $block_content, $block, $instance);
+```
+
+#### Custom implementation examples
+
+**Classic template custom implementation:**
 ```php
 // Disable default integration and implement your own
 add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
@@ -133,6 +158,45 @@ add_action('woocommerce_before_shop_loop_item_title', function() {
     // Add any custom HTML/elements between gallery start and finish
     do_action('wdevs_gallery_swiper_finish_gallery_rendering');
 }, 10);
+```
+
+**WooCommerce Blocks custom implementation:**
+```php
+// Disable default block integration
+add_filter('wdevs_gallery_swiper_enable_default_block_integration', '__return_false');
+
+// Implement custom block rendering
+add_filter('render_block_woocommerce/product-image', function($block_content, $block, $instance) {
+    // Custom logic here
+    $gallery_html = do_action('wdevs_gallery_swiper_start_gallery_block_rendering', $block_content, $block, $instance);
+    $gallery_html = do_action('wdevs_gallery_swiper_finish_gallery_block_rendering', $gallery_html, $block, $instance);
+    return $gallery_html;
+}, 10, 3);
+```
+
+**Hybrid approach - supporting both classic and blocks:**
+```php
+// Custom function that works for both classic templates and blocks
+function my_custom_gallery_integration() {
+    // Disable both default integrations
+    add_filter('wdevs_gallery_swiper_enable_default_integration', '__return_false');
+    add_filter('wdevs_gallery_swiper_enable_default_block_integration', '__return_false');
+    
+    // Classic template integration
+    add_action('woocommerce_before_shop_loop_item_title', function() {
+        do_action('wdevs_gallery_swiper_render_gallery', true);
+    }, 10);
+    
+    // Block integration
+    add_filter('render_block_woocommerce/product-image', function($block_content, $block, $instance) {
+        return do_action('wdevs_gallery_swiper_start_gallery_block_rendering', $block_content, $block, $instance);
+    }, PHP_INT_MIN, 3);
+    
+    add_filter('render_block_woocommerce/product-image', function($block_content, $block, $instance) {
+        return do_action('wdevs_gallery_swiper_finish_gallery_block_rendering', $block_content, $block, $instance);
+    }, PHP_INT_MAX, 3);
+}
+add_action('init', 'my_custom_gallery_integration');
 ```
 
 ### Internal compatibility handling

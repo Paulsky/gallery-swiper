@@ -172,6 +172,7 @@ class Wdevs_Gallery_Swiper {
 		}
 	}
 
+
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *

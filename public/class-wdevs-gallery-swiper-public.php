@@ -52,6 +52,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 */
 	private const SWIPER_VERSION = '11.2.0';
 
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -82,7 +83,7 @@ class Wdevs_Gallery_Swiper_Public {
 		if ( ! empty( $theme_color ) ) {
 			$inline_css = sprintf(
 				'.woocommerce ul.products li.product .swiper { --swiper-theme-color: %s; }',
-				esc_attr($theme_color)
+				esc_attr( $theme_color )
 			);
 			wp_add_inline_style( $this->plugin_name . '-public', $inline_css );
 		}
@@ -104,10 +105,10 @@ class Wdevs_Gallery_Swiper_Public {
 
 		$localized_settings = [
 			'swiper' => [
-				'scrollbar'  => get_option( 'wdevs_gallery_swiper_scrollbar', 'yes' ) === 'yes',
-				'pagination' => get_option( 'wdevs_gallery_swiper_pagination', 'no' ) === 'yes',
-				'navigation' => get_option( 'wdevs_gallery_swiper_navigation', 'no' ) === 'yes',
-				'breakpoint' => $this->parse_breakpoint( get_option( 'wdevs_gallery_swiper_breakpoint', '' ) ),
+				'scrollbar'    => get_option( 'wdevs_gallery_swiper_scrollbar', 'yes' ) === 'yes',
+				'pagination'   => get_option( 'wdevs_gallery_swiper_pagination', 'no' ) === 'yes',
+				'navigation'   => get_option( 'wdevs_gallery_swiper_navigation', 'no' ) === 'yes',
+				'breakpoint'   => $this->parse_breakpoint( get_option( 'wdevs_gallery_swiper_breakpoint', '' ) ),
 				'hoverEnabled' => get_option( 'wdevs_gallery_swiper_hover_enabled', 'yes' ) === 'yes',
 			]
 		];
@@ -129,6 +130,14 @@ class Wdevs_Gallery_Swiper_Public {
 		// Hooks for external developers to call our methods
 		add_action( 'wdevs_gallery_swiper_start_gallery_rendering', [ $this, 'start_gallery_rendering' ] );
 		add_action( 'wdevs_gallery_swiper_finish_gallery_rendering', [ $this, 'finish_gallery_rendering' ] );
+		add_action( 'wdevs_gallery_swiper_start_gallery_block_rendering', [
+			$this,
+			'start_gallery_block_rendering'
+		], 10, 3 );
+		add_action( 'wdevs_gallery_swiper_finish_gallery_block_rendering', [
+			$this,
+			'finish_gallery_block_rendering'
+		], 10, 3 );
 		add_action( 'wdevs_gallery_swiper_render_gallery', [ $this, 'render_full_gallery' ], 10, 1 );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
@@ -138,6 +147,7 @@ class Wdevs_Gallery_Swiper_Public {
 		$this->add_plugins_compatibility();
 
 		$this->setup_default_woocommerce_integration();
+		$this->setup_default_woocommerce_block_integration();
 	}
 
 	/**
@@ -156,6 +166,27 @@ class Wdevs_Gallery_Swiper_Public {
 	}
 
 	/**
+	 * Setup default WooCommerce block integration.
+	 *
+	 * This method sets up the default gallery rendering hooks for WooCommerce product image blocks.
+	 * External developers can disable this via the 'wdevs_gallery_swiper_enable_default_block_integration' filter.
+	 *
+	 * @since 1.5.9
+	 */
+	public function setup_default_woocommerce_block_integration() {
+		if ( apply_filters( 'wdevs_gallery_swiper_enable_default_block_integration', true ) ) {
+			add_filter( 'render_block_woocommerce/product-image', [
+				$this,
+				'start_gallery_block_rendering'
+			], PHP_INT_MIN, 3 );
+			add_filter( 'render_block_woocommerce/product-image', [
+				$this,
+				'finish_gallery_block_rendering'
+			], PHP_INT_MAX, 3 );
+		}
+	}
+
+	/**
 	 * Add compatibility fixes for various themes.
 	 *
 	 * Handles compatibility with various themes including GeneratePress, Blocksy, and XStore.
@@ -164,8 +195,6 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.0.0
 	 */
 	public function add_themes_compatibility() {
-		// Default WooCommerce
-		//remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
 
 		// GeneratePress Theme compatibility
 		remove_action( 'woocommerce_before_shop_loop_item_title', 'generatepress_wc_secondary_product_image' );
@@ -198,7 +227,7 @@ class Wdevs_Gallery_Swiper_Public {
 		}
 
 		// XStore theme compatibility: init swiper after AJAX filter
-		if(function_exists('etheme_theme_setup')){
+		if ( function_exists( 'etheme_theme_setup' ) ) {
 			wp_register_script( 'wdevs-gallery-swiper-xstore-theme', plugin_dir_url( __FILE__ ) . 'js/xstore-theme.js', [
 				'jquery',
 				'ajaxFilters',
@@ -211,9 +240,12 @@ class Wdevs_Gallery_Swiper_Public {
 	/**
 	 * Add compatibility fixes for various plugins.
 	 *
-	 * This function adds compatibility with the YITH Infinite Scrolling plugin.
+	 * This function adds compatibility with various plugins including:
+	 * - YITH Infinite Scrolling
+	 * - Woo Product Filter by WBW
+	 * - GeneratePress Premium WooCommerce
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public function add_plugins_compatibility() {
 		add_action( 'wp_enqueue_scripts', function () {
@@ -243,10 +275,97 @@ class Wdevs_Gallery_Swiper_Public {
 			if ( generatepress_is_module_active( 'generate_package_woocommerce', 'GENERATE_WOOCOMMERCE' ) ) {
 				$this->disable_default_thumbnail();
 				add_filter( 'wdevs_gallery_swiper_enable_default_integration', '__return_false' );
-				add_filter('wdevs_gallery_swiper_should_display_gallery', '__return_true');
-				add_action( 'woocommerce_before_shop_loop_item_title', [ $this, 'render_gallery_with_default_thumbnail' ], 10 );
+				add_filter( 'wdevs_gallery_swiper_should_display_gallery', '__return_true' );
+				add_action( 'woocommerce_before_shop_loop_item_title', [
+					$this,
+					'render_gallery_with_default_thumbnail'
+				], 10 );
 			}
 		}
+	}
+
+	/**
+	 * Build gallery opening HTML structure.
+	 *
+	 * @return string Opening HTML structure.
+	 * @since 1.5.9
+	 */
+	private function build_swiper_opening_html() {
+		$extra_classes     = apply_filters( 'wdevs_gallery_swiper_container_extra_classes', '' );
+		$container_classes = trim( 'swiper ' . $extra_classes );
+
+		$html = '<div class="' . esc_attr( $container_classes ) . '">';
+		$html .= '<div class="swiper-wrapper">';
+
+		return $html;
+	}
+
+	/**
+	 * Build navigation elements HTML.
+	 *
+	 * @return string Navigation HTML.
+	 * @since 1.5.9
+	 */
+	private function build_swiper_closing_tag() {
+		$html = '</div>';
+		$html .= '<div class="swiper-pagination"></div>';
+		$html .= '<div class="swiper-button-prev"></div>';
+		$html .= '<div class="swiper-button-next"></div>';
+		$html .= '<div class="swiper-scrollbar"></div>';
+		$html .= '</div>';
+
+		return $html;
+	}
+
+
+	/**
+	 * Wrap content in a Swiper slide div.
+	 *
+	 * Creates a div element with the swiper-slide class and wraps the provided content.
+	 *
+	 * @param string $content The content to wrap in the slide.
+	 *
+	 * @return string The HTML for the Swiper slide with content.
+	 *
+	 * @since 1.5.8
+	 */
+	public function wrap_in_slide( $content ) {
+		$extra_classes = apply_filters( 'wdevs_gallery_swiper_slide_extra_classes', '' );
+		$slide_classes = trim( 'swiper-slide ' . $extra_classes );
+
+		return '<div class="' . esc_attr( $slide_classes ) . '">' . $content . '</div>';
+	}
+
+	/**
+	 * Render block with temporary filter removal.
+	 *
+	 * @param array $block Block to render.
+	 *
+	 * @return string Rendered block content.
+	 * @since 1.5.9
+	 */
+	private function render_block_without_gallery_filters( $block ) {
+		remove_filter( 'render_block_woocommerce/product-image', [
+			$this,
+			'start_gallery_block_rendering'
+		], PHP_INT_MIN );
+		remove_filter( 'render_block_woocommerce/product-image', [
+			$this,
+			'finish_gallery_block_rendering'
+		], PHP_INT_MAX );
+
+		$content = render_block( $block );
+
+		add_filter( 'render_block_woocommerce/product-image', [
+			$this,
+			'start_gallery_block_rendering'
+		], PHP_INT_MIN, 3 );
+		add_filter( 'render_block_woocommerce/product-image', [
+			$this,
+			'finish_gallery_block_rendering'
+		], PHP_INT_MAX, 3 );
+
+		return $content;
 	}
 
 
@@ -261,11 +380,9 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.4.0
 	 */
 	public function start_gallery_rendering() {
-		if ( $this->should_display_gallery() ) {
-			$extra_classes = apply_filters( 'wdevs_gallery_swiper_container_extra_classes', '' );
-			$container_classes = trim( 'swiper ' . $extra_classes );
-			echo '<div class="' . esc_attr( $container_classes ) . '">';
-			echo '<div class="swiper-wrapper">';
+		if ( $this->should_display_gallery() && ! $this->executed_block_integration() ) {
+			do_action( 'wdevs_gallery_swiper_start_rendering' );
+			echo $this->build_swiper_opening_html();
 			echo '<div class="swiper-slide">';
 		}
 	}
@@ -281,35 +398,31 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.4.0
 	 */
 	public function finish_gallery_rendering() {
-		if ( $this->should_display_gallery() ) {
+		if ( $this->should_display_gallery() && ! $this->executed_block_integration() ) {
 			echo '</div>';
 
 			$product = wc_get_product();
-			foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
-				echo $this->wrap_in_slide( $this->get_product_image( $product, $attachment_id ) );
-			}
+			if ( $product ) {
+				foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
+					echo $this->wrap_in_slide( $this->get_product_image( $product, $attachment_id ) );
+				}
 
-			if ($product->is_type('variable')){
-				$consider_variation_images = ( get_option( 'wdevs_gallery_swiper_variation_images', 'no' ) === 'yes' );
-				if ( $consider_variation_images ) {
-					$variation_images = [];
-					$variations       = $product->get_available_variations();
+				if ( $product->is_type( 'variable' ) ) {
+					if ( $this->should_include_variation_images() ) {
+						$variation_images = [];
+						$variations       = $product->get_available_variations();
 
-					foreach ( $variations as $variation ) {
-						if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
-							echo $this->wrap_in_slide( $this->get_product_image( $product, $variation['image_id'] ) );
-							$variation_images[] = $variation['image_id'];
+						foreach ( $variations as $variation ) {
+							if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
+								echo $this->wrap_in_slide( $this->get_product_image( $product, $variation['image_id'] ) );
+								$variation_images[] = $variation['image_id'];
+							}
 						}
 					}
 				}
 			}
 
-			echo '</div>';
-			echo '<div class="swiper-pagination"></div>';
-			echo '<div class="swiper-button-prev"></div>';
-			echo '<div class="swiper-button-next"></div>';
-			echo '<div class="swiper-scrollbar"></div>';
-			echo '</div>';
+			echo $this->build_swiper_closing_tag();
 		}
 	}
 
@@ -346,38 +459,145 @@ class Wdevs_Gallery_Swiper_Public {
 	}
 
 	/**
+	 * Render gallery with default thumbnail as first slide.
+	 *
+	 * This method is used as a callback for theme/plugin compatibility adjustments
+	 * where the default gallery rendering needs to be replaced with a version
+	 * that includes the default thumbnail as the first slide.
+	 *
+	 * @since 1.5.8
+	 */
+	public function render_gallery_with_default_thumbnail() {
+		$this->render_full_gallery( true );
+	}
+
+
+	/**
+	 * Start gallery rendering for WooCommerce product image blocks.
+	 *
+	 * Creates the opening HTML structure for the Swiper gallery when rendering
+	 * WooCommerce product image blocks. Works in conjunction with finish_gallery_block_rendering().
+	 *
+	 * @param string $block_content The original block content.
+	 * @param array $block The block array.
+	 * @param object $instance The WP_Block instance.
+	 *
+	 * @return string Modified block content with gallery opening HTML.
+	 * @since 1.5.9
+	 */
+	public function start_gallery_block_rendering( $block_content, $block, $instance ) {
+		do_action( 'wdevs_gallery_swiper_block_start_rendering' );
+		$product_id = $instance->context['postId'] ?? 0;
+		if ( ! $this->should_display_gallery( $product_id ) ) {
+			return $block_content;
+		}
+
+		$html = $this->build_swiper_opening_html();
+		$html .= '<div class="swiper-slide">';
+		$html .= $block_content;
+		$html .= '</div>';
+
+		return $html;
+	}
+
+	/**
+	 * Finish gallery rendering for WooCommerce product image blocks.
+	 *
+	 * Completes the Swiper gallery structure by adding gallery and variation images,
+	 * then closing the HTML structure. Works in conjunction with start_gallery_block_rendering().
+	 *
+	 * @param string $block_content The original block content.
+	 * @param array $block The block array.
+	 * @param object $instance The WP_Block instance.
+	 *
+	 * @return string Complete gallery HTML or original block content.
+	 * @since 1.5.9
+	 */
+	public function finish_gallery_block_rendering( $block_content, $block, $instance ) {
+		$product_id = $instance->context['postId'] ?? 0;
+		if ( ! $this->should_display_gallery( $product_id ) ) {
+			return $block_content;
+		}
+
+		$product = wc_get_product( $product_id );
+
+		if ( $product ) {
+			$output = $block_content;
+
+			foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
+				$block_copy                       = $block;
+				$block_copy['context']['imageId'] = $attachment_id;
+
+				$slide_content = $this->render_block_without_gallery_filters( $block_copy );
+				$output        .= $this->wrap_in_slide( $slide_content );
+			}
+
+			if ( $product->is_type( 'variable' ) ) {
+				if ( $this->should_include_variation_images() ) {
+					$variation_images = [];
+					$variations       = $product->get_available_variations();
+
+					foreach ( $variations as $variation ) {
+						if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
+							$block_copy                       = $block;
+							$block_copy['context']['imageId'] = $variation['image_id'];
+
+							$slide_content      = $this->render_block_without_gallery_filters( $block_copy );
+							$output             .= $this->wrap_in_slide( $slide_content );
+							$variation_images[] = $variation['image_id'];
+						}
+					}
+				}
+			}
+
+			$output .= $this->build_swiper_closing_tag();
+
+			return $output;
+		}
+
+		return $block_content;
+	}
+
+	/**
 	 * Determines if the gallery should be displayed.
 	 *
 	 * Checks if the current post is a product, has a product object,
 	 * contains gallery images, and has a featured thumbnail.
 	 *
+	 * @param int|null $product_id Optional product ID to check. Uses current post if null.
+	 *
 	 * @return bool True if gallery should be displayed, false otherwise.
-	 * @since    1.4.0
+	 * @since 1.4.0
 	 */
-	public function should_display_gallery(): bool {
-		if ('product' !== get_post_type()) {
+	public function should_display_gallery( $product_id = null ): bool {
+
+		if ( ! isset( $product_id ) ) {
+			$product_id = get_the_ID();
+		}
+
+		if ( 'product' !== get_post_type( $product_id ) ) {
 			return false;
 		}
 
-		$has_featured_image = has_post_thumbnail();
+		$has_featured_image = has_post_thumbnail( $product_id );
 
-		if(!$has_featured_image){
+		if ( ! $has_featured_image ) {
 			return false;
 		}
 
-		$product = wc_get_product();
-		if (!$product) {
+		$product = wc_get_product( $product_id );
+		if ( ! $product ) {
 			return false;
 		}
 
 		$gallery_images = $product->get_gallery_image_ids();
-		if(count($gallery_images) > 0){
+		if ( count( $gallery_images ) > 0 ) {
 			return true;
 		}
 
-		$consider_variation_images = (get_option('wdevs_gallery_swiper_variation_images', 'no') === 'yes');
-		if($consider_variation_images){
-			return apply_filters( 'wdevs_gallery_swiper_should_display_gallery', $this->product_has_variation_images($product) );
+		$consider_variation_images = $this->should_include_variation_images();
+		if ( $consider_variation_images ) {
+			return apply_filters( 'wdevs_gallery_swiper_should_display_gallery', $this->product_has_variation_images( $product ) );
 		}
 
 		return apply_filters( 'wdevs_gallery_swiper_should_display_gallery', false );
@@ -390,6 +610,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @param WC_Product $product The product object.
 	 * @param int $attachment_id The attachment ID of the image.
+	 *
 	 * @return string The HTML for the product image.
 	 *
 	 * @since    1.4.0
@@ -415,6 +636,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @param WC_Product $product The product object.
 	 * @param int $attachment_id The attachment ID of the image.
+	 *
 	 * @return mixed The HTML for the product image with Blocksy compatibility.
 	 *
 	 * @since    1.4.0
@@ -471,13 +693,13 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @since 1.5.2
 	 */
-	private function product_has_variation_images($product): bool {
-		if (!$product->is_type('variable')) {
+	private function product_has_variation_images( $product ): bool {
+		if ( ! $product->is_type( 'variable' ) ) {
 			return false;
 		}
 
-		foreach ($product->get_available_variations() as $variation) {
-			if (!empty($variation['image_id'])) {
+		foreach ( $product->get_available_variations() as $variation ) {
+			if ( ! empty( $variation['image_id'] ) ) {
 				return true;
 			}
 		}
@@ -514,33 +736,30 @@ class Wdevs_Gallery_Swiper_Public {
 		return $value > 0 ? $value : null;
 	}
 
+
 	/**
-	 * Wrap content in a Swiper slide div.
+	 * Check if block integration has been executed.
 	 *
-	 * Creates a div element with the swiper-slide class and wraps the provided content.
+	 * Uses WordPress did_action() to check if the block integration
+	 * action has been triggered during the current request.
 	 *
-	 * @param string $content The content to wrap in the slide.
-	 *
-	 * @return string The HTML for the Swiper slide with content.
-	 *
-	 * @since 1.5.8
+	 * @return bool True if block integration has been executed, false otherwise.
+	 * @since 1.5.9
 	 */
-	public function wrap_in_slide( $content ) {
-		$extra_classes = apply_filters( 'wdevs_gallery_swiper_slide_extra_classes', '' );
-		$slide_classes = trim( 'swiper-slide ' . $extra_classes );
-		return '<div class="' . esc_attr( $slide_classes ) . '">' . $content . '</div>';
+	private function executed_block_integration() {
+		return did_action( 'wdevs_gallery_swiper_block_start_rendering' );
 	}
 
 	/**
-	 * Render gallery with default thumbnail as first slide.
+	 * Check if variation images should be included in the gallery.
 	 *
-	 * This method is used as a callback for theme/plugin compatibility adjustments
-	 * where the default gallery rendering needs to be replaced with a version
-	 * that includes the default thumbnail as the first slide.
+	 * Checks the plugin setting 'wdevs_gallery_swiper_variation_images'
+	 * to determine if variable product variation images should be displayed.
 	 *
-	 * @since 1.5.8
+	 * @return bool True if variation images should be included, false otherwise.
+	 * @since 1.5.9
 	 */
-	public function render_gallery_with_default_thumbnail() {
-		$this->render_full_gallery( true );
+	private function should_include_variation_images() {
+		return ( get_option( 'wdevs_gallery_swiper_variation_images', 'no' ) === 'yes' );
 	}
 }
