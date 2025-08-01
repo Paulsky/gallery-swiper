@@ -1,9 +1,13 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.5.10] - 2025-08-01
+### Updated
+- Improved compatibility for XStore theme
+
 ## [1.5.9] - 2025-07-25
 ### Added
---WooCommerce ProductImage block integration
+- WooCommerce ProductImage block integration
 
 ## [1.5.8] - 2025-07-24
 ### Added

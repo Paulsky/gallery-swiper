@@ -10,3 +10,8 @@
 .woocommerce ul.products li.product a.woocommerce-loop-product__link {
     max-width: 100%;
 }
+
+/* XStore product grid */
+.etheme-product-grid-image footer{
+    z-index: 1;
+}

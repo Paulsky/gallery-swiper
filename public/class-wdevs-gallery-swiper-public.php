@@ -234,6 +234,9 @@ class Wdevs_Gallery_Swiper_Public {
 				$this->plugin_name
 			], $this->version, true );
 			wp_enqueue_script( 'wdevs-gallery-swiper-xstore-theme' );
+
+			// Hook into XStore product grid element rendering
+			add_filter( 'etheme_product_grid_list_product_element_image', [ $this, 'xstore_product_grid_gallery_integration' ], PHP_INT_MIN, 3 );
 		}
 	}
 
@@ -397,30 +400,11 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @since    1.4.0
 	 */
-	public function finish_gallery_rendering() {
+	public function finish_gallery_rendering( $product = null ) {
 		if ( $this->should_display_gallery() && ! $this->executed_block_integration() ) {
 			echo '</div>';
 
-			$product = wc_get_product();
-			if ( $product ) {
-				foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
-					echo $this->wrap_in_slide( $this->get_product_image( $product, $attachment_id ) );
-				}
-
-				if ( $product->is_type( 'variable' ) ) {
-					if ( $this->should_include_variation_images() ) {
-						$variation_images = [];
-						$variations       = $product->get_available_variations();
-
-						foreach ( $variations as $variation ) {
-							if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
-								echo $this->wrap_in_slide( $this->get_product_image( $product, $variation['image_id'] ) );
-								$variation_images[] = $variation['image_id'];
-							}
-						}
-					}
-				}
-			}
+			$this->render_gallery_images( $product );
 
 			echo $this->build_swiper_closing_tag();
 		}
@@ -761,5 +745,66 @@ class Wdevs_Gallery_Swiper_Public {
 	 */
 	private function should_include_variation_images() {
 		return ( get_option( 'wdevs_gallery_swiper_variation_images', 'no' ) === 'yes' );
+	}
+
+	/**
+	 * Render gallery images and variations for a specific product.
+	 *
+	 * @param WC_Product|null $product Product object, uses current product if null.
+	 * @return void
+	 * @since 1.5.10
+	 */
+	private function render_gallery_images( $product = null ) {
+		if ( ! $product ) {
+			$product = wc_get_product();
+		}
+		
+		if ( ! $product ) {
+			return;
+		}
+
+		foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
+			echo $this->wrap_in_slide( $this->get_product_image( $product, $attachment_id ) );
+		}
+
+		if ( $product->is_type( 'variable' ) && $this->should_include_variation_images() ) {
+			$variation_images = [];
+			$variations       = $product->get_available_variations();
+
+			foreach ( $variations as $variation ) {
+				if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
+					echo $this->wrap_in_slide( $this->get_product_image( $product, $variation['image_id'] ) );
+					$variation_images[] = $variation['image_id'];
+				}
+			}
+		}
+	}
+
+	/**
+	 * XStore product grid gallery integration.
+	 *
+	 * @param string $original_image_html The original image HTML from XStore.
+	 * @param WC_Product $product The product object.
+	 * @param array $local_settings The XStore element settings.
+	 *
+	 * @return string The gallery HTML or original image HTML.
+	 * @since 1.5.10
+	 */
+	public function xstore_product_grid_gallery_integration( $original_image_html, $product, $local_settings ) {
+		if ( ! $product || ! is_a( $product, 'WC_Product' ) ) {
+			return $original_image_html;
+		}
+
+		if ( ! $this->should_display_gallery( $product->get_id() ) ) {
+			return $original_image_html;
+		}
+
+		ob_start();
+		
+		$this->start_gallery_rendering();
+		echo $original_image_html;
+		$this->finish_gallery_rendering( $product );
+		
+		return ob_get_clean();
 	}
 }
