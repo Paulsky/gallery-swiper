@@ -3,7 +3,7 @@ Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.5.10
+Stable tag: 1.6.0
 Requires PHP: 7.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -64,6 +64,11 @@ The plugin includes support for WooCommerce ProductImage Block. Some other WooCo
 If you encounter any conflicts with other themes or plugins, please report them to us. We are trying to use all standard WooCommerce filters and hooks, and we want to use the active theme settings and change as little as possible. This approach ensures maximum compatibility with themes and other plugins. However, some themes and plugins might not follow standard WordPress/WooCommerce practices, which can result in compatibility issues out of the box.
 
 == Changelog ==
+= 1.6.0 =
+* Refactored theme/plugin compatibility scripts into single file
+* Added compatibility for Woodmart theme
+* Tested WooCommerce 10.1.0
+
 = 1.5.10 =
 * Improved compatibility for XStore theme
 
@@ -133,6 +138,8 @@ If you encounter any conflicts with other themes or plugins, please report them 
 * Initial release of Woo Swiper.
 
 == Additional Information ==
+
+This plugin is fully open source. You can find the source code on [GitHub](https://github.com/Paulsky/gallery-swiper)
 
 For more information and other WordPress plugins, visit [Wijnberg Developments](https://products.wijnberg.dev/product-category/wordpress/plugins/).
 

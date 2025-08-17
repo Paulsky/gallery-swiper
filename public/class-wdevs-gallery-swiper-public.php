@@ -116,6 +116,31 @@ class Wdevs_Gallery_Swiper_Public {
 		wp_localize_script( $this->plugin_name, 'wgsSettings', $localized_settings );
 
 		wp_enqueue_script( $this->plugin_name );
+
+		// Universal theme/plugin compatibility script
+		$compatibility_dependencies = [
+			$this->plugin_name,
+			'jquery',
+		];
+
+		// Add theme/plugin specific dependencies if available
+		// YITH Infinite Scrolling compatibility
+		if ( is_plugin_active( 'yith-infinite-scrolling/init.php' ) ) {
+			$compatibility_dependencies[] = 'yith-infinitescroll';
+		}
+
+		// XStore theme compatibility: init swiper after AJAX filter
+		if ( function_exists( 'etheme_theme_setup' ) ) {
+			$compatibility_dependencies[] = 'ajaxFilters';
+		}
+
+		// Woodmart theme compatibility: init swiper after AJAX load
+		if ( function_exists( 'woodmart_theme_setup' ) ) {
+			$compatibility_dependencies[] = 'woodmart-theme';
+		}
+
+		wp_register_script( 'wdevs-gallery-swiper-compatibility', plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-swiper-compatibility.js', $compatibility_dependencies, $this->version, true );
+		wp_enqueue_script( 'wdevs-gallery-swiper-compatibility' );
 	}
 
 	/**
@@ -226,15 +251,8 @@ class Wdevs_Gallery_Swiper_Public {
 			}, 5 );
 		}
 
-		// XStore theme compatibility: init swiper after AJAX filter
+		// XStore theme specific PHP integration
 		if ( function_exists( 'etheme_theme_setup' ) ) {
-			wp_register_script( 'wdevs-gallery-swiper-xstore-theme', plugin_dir_url( __FILE__ ) . 'js/xstore-theme.js', [
-				'jquery',
-				'ajaxFilters',
-				$this->plugin_name
-			], $this->version, true );
-			wp_enqueue_script( 'wdevs-gallery-swiper-xstore-theme' );
-
 			// Hook into XStore product grid element rendering
 			add_filter( 'etheme_product_grid_list_product_element_image', [ $this, 'xstore_product_grid_gallery_integration' ], PHP_INT_MIN, 3 );
 		}
@@ -244,7 +262,6 @@ class Wdevs_Gallery_Swiper_Public {
 	 * Add compatibility fixes for various plugins.
 	 *
 	 * This function adds compatibility with various plugins including:
-	 * - YITH Infinite Scrolling
 	 * - Woo Product Filter by WBW
 	 * - GeneratePress Premium WooCommerce
 	 *
@@ -252,16 +269,6 @@ class Wdevs_Gallery_Swiper_Public {
 	 */
 	public function add_plugins_compatibility() {
 		add_action( 'wp_enqueue_scripts', function () {
-			// YITH Infinite Scrolling compatibility
-			if ( is_plugin_active( 'yith-infinite-scrolling/init.php' ) ) {
-				wp_register_script( 'wdevs-gallery-swiper-yith-infinite-scrolling', plugin_dir_url( __FILE__ ) . 'js/yith-infinite-scrolling.js', [
-					'jquery',
-					'yith-infinitescroll',
-					$this->plugin_name
-				], $this->version, true );
-				wp_enqueue_script( 'wdevs-gallery-swiper-yith-infinite-scrolling' );
-			}
-
 			// Woo Product Filter by WBW compatibility
 			if ( is_plugin_active( 'woo-product-filter/woo-product-filter.php' ) ) {
 				wp_register_script( 'wdevs-gallery-swiper-woo-product-filter-by-wbw', plugin_dir_url( __FILE__ ) . 'js/woo-product-filter-by-wbw.js', [
