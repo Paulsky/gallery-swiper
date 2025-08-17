@@ -54,6 +54,7 @@ This plugin is tested and compatible with the following:
 - [**GeneratePress**](https://generatepress.com): The secondary thumbnail image is disabled.
 - Blocksy
 - XStore (WooCommerce (Shop) -> Shop -> Products Design -> Image Hover Effect -> Disable)
+- Woodmart
 
 ### Plugins
 
