@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.6.1] - 2025-12-05
+### Updated
+- Tested WordPress 6.9
+- Tested WooCommerce 10.3.6
+
 ## [1.6.0] - 2025-08-17
 ### Added
 - Compatibility for Woodmart theme
@@ -98,4 +103,3 @@ All notable changes to the Product Gallery Swiper for WooCommerce plugin will be
 
 ## [1.0.0] - 2024-02-24
 - Initial release
-

@@ -1,14 +1,14 @@
 {
 	"name": "wdevs-gallery-swiper",
-	"version": "1.6.0",
+	"version": "1.6.1",
 	"description": "Enhances WooCommerce product images display on product listing sections, providing a responsive and touch-friendly slider.",
 	"author": "Wijnberg Developments",
 	"scripts": {
 		"format": "wp-scripts format",
-		"plugin-zip": "wp-scripts plugin-zip",
+		"plugin-zip": "wp-scripts plugin-zip --root-folder=product-gallery-swiper-for-woocommerce",
 		"deploy": "npm run format && npm run plugin-zip"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^27.3.0"
+		"@wordpress/scripts": "^31.1.0"
 	}
 }
