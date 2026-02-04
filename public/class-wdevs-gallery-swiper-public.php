@@ -364,7 +364,15 @@ class Wdevs_Gallery_Swiper_Public {
 			'finish_gallery_block_rendering'
 		], PHP_INT_MAX );
 
+		$custom_context = isset( $block['context'] ) ? $block['context'] : [];
+		$context_filter = function( $context ) use ( $custom_context ) {
+			return array_merge( $context, $custom_context );
+		};
+		add_filter( 'render_block_context', $context_filter, 10, 1 );
+
 		$content = render_block( $block );
+
+		remove_filter( 'render_block_context', $context_filter, 10 );
 
 		add_filter( 'render_block_woocommerce/product-image', [
 			$this,

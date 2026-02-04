@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.6.2] - 2026-02-04
+### Updated
+- Fixed a bug where the WooCommerce ProductImage block context was not passed correctly during rendering
+
 ## [1.6.1] - 2025-12-05
 ### Updated
 - Tested WordPress 6.9
