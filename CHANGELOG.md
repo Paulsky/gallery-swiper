@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.6.3] - 2026-05-23
+### Added
+- Compatibility for FiboFilters
+### Updated
+- Tested WordPress 7.0
+- Tested WooCommerce 10.7.0
+
 ## [1.6.2] - 2026-02-04
 ### Updated
 - Fixed a bug where the WooCommerce ProductImage block context was not passed correctly during rendering

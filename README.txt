@@ -2,8 +2,8 @@
 Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
-Tested up to: 6.9
-Stable tag: 1.6.2
+Tested up to: 7.0
+Stable tag: 1.6.3
 Requires PHP: 7.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -49,6 +49,7 @@ Plugins:
 * WooCommerce HPOS
 * Product Filter by WBW (Swiper initializes for AJAX loaded products)
 * GeneratePress Premium
+* FiboFilters
 
 == Installation ==
 
@@ -65,6 +66,11 @@ The plugin includes support for WooCommerce ProductImage Block. Some other WooCo
 If you encounter any conflicts with other themes or plugins, please report them to us. We are trying to use all standard WooCommerce filters and hooks, and we want to use the active theme settings and change as little as possible. This approach ensures maximum compatibility with themes and other plugins. However, some themes and plugins might not follow standard WordPress/WooCommerce practices, which can result in compatibility issues out of the box.
 
 == Changelog ==
+= 1.6.3 =
+* Added compatibility for FiboFilters
+* Tested WordPress 7.0
+* Tested WooCommerce 10.7.0
+
 = 1.6.2 =
 * Fixed a bug where the WooCommerce ProductImage block context was not passed correctly during rendering
 

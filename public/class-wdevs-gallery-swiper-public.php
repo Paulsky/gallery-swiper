@@ -141,6 +141,17 @@ class Wdevs_Gallery_Swiper_Public {
 
 		wp_register_script( 'wdevs-gallery-swiper-compatibility', plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-swiper-compatibility.js', $compatibility_dependencies, $this->version, true );
 		wp_enqueue_script( 'wdevs-gallery-swiper-compatibility' );
+
+		if ( is_plugin_active( 'fibofilters-pro/fibofilters.php' ) || is_plugin_active( 'fibofilters/fibofilters.php' ) ) {
+			$fibofilters_dependencies = [ $this->plugin_name ];
+
+			if ( wp_script_is( 'fibofilters', 'registered' ) || wp_script_is( 'fibofilters', 'enqueued' ) ) {
+				$fibofilters_dependencies[] = 'fibofilters';
+			}
+
+			wp_register_script( 'wdevs-gallery-swiper-fibofilters', plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-swiper-fibofilters.js', $fibofilters_dependencies, $this->version, true );
+			wp_enqueue_script( 'wdevs-gallery-swiper-fibofilters' );
+		}
 	}
 
 	/**
