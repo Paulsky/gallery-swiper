@@ -61,7 +61,8 @@ This plugin is tested and compatible with the following:
 - [**YITH Infinite Scrolling**](https://yithemes.com/themes/plugins/yith-infinite-scrolling/): Swiper is initialized for AJAX loaded products.
 - [**Product Filter by WBW**](https://wordpress.org/plugins/woo-product-filter/): Swiper is initialized for AJAX loaded products.
 - [**GeneratePress Premium**](https://generatepress.com/): Adjust gallery rendering timing for image wrapper conflict.
-- [**FiboFilters**](https://fibofilters.com/): wiper is initialized for AJAX loaded products.
+- [**FiboFilters**](https://fibofilters.com/): Swiper is initialized for AJAX loaded products.
+- Elementor Pro
 
 If you encounter any conflicts with other themes or plugins, please report them to us by opening an issue or through our website. We welcome community contributions, so feel free to submit a pull request if you have a fix or improvement.
 
@@ -110,6 +111,21 @@ add_filter('wdevs_gallery_swiper_enable_default_block_integration', '__return_fa
 // Override gallery display decision (force show/hide)
 add_filter('wdevs_gallery_swiper_should_display_gallery', '__return_true'); // or '__return_false'
 ```
+
+**Use an existing Swiper installation:**
+```php
+// The handles must already be registered before this plugin enqueues its assets.
+// The external Swiper version must be compatible with this plugin.
+add_filter('wdevs_gallery_swiper_swiper_script_handle', function() {
+    return 'swiper';
+});
+
+add_filter('wdevs_gallery_swiper_swiper_style_handle', function() {
+    return 'swiper';
+});
+```
+
+The example above reuses the handles registered by Elementor. If a filtered handle is not registered, the plugin safely falls back to its bundled Swiper assets.
 
 **CSS customization:**
 ```php

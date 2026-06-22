@@ -1,5 +1,5 @@
 function wdevs_gallery_swiper_init_swiper() {
-	const swiperElements = document.querySelectorAll( '.swiper' );
+	const swiperElements = document.querySelectorAll( '.wdevs-gallery-swiper' );
 
 	swiperElements.forEach( function ( swiperElement ) {
 		if ( ! swiperElement.dataset.swiperInitialized ) {

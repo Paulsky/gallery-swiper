@@ -3,7 +3,7 @@ Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.6.3
+Stable tag: 1.7.0
 Requires PHP: 7.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -50,6 +50,7 @@ Plugins:
 * Product Filter by WBW (Swiper initializes for AJAX loaded products)
 * GeneratePress Premium
 * FiboFilters
+* Elementor Pro
 
 == Installation ==
 
@@ -65,7 +66,24 @@ The plugin includes support for WooCommerce ProductImage Block. Some other WooCo
 
 If you encounter any conflicts with other themes or plugins, please report them to us. We are trying to use all standard WooCommerce filters and hooks, and we want to use the active theme settings and change as little as possible. This approach ensures maximum compatibility with themes and other plugins. However, some themes and plugins might not follow standard WordPress/WooCommerce practices, which can result in compatibility issues out of the box.
 
+= Can I reuse Swiper registered by another plugin or theme? =
+
+Yes. Filter the script and style handles to return compatible Swiper assets that have already been registered. For example, Elementor registers both assets with the `swiper` handle:
+
+`add_filter( 'wdevs_gallery_swiper_swiper_script_handle', function() { return 'swiper'; } );`
+
+`add_filter( 'wdevs_gallery_swiper_swiper_style_handle', function() { return 'swiper'; } );`
+
+If either handle is not registered, the plugin falls back to its bundled Swiper asset. The external Swiper version must be compatible with this plugin.
+
 == Changelog ==
+= 1.7.0 =
+* Added filters for reusing compatible Swiper assets registered by another plugin or theme
+* Improved compatibility with third-party Swiper instances by limiting initialization to plugin galleries
+* Renamed the internal `swiper-js` and `swiper-css` asset handles to `wdevs-gallery-swiper-swiper`
+* Updated Swiper to 12.2.0
+* Tested WooCommerce 10.8.1
+
 = 1.6.3 =
 * Added compatibility for FiboFilters
 * Tested WordPress 7.0

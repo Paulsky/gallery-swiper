@@ -50,7 +50,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @since    1.1.0
 	 */
-	private const SWIPER_VERSION = '11.2.0';
+	private const SWIPER_VERSION = '12.2.0';
 
 
 	/**
@@ -74,10 +74,29 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		wp_register_style( 'swiper-css', plugin_dir_url( __FILE__ ) . 'vendor/swiper/swiper-bundle.min.css', [], self::SWIPER_VERSION );
-		wp_enqueue_style( 'swiper-css' );
+		$default_handle = $this->plugin_name . '-swiper';
 
-		wp_enqueue_style( $this->plugin_name . '-public', plugin_dir_url( __FILE__ ) . 'css/wdevs-gallery-swiper-public.css', array(), $this->version );
+		/**
+		 * Filters the registered style handle used for Swiper.
+		 *
+		 * Return the handle of an already registered Swiper stylesheet
+		 * to prevent this plugin from loading its bundled stylesheet.
+		 *
+	 * @since 1.7.0
+		 *
+		 * @param string $default_handle The plugin's default Swiper style handle.
+		 */
+		$handle = apply_filters( 'wdevs_gallery_swiper_swiper_style_handle', $default_handle );
+
+		if ( ! is_string( $handle ) || '' === $handle || ! wp_style_is( $handle, 'registered' ) ) {
+			$handle = $default_handle;
+
+			if ( ! wp_style_is( $handle, 'registered' ) ) {
+				wp_register_style( $handle, plugin_dir_url( __FILE__ ) . 'vendor/swiper/swiper-bundle.min.css', [], self::SWIPER_VERSION );
+			}
+		}
+
+		wp_enqueue_style( $this->plugin_name . '-public', plugin_dir_url( __FILE__ ) . 'css/wdevs-gallery-swiper-public.css', [ $handle ], $this->version );
 
 		$theme_color = get_option( 'wdevs_gallery_swiper_theme_color', '' );
 		if ( ! empty( $theme_color ) ) {
@@ -98,10 +117,29 @@ class Wdevs_Gallery_Swiper_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_register_script( 'swiper-js', plugin_dir_url( __FILE__ ) . 'vendor/swiper/swiper-bundle.min.js', [], self::SWIPER_VERSION, true );
-		wp_enqueue_script( 'swiper-js' );
+		$default_handle = $this->plugin_name . '-swiper';
 
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-swiper-public.js', [ 'swiper-js' ], $this->version, true );
+		/**
+		 * Filters the registered script handle used for Swiper.
+		 *
+		 * Return the handle of an already registered Swiper script
+		 * to prevent this plugin from loading its bundled script.
+		 *
+	 * @since 1.7.0
+		 *
+		 * @param string $default_handle The plugin's default Swiper script handle.
+		 */
+		$handle = apply_filters( 'wdevs_gallery_swiper_swiper_script_handle', $default_handle );
+
+		if ( ! is_string( $handle ) || '' === $handle || ! wp_script_is( $handle, 'registered' ) ) {
+			$handle = $default_handle;
+
+			if ( ! wp_script_is( $handle, 'registered' ) ) {
+				wp_register_script( $handle, plugin_dir_url( __FILE__ ) . 'vendor/swiper/swiper-bundle.min.js', [], self::SWIPER_VERSION, true );
+			}
+		}
+
+		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wdevs-gallery-swiper-public.js', [ $handle ], $this->version, true );
 
 		$localized_settings = [
 			'swiper' => [
@@ -313,7 +351,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 */
 	private function build_swiper_opening_html() {
 		$extra_classes     = apply_filters( 'wdevs_gallery_swiper_container_extra_classes', '' );
-		$container_classes = trim( 'swiper ' . $extra_classes );
+		$container_classes = trim( 'swiper wdevs-gallery-swiper ' . $extra_classes );
 
 		$html = '<div class="' . esc_attr( $container_classes ) . '">';
 		$html .= '<div class="swiper-wrapper">';

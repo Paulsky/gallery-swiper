@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.7.0] - 2026-06-22
+### Added
+- Filters for reusing compatible Swiper assets registered by another plugin or theme
+### Updated
+- Improved compatibility with third-party Swiper instances by limiting initialization to plugin galleries
+- Renamed the internal `swiper-js` and `swiper-css` asset handles to `wdevs-gallery-swiper-swiper`
+- Updated Swiper to 12.2.0
+- Tested WooCommerce 10.8.1
+
 ## [1.6.3] - 2026-05-23
 ### Added
 - Compatibility for FiboFilters
