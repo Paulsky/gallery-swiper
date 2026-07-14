@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.7.1] - 2026-07-14
+### Added
+- Added `blueprint.json` for an interactive WordPress Playground demo
+### Updated
+- Tested WordPress 7.0.1
+- Tested WooCommerce 10.9.4
+
 ## [1.7.0] - 2026-06-22
 ### Added
 - Filters for reusing compatible Swiper assets registered by another plugin or theme

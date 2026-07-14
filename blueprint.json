@@ -1,0 +1,73 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/shop/",
+	"features": {
+		"networking": true
+	},
+	"extraLibraries": [ "wp-cli" ],
+	"login": true,
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "woocommerce"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "product-gallery-swiper-for-woocommerce"
+			},
+			"ifAlreadyInstalled": "skip"
+		},
+		{
+			"step": "activatePlugin",
+			"pluginPath": "product-gallery-swiper-for-woocommerce/wdevs-gallery-swiper.php"
+		},
+		{
+			"step": "mkdir",
+			"path": "/wordpress/wp-content/mu-plugins"
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/mu-plugins/product-gallery-swiper-for-woocommerce-demo.php",
+			"data": "<?php\nadd_action( 'wp_body_open', function () {\n\techo '<aside role=\"complementary\" aria-label=\"Product Gallery Swiper for WooCommerce\" style=\"box-sizing:border-box;width:100%;padding:.75rem 1rem;text-align:center;background:#1e1e1e;color:#fff\">👋 Questions or want to learn more? <a href=\"https://products.wijnberg.dev/product/wordpress/plugins/product-gallery-swiper-for-woocommerce/\" style=\"color:inherit;font-weight:600\">Explore Product Gallery Swiper for WooCommerce →</a><small style=\"display:block;margin-top:.25rem;opacity:.75\">Looking for the settings? <a href=\"/wp-admin/admin.php?page=wc-settings&amp;tab=wdevs_gallery_swiper\" style=\"color:inherit\">Open them here →</a></small></aside>';\n} );\n\nfunction wdevs_gallery_swiper_demo_hidden_page_ids() {\n\tstatic $page_ids;\n\n\tif ( isset( $page_ids ) ) {\n\t\treturn $page_ids;\n\t}\n\n\t$sample_page = get_page_by_path( 'sample-page' );\n\t$page_ids    = array_filter(\n\t\tarray(\n\t\t\tfunction_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'cart' ) : 0,\n\t\t\tfunction_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'checkout' ) : 0,\n\t\t\tfunction_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'myaccount' ) : 0,\n\t\t\t$sample_page ? $sample_page->ID : 0,\n\t\t)\n\t);\n\n\treturn array_map( 'absint', $page_ids );\n}\n\nadd_filter( 'wp_list_pages_excludes', function ( $excluded ) {\n\treturn array_values( array_unique( array_merge( $excluded, wdevs_gallery_swiper_demo_hidden_page_ids() ) ) );\n} );\n\nadd_filter( 'wp_get_nav_menu_items', function ( $items ) {\n\tif ( ! is_array( $items ) ) {\n\t\treturn $items;\n\t}\n\n\t$hidden_page_ids = wdevs_gallery_swiper_demo_hidden_page_ids();\n\n\treturn array_values(\n\t\tarray_filter(\n\t\t\t$items,\n\t\t\tfunction ( $item ) use ( $hidden_page_ids ) {\n\t\t\t\treturn ! in_array( (int) $item->object_id, $hidden_page_ids, true );\n\t\t\t}\n\t\t)\n\t);\n} );\n"
+		},
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "Product Gallery Swiper for WooCommerce Demo",
+				"woocommerce_allow_tracking": "no",
+				"woocommerce_onboarding_profile": {
+					"skipped": true
+				},
+				"woocommerce_coming_soon": "no",
+				"permalink_structure": "/%postname%/"
+			}
+		},
+		{
+			"step": "wp-cli",
+			"command": "wp transient delete _wc_activation_redirect"
+		},
+		{
+			"step": "importWxr",
+			"file": {
+				"resource": "vfs",
+				"path": "/wordpress/wp-content/plugins/woocommerce/sample-data/sample_products.xml"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php\nrequire '/wordpress/wp-load.php';\n\n$has_gallery = false;\nforeach ( wc_get_products( array( 'limit' => -1 ) ) as $product ) {\n\t$image_ids = get_posts(\n\t\tarray(\n\t\t\t'post_type'      => 'attachment',\n\t\t\t'post_status'    => 'inherit',\n\t\t\t'post_parent'    => $product->get_id(),\n\t\t\t'post_mime_type' => 'image',\n\t\t\t'fields'         => 'ids',\n\t\t\t'posts_per_page' => -1,\n\t\t\t'orderby'        => 'ID',\n\t\t\t'order'          => 'ASC',\n\t\t)\n\t);\n\n\t$gallery_ids = array_values( array_diff( array_map( 'absint', $image_ids ), array( $product->get_image_id() ) ) );\n\t$product->set_gallery_image_ids( $gallery_ids );\n\t$product->save();\n\n\tif ( $product->get_image_id() && $gallery_ids ) {\n\t\t$has_gallery = true;\n\t}\n}\n\nif ( ! $has_gallery ) {\n\tthrow new RuntimeException( 'No WooCommerce sample products with featured and gallery images were imported.' );\n}\n"
+		},
+		{
+			"step": "wp-cli",
+			"command": "wp rewrite flush"
+		}
+	]
+}

@@ -2,8 +2,8 @@
 Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
-Tested up to: 7.0
-Stable tag: 1.7.0
+Tested up to: 7.0.1
+Stable tag: 1.7.1
 Requires PHP: 7.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -15,6 +15,8 @@ Enhance WooCommerce product images display on product listing sections with a re
 Product Gallery Swiper for WooCommerce integrates the Swiper library to enhance the product images display on product listing sections. This plugin provides a responsive and touch-friendly slider for product thumbnails, improving the user experience on shop pages, product category pages, and related products sections.
 
 This slider is designed for product listing sections where multiple products are displayed, not for single product itself.
+
+> **See Product Gallery Swiper for WooCommerce in action:** [Try the live demo →](https://wordpress.org/plugins/product-gallery-swiper-for-woocommerce/?preview=1)
 
 === Key features ===
 
@@ -74,9 +76,14 @@ Yes. Filter the script and style handles to return compatible Swiper assets that
 
 `add_filter( 'wdevs_gallery_swiper_swiper_style_handle', function() { return 'swiper'; } );`
 
-If either handle is not registered, the plugin falls back to its bundled Swiper asset. The external Swiper version must be compatible with this plugin.
+If either handle is not registered, the plugin falls back to its bundled Swiper asset.
 
 == Changelog ==
+= 1.7.1 =
+* Added `blueprint.json` for an interactive WordPress Playground demo
+* Tested WordPress 7.0.1
+* Tested WooCommerce 10.9.4
+
 = 1.7.0 =
 * Added filters for reusing compatible Swiper assets registered by another plugin or theme
 * Improved compatibility with third-party Swiper instances by limiting initialization to plugin galleries

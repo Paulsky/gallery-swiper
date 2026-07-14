@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Product Gallery Slider for WooCommerce\n"
-"POT-Creation-Date: 2025-07-23 22:28+0200\n"
+"POT-Creation-Date: 2026-07-14 10:26+0200\n"
 "PO-Revision-Date: 2024-08-17 16:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wdevs-gallery-swiper.php\n"
@@ -22,9 +22,33 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 "X-Poedit-SearchPathExcluded-2: public/vendor\n"
 
-#: admin/class-wdevs-gallery-swiper-admin.php:83
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:282
+#: admin/class-wdevs-gallery-swiper-admin.php:97
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:281
 msgid "Settings"
+msgstr ""
+
+#: admin/class-wdevs-gallery-swiper-admin.php:127
+msgid "Thank you for using Product Gallery Swiper for WooCommerce."
+msgstr ""
+
+#. translators: 1: Product Gallery Swiper for WooCommerce 2: five stars
+#: admin/class-wdevs-gallery-swiper-admin.php:132
+#, php-format
+msgid ""
+"If you like %1$s please leave us a %2$s rating. A huge thanks in advance!"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: admin/class-wdevs-gallery-swiper-admin.php:133
+msgid "Product Gallery Swiper for WooCommerce"
+msgstr ""
+
+#: admin/class-wdevs-gallery-swiper-admin.php:134
+msgid "five star"
+msgstr ""
+
+#: admin/class-wdevs-gallery-swiper-admin.php:134
+msgid "Thanks :)"
 msgstr ""
 
 #: includes/class-wdevs-gallery-swiper-activator.php:33
@@ -33,111 +57,99 @@ msgid ""
 "before activating this plugin."
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:96
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:110
 msgid "Gallery Swiper"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:110
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:124
 msgid "Gallery Swiper settings"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:112
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:126
 msgid "Customize the Gallery slider settings."
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:116
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:130
 msgid "Enable scrollbar"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:118
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:132
 msgid "Enable scrollbar for the slider"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:123
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:137
 msgid "Enable pagination"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:125
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:139
 msgid "Enable pagination for the slider"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:130
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:144
 msgid "Enable navigation"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:132
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:146
 msgid "Enable navigation for the slider"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:137
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:151
 msgid "Enable variation images"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:139
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:153
 msgid "Display variation images in the slider"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:144
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:158
 msgid "Disable slider from"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:146
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:160
 msgid ""
 "When set, the slider will be disabled from the specified breakpoint upwards."
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:149
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:163
 msgid "Always enabled"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:150
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:164
 msgid "Disabled from 480px and up"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:151
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:165
 msgid "Disabled from 768px and up"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:152
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:166
 msgid "Disabled from 992px and up"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:153
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:167
 msgid "Disabled from 1200px and up"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:158
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:172
 msgid "Enable hover on disabled slider"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:160
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:174
 msgid ""
 "When the slider is disabled (above breakpoint), show the second image on "
 "mouse hover."
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:166
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:180
 msgid "Theme color"
 msgstr ""
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:168
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:182
 msgid "Choose the Swiper theme color"
 msgstr ""
 
-#. translators: %s: Link to author site.
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:207
-#, php-format
-msgid ""
-"Product Gallery Swiper for WooCommerce is developed by %s. Your trusted "
-"WordPress & WooCommerce plugin partner from the Netherlands."
-msgstr ""
-
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:256
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:255
 msgid "Documentation"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Product Gallery Swiper for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

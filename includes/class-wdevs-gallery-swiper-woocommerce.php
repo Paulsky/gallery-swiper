@@ -74,6 +74,20 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 	}
 
 	/**
+	 * Check if the current admin screen is the Gallery Swiper WooCommerce settings tab.
+	 *
+	 * @since 1.7.1
+	 */
+	public static function is_settings_page() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		return is_admin()
+			&& isset( $_GET['page'], $_GET['tab'] )
+			&& 'wc-settings' === $_GET['page']
+			&& 'wdevs_gallery_swiper' === $_GET['tab'];
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+	}
+
+	/**
 	 * Declare WooCommerce compatibility
 	 *
 	 * @since 1.2.0
@@ -194,21 +208,6 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 	 */
 	public function update_settings() {
 		woocommerce_update_options( $this->get_settings() );
-	}
-
-	/**
-	 * Output footer info
-	 *
-	 * @since    1.5.3
-	 */
-	public function render_footer_info() {
-		$text = sprintf(
-		/* translators: %s: Link to author site. */
-			__( 'Product Gallery Swiper for WooCommerce is developed by %s. Your trusted WordPress & WooCommerce plugin partner from the Netherlands.', 'product-gallery-swiper-for-woocommerce' ),
-			'<a href="https://products.wijnberg.dev" target="_blank" rel="noopener">Wijnberg Developments</a>'
-		);
-
-		echo '<span style="padding: 0 30px; background: #f0f0f1; display: block;">' . wp_kses_post( $text ) . '</span>';
 	}
 
 	/**

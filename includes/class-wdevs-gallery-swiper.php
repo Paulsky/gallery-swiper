@@ -67,8 +67,8 @@ class Wdevs_Gallery_Swiper {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'WDEVS_GALLERY_SLIDER_VERSION' ) ) {
-			$this->version = WDEVS_GALLERY_SLIDER_VERSION;
+		if ( defined( 'WDEVS_GALLERY_SWIPER_VERSION' ) ) {
+			$this->version = WDEVS_GALLERY_SWIPER_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -139,6 +139,9 @@ class Wdevs_Gallery_Swiper {
 		$plugin_admin = new Wdevs_Gallery_Swiper_Admin( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/' . $this->plugin_name . '.php' ), $plugin_admin, 'add_action_links' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_filter( 'woocommerce_display_admin_footer_text', $plugin_admin, 'hide_woocommerce_footer_text' );
+		$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'admin_footer_text', 20 );
+		$this->loader->add_action( 'wp_ajax_' . Wdevs_Gallery_Swiper_Admin::AJAX_ACTION_FOOTER_RATED, $plugin_admin, Wdevs_Gallery_Swiper_Admin::AJAX_ACTION_FOOTER_RATED . '_action' );
 	}
 
 	/**
@@ -168,7 +171,6 @@ class Wdevs_Gallery_Swiper {
 		if ( is_admin() ) {
 			$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_woocommerce, 'add_settings_tab', 50 );
 			$this->loader->add_action( 'woocommerce_settings_tabs_wdevs_gallery_swiper', $plugin_woocommerce, 'settings_tab' );
-			$this->loader->add_action('woocommerce_after_settings_wdevs_gallery_swiper', $plugin_woocommerce, 'render_footer_info');
 		}
 	}
 
