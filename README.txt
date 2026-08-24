@@ -2,9 +2,9 @@
 Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
-Tested up to: 7.0.1
-Stable tag: 1.7.1
-Requires PHP: 7.2
+Tested up to: 7.1
+Stable tag: 1.7.2
+Requires PHP: 8.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -79,6 +79,11 @@ Yes. Filter the script and style handles to return compatible Swiper assets that
 If either handle is not registered, the plugin falls back to its bundled Swiper asset.
 
 == Changelog ==
+= 1.7.2 =
+* Raised minimum required PHP version to 8.0
+* Tested WordPress 7.1
+* Tested WooCommerce 11.0.1
+
 = 1.7.1 =
 * Added `blueprint.json` for an interactive WordPress Playground demo
 * Tested WordPress 7.0.1

@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.7.2] - 2026-08-23
+### Updated
+- Raised minimum required PHP version to 8.0
+- Tested WordPress 7.1
+- Tested WooCommerce 11.0.1
+
 ## [1.7.1] - 2026-07-14
 ### Added
 - Added `blueprint.json` for an interactive WordPress Playground demo

@@ -16,17 +16,17 @@
  * Plugin Name:          Product Gallery Swiper for WooCommerce
  * Plugin URI:           https://products.wijnberg.dev
  * Description:          Enhances WooCommerce product images display on product listing sections, providing a responsive and touch-friendly swiper.
- * Version:              1.7.1
+ * Version:              1.7.2
  * Author:               Wijnberg Developments
  * License:              GPL-2.0+
  * License URI:          http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:          product-gallery-swiper-for-woocommerce
  * Domain Path:          /languages
  * Requires at least:    6.0
- * Tested up to:         7.0.1
- * Requires PHP:         7.2
+ * Tested up to:         7.1
+ * Requires PHP:         8.0
  * WC requires at least: 7.0.0
- * WC tested up to:      10.9.4
+ * WC tested up to:      11.0.1
  * Requires Plugins:     woocommerce
  */
 
@@ -40,7 +40,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WDEVS_GALLERY_SWIPER_VERSION', '1.7.1' );
+define( 'WDEVS_GALLERY_SWIPER_VERSION', '1.7.2' );
 
 /**
  * The code that runs during plugin activation.
