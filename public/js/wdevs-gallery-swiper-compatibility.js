@@ -2,6 +2,8 @@
 	const thirdPartyEvents = [
 		'yith_infs_added_elem', //YITH Infinite Scrolling compatibility
 		'et_ajax_content_loaded', //XStore theme AJAX compatibility
+		'etheme_product_grid_ajax_loaded', //XStore Elementor AJAX pagination compatibility
+		'wc-blocks_product_list_rendered', //WooCommerce Product Collection pagination compatibility
 		'wood-images-loaded', //Woodmart theme AJAX compatibility
 	];
 

@@ -94,7 +94,7 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 	 */
 	public function declare_compatibility() {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', 'wdevs-gallery-swiper/wdevs-gallery-swiper.php', true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', dirname( __DIR__ ) . '/wdevs-gallery-swiper.php', true );
 		}
 	}
 

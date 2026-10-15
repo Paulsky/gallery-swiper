@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.7.3] - 2026-10-15
+### Updated
+- Fixed product gallery sliders not initializing after XStore Elementor AJAX pagination
+- Fixed product gallery sliders not initializing after WooCommerce Product Collection pagination
+- Fixed WooCommerce HPOS compatibility declaration for the installed plugin directory
+- Tested WordPress 7.1.3
+- Tested WooCommerce 11.2.1
+
 ## [1.7.2] - 2026-08-23
 ### Updated
 - Raised minimum required PHP version to 8.0
