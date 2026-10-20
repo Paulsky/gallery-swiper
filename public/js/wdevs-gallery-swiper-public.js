@@ -3,8 +3,11 @@ function wdevs_gallery_swiper_init_swiper() {
 
 	swiperElements.forEach( function ( swiperElement ) {
 		if ( ! swiperElement.dataset.swiperInitialized ) {
+			const slideCount =
+				swiperElement.querySelector( '.swiper-wrapper' ).children
+					.length;
 			const swiperOptions = {
-				loop: true,
+				loop: slideCount > 1,
 				scrollbar: {
 					el: '.swiper-scrollbar',
 					hide: false,

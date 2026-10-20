@@ -148,6 +148,17 @@ class Wdevs_Gallery_Swiper_Woocommerce {
 				'default' => 'no'
 			),
 			array(
+				'name'              => __( 'Maximum number of images', 'product-gallery-swiper-for-woocommerce' ),
+				'type'              => 'number',
+				'desc'              => __( 'Limit the total number of images shown in each product slider, including the main product image. Leave empty to show all images.', 'product-gallery-swiper-for-woocommerce' ),
+				'id'                => 'wdevs_gallery_swiper_max_images',
+				'default'           => '',
+				'custom_attributes' => array(
+					'min'  => '1',
+					'step' => '1'
+				)
+			),
+			array(
 				'name'    => __( 'Enable variation images', 'product-gallery-swiper-for-woocommerce' ),
 				'type'    => 'checkbox',
 				'desc'    => __( 'Display variation images in the slider', 'product-gallery-swiper-for-woocommerce' ),

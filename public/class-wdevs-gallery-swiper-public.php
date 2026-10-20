@@ -572,30 +572,12 @@ class Wdevs_Gallery_Swiper_Public {
 		if ( $product ) {
 			$output = $block_content;
 
-			foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
+			foreach ( $this->get_additional_image_ids( $product ) as $attachment_id ) {
 				$block_copy                       = $block;
 				$block_copy['context']['imageId'] = $attachment_id;
 
 				$slide_content = $this->render_block_without_gallery_filters( $block_copy );
 				$output        .= $this->wrap_in_slide( $slide_content );
-			}
-
-			if ( $product->is_type( 'variable' ) ) {
-				if ( $this->should_include_variation_images() ) {
-					$variation_images = [];
-					$variations       = $product->get_available_variations();
-
-					foreach ( $variations as $variation ) {
-						if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
-							$block_copy                       = $block;
-							$block_copy['context']['imageId'] = $variation['image_id'];
-
-							$slide_content      = $this->render_block_without_gallery_filters( $block_copy );
-							$output             .= $this->wrap_in_slide( $slide_content );
-							$variation_images[] = $variation['image_id'];
-						}
-					}
-				}
 			}
 
 			$output .= $this->build_swiper_closing_tag();
@@ -812,6 +794,50 @@ class Wdevs_Gallery_Swiper_Public {
 	}
 
 	/**
+	 * Get gallery and variation image IDs within the total image limit.
+	 *
+	 * The main product image occupies the first slide, so it counts towards the limit.
+	 *
+	 * @param WC_Product $product The product object.
+	 * @return array Image IDs for the additional slides, in display order.
+	 * @since 1.8.0
+	 */
+	private function get_additional_image_ids( $product ) {
+		$max_images = (int) get_option( 'wdevs_gallery_swiper_max_images', '' );
+
+		if ( 1 === $max_images ) {
+			return [];
+		}
+
+		$image_ids = $product->get_gallery_image_ids();
+
+		if ( $max_images > 1 ) {
+			$image_ids = array_slice( $image_ids, 0, $max_images - 1 );
+
+			if ( count( $image_ids ) === $max_images - 1 ) {
+				return $image_ids;
+			}
+		}
+
+		if ( $product->is_type( 'variable' ) && $this->should_include_variation_images() ) {
+			$variation_images = [];
+
+			foreach ( $product->get_available_variations() as $variation ) {
+				if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
+					$image_ids[]        = $variation['image_id'];
+					$variation_images[] = $variation['image_id'];
+
+					if ( $max_images > 1 && count( $image_ids ) === $max_images - 1 ) {
+						break;
+					}
+				}
+			}
+		}
+
+		return $image_ids;
+	}
+
+	/**
 	 * Render gallery images and variations for a specific product.
 	 *
 	 * @param WC_Product|null $product Product object, uses current product if null.
@@ -827,20 +853,8 @@ class Wdevs_Gallery_Swiper_Public {
 			return;
 		}
 
-		foreach ( $product->get_gallery_image_ids() as $attachment_id ) {
+		foreach ( $this->get_additional_image_ids( $product ) as $attachment_id ) {
 			echo $this->wrap_in_slide( $this->get_product_image( $product, $attachment_id ) );
-		}
-
-		if ( $product->is_type( 'variable' ) && $this->should_include_variation_images() ) {
-			$variation_images = [];
-			$variations       = $product->get_available_variations();
-
-			foreach ( $variations as $variation ) {
-				if ( ! empty( $variation['image_id'] ) && ! in_array( $variation['image_id'], $variation_images, true ) ) {
-					echo $this->wrap_in_slide( $this->get_product_image( $product, $variation['image_id'] ) );
-					$variation_images[] = $variation['image_id'];
-				}
-			}
 		}
 	}
 

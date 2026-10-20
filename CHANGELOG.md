@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.8.0] - 2026-10-20
+### Added
+- Option to limit the total number of images per product slider, including the main product image and enabled variation images
+- GitHub Actions workflow to build and attach the plugin zip when a version tag is pushed
+### Updated
+- Build `product-gallery-swiper-for-woocommerce.zip` with only plugin files, excluding Markdown documentation
+
 ## [1.7.3] - 2026-10-15
 ### Updated
 - Fixed product gallery sliders not initializing after XStore Elementor AJAX pagination

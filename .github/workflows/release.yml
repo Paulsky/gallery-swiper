@@ -1,0 +1,57 @@
+name: Release plugin
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+permissions:
+    contents: write
+
+concurrency:
+    group: release-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: Check out tagged commit
+              uses: actions/checkout@v6
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: '22'
+                  cache: npm
+
+            - name: Validate versions and prepare release notes
+              env:
+                  RELEASE_TAG: ${{ github.ref_name }}
+              run: node scripts/prepare-release.cjs "$RELEASE_TAG" > "$RUNNER_TEMP/release-notes.md"
+
+            - name: Install build dependencies
+              run: npm ci
+
+            - name: Check PHP syntax
+              run: find . -path './node_modules' -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
+
+            - name: Build plugin zip
+              run: npm run plugin-zip
+
+            - name: Create GitHub release and upload zip
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  GH_REPO: ${{ github.repository }}
+                  RELEASE_TAG: ${{ github.ref_name }}
+                  PLUGIN_ZIP: product-gallery-swiper-for-woocommerce.zip
+              run: |
+                  if gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+                    gh release upload "$RELEASE_TAG" "$PLUGIN_ZIP" --clobber
+                  else
+                    gh release create "$RELEASE_TAG" "$PLUGIN_ZIP" \
+                      --verify-tag \
+                      --title "$RELEASE_TAG" \
+                      --notes-file "$RUNNER_TEMP/release-notes.md"
+                  fi

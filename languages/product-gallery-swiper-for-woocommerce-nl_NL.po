@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Product Gallery Slider for WooCommerce\n"
-"POT-Creation-Date: 2026-07-14 10:27+0200\n"
-"PO-Revision-Date: 2026-07-14 10:29+0200\n"
+"POT-Creation-Date: 2026-10-20 17:30+0200\n"
+"PO-Revision-Date: 2026-10-20 17:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-2: public/vendor\n"
 
 #: admin/class-wdevs-gallery-swiper-admin.php:97
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:281
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:292
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -99,49 +99,61 @@ msgid "Enable navigation for the slider"
 msgstr "Schakel navigatie in voor de slider"
 
 #: includes/class-wdevs-gallery-swiper-woocommerce.php:151
+msgid "Maximum number of images"
+msgstr "Maximumaantal afbeeldingen"
+
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:153
+msgid ""
+"Limit the total number of images shown in each product slider, including the "
+"main product image. Leave empty to show all images."
+msgstr ""
+"Beperk het totale aantal afbeeldingen per productslider, inclusief de "
+"hoofdafbeelding. Laat leeg om alle afbeeldingen te tonen."
+
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:162
 msgid "Enable variation images"
 msgstr "Schakel variatie-afbeeldingen in"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:153
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:164
 msgid "Display variation images in the slider"
 msgstr "Variatie-afbeeldingen weergeven in de slider"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:158
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:169
 msgid "Disable slider from"
 msgstr "Schakel slider uit vanaf"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:160
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:171
 msgid ""
 "When set, the slider will be disabled from the specified breakpoint upwards."
 msgstr ""
 "Indien ingesteld, wordt de slider uitgeschakeld vanaf het gespecificeerde "
 "breekpunt en hoger."
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:163
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:174
 msgid "Always enabled"
 msgstr "Altijd ingeschakeld"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:164
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:175
 msgid "Disabled from 480px and up"
 msgstr "Uitgeschakeld vanaf 480px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:165
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:176
 msgid "Disabled from 768px and up"
 msgstr "Uitgeschakeld vanaf 768px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:166
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:177
 msgid "Disabled from 992px and up"
 msgstr "Uitgeschakeld vanaf 992px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:167
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:178
 msgid "Disabled from 1200px and up"
 msgstr "Uitgeschakeld vanaf 1200px en hoger"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:172
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:183
 msgid "Enable hover on disabled slider"
 msgstr "Schakel muisbeweging in bij uitgeschakelde slider"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:174
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:185
 msgid ""
 "When the slider is disabled (above breakpoint), show the second image on "
 "mouse hover."
@@ -149,15 +161,15 @@ msgstr ""
 "Wanneer de slider is uitgeschakeld (boven breekpunt), de tweede "
 "productafbeelding weergegeven bij het hoveren met de muis."
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:180
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:191
 msgid "Theme color"
 msgstr "Themakleur"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:182
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:193
 msgid "Choose the Swiper theme color"
 msgstr "Kies de Swiper themakleur"
 
-#: includes/class-wdevs-gallery-swiper-woocommerce.php:255
+#: includes/class-wdevs-gallery-swiper-woocommerce.php:266
 msgid "Documentation"
 msgstr "Documentatie"
 

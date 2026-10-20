@@ -3,7 +3,7 @@ Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 1.7.3
+Stable tag: 1.8.0
 Requires PHP: 8.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -25,6 +25,7 @@ This slider is designed for product listing sections where multiple products are
 * Breakpoint options to disable swiper on larger screens
 * Seamless integration with WooCommerce
 * Option to use variation images in the slider
+* Configurable maximum number of images per product slider
 
 For more information about this plugin, please visit the [plugin page](https://products.wijnberg.dev/product/wordpress/plugins/product-gallery-swiper-for-woocommerce/).
 
@@ -35,6 +36,8 @@ For more information about this plugin, please visit the [plugin page](https://p
 === Usage ===
 
 After installation and activation, Product Gallery Swiper for WooCommerce will automatically apply to your product galleries on listing pages. You can customize the settings in the WooCommerce -> Gallery Slider menu.
+
+Use "Maximum number of images" to limit the total number of images per product slider on desktop and mobile. The main product image and enabled variation images count towards this limit. Leave the field empty to show all images, or enter 1 to show only the main product image.
 
 === Known compatibility ===
 
@@ -79,6 +82,9 @@ Yes. Filter the script and style handles to return compatible Swiper assets that
 If either handle is not registered, the plugin falls back to its bundled Swiper asset.
 
 == Changelog ==
+= 1.8.0 =
+* Added option to limit the total number of images per product slider, including the main product image and enabled variation images
+
 = 1.7.3 =
 * Fixed product gallery sliders not initializing after XStore Elementor AJAX pagination
 * Fixed product gallery sliders not initializing after WooCommerce Product Collection pagination
