@@ -20,16 +20,19 @@ All source files remain in the repository.
 ## Publish a GitHub release
 
 The examples below use `v1.8.0` and the `master` branch. Use the version you are
-releasing. This procedure creates a new tag. If that tag was already pushed
-before the release changes were committed, use the recovery procedure below.
+releasing. This procedure creates a new tag. If that tag already exists and the
+release needs a fix before publication, use the recovery procedure below.
 
 1. Update the version in `package.json`, both root version fields in
    `package-lock.json`, the plugin header and version constant in
    `wdevs-gallery-swiper.php`, and the stable tag in `README.txt`.
 2. Add the version's changes to `CHANGELOG.md` and the changelog in `README.txt`.
-3. Check the release notes and build the zip locally:
+3. Run a clean dependency installation before every release, then check the
+   release notes and build the zip locally. This also checks that the lock file
+   is complete and agrees with the dependency declarations:
 
    ```sh
+   npm ci
    npm run release-notes -- v1.8.0
    npm run plugin-zip
    ```
@@ -67,11 +70,12 @@ the repository. The workflow uses its built-in `GITHUB_TOKEN`; no additional
 secret is required. Re-running the workflow replaces the zip on an existing
 release without changing its release notes.
 
-## Recover a tag pushed before the release commit
+## Recover an unpublished release
 
-Use this procedure when a tag such as `v1.8.0` was already pushed while the
-release changes were still uncommitted. That tag points to an older commit.
-First complete steps 1–4 above so the intended release changes are staged.
+Use this procedure when a tag such as `v1.8.0` was pushed before the release
+changes were committed, or when the release workflow failed and needs a code or
+dependency fix. First complete steps 1–4 above so the release changes or fix are
+tested and staged. Choose a commit message describing those changes.
 
 The following Bash commands record the current local tag, commit and push the
 release changes, and move the tag to that new commit. Run each command only after
@@ -79,7 +83,7 @@ the previous command has succeeded:
 
 ```bash
 previous_release_tag=$(git rev-parse refs/tags/v1.8.0)
-git commit -m "Added image limit setting and GitHub release workflow"
+git commit -m "Fixed release build dependencies"
 git push origin master
 git tag -f v1.8.0
 git push --force-with-lease="refs/tags/v1.8.0:$previous_release_tag" origin refs/tags/v1.8.0
@@ -90,6 +94,7 @@ recorded in the first command. It stops if the remote tag differs. That tag push
 triggers the release workflow for the new commit. Check the run under **Actions**.
 
 If the release changes have already been committed and pushed, skip the commit
-and branch-push commands. This recovery procedure is for a mistakenly placed tag
-before publication of the intended release. Use a new version for changes to an
-already published release.
+and branch-push commands. Re-running the old workflow run uses its original
+commit, so it does not include a fix you have just pushed to `master`. Push the
+corrected tag to run the workflow with that fix. Use a new version for changes
+to an already published release.
