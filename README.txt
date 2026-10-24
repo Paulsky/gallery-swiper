@@ -3,7 +3,7 @@ Contributors: wijnbergdevelopments
 Tags: woocommerce, product gallery, slider, swiper
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 Requires PHP: 8.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -32,6 +32,7 @@ For more information about this plugin, please visit the [plugin page](https://p
 === Requirements ===
 
 * WooCommerce plugin installed and activated
+* Chrome/Edge 110+, Firefox 110+, or Safari/iOS 16.4+
 
 === Usage ===
 
@@ -82,6 +83,10 @@ Yes. Filter the script and style handles to return compatible Swiper assets that
 If either handle is not registered, the plugin falls back to its bundled Swiper asset.
 
 == Changelog ==
+= 1.9.0 =
+* Updated Swiper from 12.2.0 to 14.3.0
+* Updated browser requirements to Chrome/Edge 110+, Firefox 110+, and Safari/iOS 16.4+
+
 = 1.8.0 =
 * Added option to limit the total number of images per product slider, including the main product image and enabled variation images
 

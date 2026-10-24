@@ -50,7 +50,7 @@ class Wdevs_Gallery_Swiper_Public {
 	 *
 	 * @since    1.1.0
 	 */
-	private const SWIPER_VERSION = '12.2.0';
+	private const SWIPER_VERSION = '14.3.0';
 
 
 	/**

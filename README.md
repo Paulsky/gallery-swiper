@@ -16,6 +16,7 @@ For more WordPress plugins, check out our products at [Wijnberg Developments](ht
 
 - PHP 8.0 or higher
 - WooCommerce plugin installed and activated
+- Chrome/Edge 110+, Firefox 110+, or Safari/iOS 16.4+
 
 ## Installation
 

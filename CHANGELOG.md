@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to the Product Gallery Swiper for WooCommerce plugin will be documented in this file.
 
+## [1.9.0] - 2026-10-24
+### Updated
+- Updated Swiper from 12.2.0 to 14.3.0
+- Updated browser requirements to Chrome/Edge 110+, Firefox 110+, and Safari/iOS 16.4+
+
 ## [1.8.0] - 2026-10-20
 ### Added
 - Option to limit the total number of images per product slider, including the main product image and enabled variation images
